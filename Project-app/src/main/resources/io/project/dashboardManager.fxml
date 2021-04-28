@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane fx:id="managerPane" prefHeight="898.0" prefWidth="243.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.project.DashboardManagerController">
+   <children>
+      <Button fx:id="mainPageButton" layoutX="10.0" layoutY="14.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="224.0" text="Strona główna">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="employeesButton" layoutX="10.0" layoutY="88.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="224.0" text="Pracownicy" visible="false">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="facilitiesButton" layoutX="10.0" layoutY="139.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="224.0" text="Obiekty handlowe" visible="false">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="receiveDeliveryButton" layoutX="10.0" layoutY="88.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="224.0" text="Przyjmij dostawę" visible="false">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="deliveryListButton" layoutX="10.0" layoutY="88.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="224.0" text="Lista dostaw" visible="false">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
