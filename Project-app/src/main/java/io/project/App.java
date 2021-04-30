@@ -17,8 +17,8 @@ public class App extends Application {
         scene = new Scene(loadFXML("dashboard"));
         stage.setScene(scene);
         stage.show();
-        stage.setMaximized(true);
-//        stage.setResizable(false);
+//        stage.setMaximized(true);
+        stage.setResizable(false);
     }
 
     static void setRoot(String fxml) throws IOException {

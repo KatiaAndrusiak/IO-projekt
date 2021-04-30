@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="managerPane" prefHeight="982.0" prefWidth="240.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.project.DashboardManagerController">
+<AnchorPane fx:id="managerPane" prefHeight="750.0" prefWidth="240.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.project.DashboardManagerController">
    <children>
       <Button fx:id="mainPageButton" layoutX="10.0" layoutY="14.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="220.0" text="Strona główna">
          <font>
@@ -32,6 +32,6 @@
             <Font name="System Bold" size="16.0" />
          </font>
       </Button>
-      <Label layoutX="106.0" layoutY="951.0" text="Label" />
+      <Label layoutY="732.0" text="Label" />
    </children>
 </AnchorPane>
