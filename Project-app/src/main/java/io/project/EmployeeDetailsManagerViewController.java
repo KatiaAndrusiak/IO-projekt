@@ -28,9 +28,6 @@ public class EmployeeDetailsManagerViewController implements Initializable {
 	private Label employeeBirthDate;
 	
 	@FXML
-	private Label employeeEmploymentDate;
-	
-	@FXML
 	private Label employeePhoneNumber;
 	
 	@FXML
@@ -38,6 +35,15 @@ public class EmployeeDetailsManagerViewController implements Initializable {
 	
 	@FXML
 	private Label employeeSalary;
+	
+	@FXML
+	private Label employeeCategory;
+	
+	@FXML
+	private Label employeeSOO;
+	
+	@FXML
+	private Label employeeCoursesHours;
 	
 	@FXML
 	private Button employeeDeleteButton;
