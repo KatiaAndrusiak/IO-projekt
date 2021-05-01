@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane fx:id="viewPane" minHeight="-1.0" minWidth="-1.0" prefHeight="750.0" prefWidth="1160.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.project.EmployeeListController">
+   <children>
+      <TableView fx:id="table" layoutX="11.0" layoutY="67.0" prefHeight="354.0" prefWidth="1139.0">
+         <columns>
+            <TableColumn fx:id="firstNameCol" maxWidth="232.0" minWidth="-1.0" prefWidth="207.0" text="Imię" />
+            <TableColumn fx:id="lastNameCol" maxWidth="233.0" minWidth="-1.0" prefWidth="197.0" text="Nazwisko" />
+            <TableColumn fx:id="dobCol" maxWidth="252.0" minWidth="-1.0" prefWidth="138.0" text="Data urodzenia" />
+            <TableColumn fx:id="positionCol" maxWidth="272.0" minWidth="-1.0" prefWidth="170.0" text="Stanowisko" />
+            <TableColumn fx:id="categoryCol" maxWidth="287.0" minWidth="-1.0" prefWidth="148.0" text="Kategoria" />
+            <TableColumn fx:id="salaryCol" maxWidth="327.0" minWidth="-1.0" prefWidth="143.0" text="Wynagrodzenie" />
+            <TableColumn fx:id="ppeCol" maxWidth="344.0" minWidth="-1.0" prefWidth="135.0" text="Otrzymano ŚOO" />
+         </columns>
+      </TableView>
+      <ComboBox fx:id="facilityCB" layoutX="11.0" layoutY="14.0" prefHeight="35.0" prefWidth="207.0" promptText="Obiekt" />
+      <TextField layoutX="317.0" layoutY="14.0" prefHeight="35.0" prefWidth="207.0" promptText="Szukaj">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+   </children>
+</AnchorPane>
