@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="viewPane" minHeight="-1.0" minWidth="-1.0" prefHeight="750.0" prefWidth="1160.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.project.FacilityListController">
+   <children>
+      <TableView fx:id="table" layoutX="11.0" layoutY="14.0" prefHeight="354.0" prefWidth="1139.0">
+         <columns>
+            <TableColumn fx:id="cityCol" maxWidth="232.0" minWidth="-1.0" prefWidth="207.0" text="Miasto" />
+            <TableColumn fx:id="nameCol" maxWidth="233.0" minWidth="-1.0" prefWidth="221.0" text="Nazwa" />
+            <TableColumn fx:id="addressCol" maxWidth="349.0" minWidth="-1.0" prefWidth="344.0" text="Adres" />
+            <TableColumn fx:id="scheduleCol" maxWidth="596.0" minWidth="-1.0" prefWidth="366.0" text="Godziny otwarcia" />
+         </columns>
+      </TableView>
+   </children>
+</AnchorPane>
