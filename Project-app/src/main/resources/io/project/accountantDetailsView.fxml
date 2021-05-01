@@ -92,57 +92,57 @@
                   </VBox>
                   <VBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" prefWidth="400.0">
                      <children>
-                        <Label fx:id="accountantFirstName" prefHeight="54.0" prefWidth="400.0">
+                        <Label fx:id="accountantFirstName" prefWidth="400.0">
                            <font>
                               <Font size="36.0" />
                            </font>
                         </Label>
-                        <Label fx:id="accountantLastName" layoutX="10.0" layoutY="10.0" prefHeight="54.0" prefWidth="400.0">
+                        <Label fx:id="accountantLastName" layoutX="10.0" layoutY="10.0" prefWidth="400.0">
                            <font>
                               <Font size="36.0" />
                            </font>
                         </Label>
-                        <Label fx:id="accountantBirthDate" layoutX="10.0" layoutY="64.0" prefHeight="54.0" prefWidth="400.0">
+                        <Label fx:id="accountantBirthDate" layoutX="10.0" layoutY="64.0" prefWidth="400.0">
                            <font>
                               <Font size="24.0" />
                            </font>
                         </Label>
-                        <Label fx:id="accountantPhoneNumber" layoutX="10.0" layoutY="554.0" prefHeight="54.0" prefWidth="400.0">
+                        <Label fx:id="accountantPhoneNumber" layoutX="10.0" layoutY="554.0" prefWidth="400.0">
                            <font>
                               <Font size="24.0" />
                            </font>
                         </Label>
-                        <Label fx:id="accountantEmploymentPlace" layoutX="10.0" layoutY="318.0" prefHeight="54.0" prefWidth="400.0">
+                        <Label fx:id="accountantEmploymentPlace" layoutX="10.0" layoutY="318.0" prefWidth="400.0">
                            <font>
                               <Font size="24.0" />
                            </font>
                         </Label>
-                        <Label fx:id="accountantPosition" layoutX="10.0" layoutY="228.0" prefHeight="54.0" prefWidth="400.0">
+                        <Label fx:id="accountantPosition" layoutX="10.0" layoutY="228.0" prefWidth="400.0">
                            <font>
                               <Font size="24.0" />
                            </font>
                         </Label>
-                        <Label fx:id="accountantSalary" layoutX="10.0" layoutY="663.0" prefHeight="54.0" prefWidth="400.0">
+                        <Label fx:id="accountantSalary" layoutX="10.0" layoutY="663.0" prefWidth="400.0">
                            <font>
                               <Font size="24.0" />
                            </font>
                         </Label>
-                        <Label fx:id="accountantCategory" layoutX="10.0" layoutY="296.0" prefHeight="54.0" prefWidth="400.0">
+                        <Label fx:id="accountantCategory" layoutX="10.0" layoutY="296.0" prefWidth="400.0">
                            <font>
                               <Font size="24.0" />
                            </font>
                         </Label>
-                        <Label fx:id="accountantSOO" layoutX="10.0" layoutY="315.0" prefHeight="54.0" prefWidth="400.0">
+                        <Label fx:id="accountantSOO" layoutX="10.0" layoutY="315.0" prefWidth="400.0">
                            <font>
                               <Font size="24.0" />
                            </font>
                         </Label>
-                        <Label fx:id="accountantCoursesHours" layoutX="10.0" layoutY="323.0" prefHeight="54.0" prefWidth="400.0">
+                        <Label fx:id="accountantCoursesHours" layoutX="10.0" layoutY="323.0" prefWidth="400.0">
                            <font>
                               <Font size="24.0" />
                            </font>
                         </Label>
-                        <Label fx:id="accountantCompanyAccountBalance" layoutX="10.0" layoutY="395.0" prefHeight="54.0" prefWidth="400.0">
+                        <Label fx:id="accountantCompanyAccountBalance" layoutX="10.0" layoutY="395.0" prefWidth="400.0">
                            <font>
                               <Font size="24.0" />
                            </font>
