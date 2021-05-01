@@ -16,7 +16,7 @@ import java.util.ResourceBundle;
 public class AccountantDetailsViewController implements Initializable {
 	
 	@FXML
-	private AnchorPane employeePane;
+	private AnchorPane accountantPane;
 	
 	@FXML
 	private Label accountantFirstName;
