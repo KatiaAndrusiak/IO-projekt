@@ -3,17 +3,17 @@ package io.project;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.Parent;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class EmployeeDetailsManagerViewController implements Initializable {
+public class EmployeeDetailsViewController implements Initializable {
 	
 	@FXML
 	private AnchorPane employeePane;
