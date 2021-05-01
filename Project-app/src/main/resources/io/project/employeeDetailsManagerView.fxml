@@ -15,7 +15,7 @@
    <children>
       <VBox prefHeight="750.0" prefWidth="1160.0">
          <children>
-            <HBox prefHeight="375.0">
+            <HBox prefHeight="350.0" prefWidth="400.0">
                <children>
                   <ImageView fitHeight="274.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true">
                      <HBox.margin>
@@ -25,7 +25,7 @@
                         <Image url="@person.jpg" />
                      </image>
                   </ImageView>
-                  <VBox alignment="CENTER_RIGHT" prefWidth="250.0">
+                  <VBox alignment="CENTER_RIGHT" prefWidth="400.0">
                      <children>
                         <Label graphicTextGap="0.0" text="Imię">
                            <font>
@@ -45,11 +45,6 @@
                               <Font size="24.0" />
                            </font>
                         </Label>
-                        <Label text="Data zatrudnienia">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Label>
                         <Label text="Telefon">
                            <font>
                               <Font size="24.0" />
@@ -60,61 +55,86 @@
                               <Font size="24.0" />
                            </font>
                         </Label>
-                        <Label text="Pensja">
+                        <Label text="Wynagrodzenie">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <Label text="Kategoria">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="241.0" layoutY="259.0" text="ŚOO">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="293.0" layoutY="293.0" text="Suma godzin odbytych kursów">
                            <font>
                               <Font size="24.0" />
                            </font>
                         </Label>
                      </children>
                      <HBox.margin>
-                        <Insets bottom="50.0" right="50.0" top="50.0" />
+                        <Insets bottom="10.0" right="50.0" top="50.0" />
                      </HBox.margin>
                   </VBox>
                   <VBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" prefWidth="400.0">
                      <children>
-                        <Label fx:id="employeeFirstName" prefHeight="54.0" prefWidth="400.0">
+                        <Label fx:id="employeeFirstName" prefWidth="400.0">
                            <font>
                               <Font size="36.0" />
                            </font>
                         </Label>
-                        <Label fx:id="employeeLastName" layoutX="10.0" layoutY="10.0" prefHeight="54.0" prefWidth="400.0">
+                        <Label fx:id="employeeLastName" layoutX="10.0" layoutY="10.0" prefWidth="400.0">
                            <font>
                               <Font size="36.0" />
                            </font>
                         </Label>
-                        <Label fx:id="employeeBirthDate" layoutX="10.0" layoutY="64.0" prefHeight="54.0" prefWidth="400.0">
+                        <Label fx:id="employeeBirthDate" layoutX="10.0" layoutY="64.0" prefWidth="400.0">
                            <font>
                               <Font size="24.0" />
                            </font>
                         </Label>
-                        <Label fx:id="employeeEmploymentDate" layoutX="10.0" layoutY="500.0" prefHeight="54.0" prefWidth="400.0">
+                        <Label fx:id="employeePhoneNumber" layoutX="10.0" layoutY="554.0" prefWidth="400.0">
                            <font>
                               <Font size="24.0" />
                            </font>
                         </Label>
-                        <Label fx:id="employeePhoneNumber" layoutX="10.0" layoutY="554.0" prefHeight="54.0" prefWidth="400.0">
+                        <Label fx:id="employeePosition" layoutX="10.0" layoutY="228.0" prefWidth="400.0">
                            <font>
                               <Font size="24.0" />
                            </font>
                         </Label>
-                        <Label fx:id="employeePosition" layoutX="10.0" layoutY="228.0" prefHeight="54.0" prefWidth="400.0">
+                        <Label fx:id="employeeSalary" layoutX="10.0" layoutY="663.0" prefWidth="400.0">
                            <font>
                               <Font size="24.0" />
                            </font>
                         </Label>
-                        <Label fx:id="employeeSalary" layoutX="10.0" layoutY="663.0" prefHeight="54.0" prefWidth="400.0">
+                        <Label fx:id="employeeCategory" layoutX="10.0" layoutY="293.0" prefWidth="400.0">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="employeeSOO" layoutX="10.0" layoutY="500.0" prefWidth="400.0">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="employeeSalary1" layoutX="10.0" layoutY="240.0" prefWidth="400.0">
                            <font>
                               <Font size="24.0" />
                            </font>
                         </Label>
                      </children>
                      <HBox.margin>
-                        <Insets bottom="50.0" right="50.0" top="50.0" />
+                        <Insets bottom="10.0" right="50.0" top="50.0" />
                      </HBox.margin>
                   </VBox>
                </children>
             </HBox>
-            <HBox prefHeight="375.0">
+            <HBox prefHeight="400.0">
                <children>
                   <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="510.0" spacing="20.0">
                      <children>

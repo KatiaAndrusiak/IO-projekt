@@ -82,47 +82,47 @@
                   </VBox>
                   <VBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" prefWidth="400.0">
                      <children>
-                        <Label fx:id="employeeFirstName" prefHeight="54.0" prefWidth="400.0">
+                        <Label fx:id="employeeFirstName" prefWidth="400.0">
                            <font>
                               <Font size="36.0" />
                            </font>
                         </Label>
-                        <Label fx:id="employeeLastName" layoutX="10.0" layoutY="10.0" prefHeight="54.0" prefWidth="400.0">
+                        <Label fx:id="employeeLastName" layoutX="10.0" layoutY="10.0" prefWidth="400.0">
                            <font>
                               <Font size="36.0" />
                            </font>
                         </Label>
-                        <Label fx:id="employeeBirthDate" layoutX="10.0" layoutY="64.0" prefHeight="54.0" prefWidth="400.0">
+                        <Label fx:id="employeeBirthDate" layoutX="10.0" layoutY="64.0" prefWidth="400.0">
                            <font>
                               <Font size="24.0" />
                            </font>
                         </Label>
-                        <Label fx:id="employeePhoneNumber" layoutX="10.0" layoutY="554.0" prefHeight="54.0" prefWidth="400.0">
+                        <Label fx:id="employeePhoneNumber" layoutX="10.0" layoutY="554.0" prefWidth="400.0">
                            <font>
                               <Font size="24.0" />
                            </font>
                         </Label>
-                        <Label fx:id="employeePosition" layoutX="10.0" layoutY="228.0" prefHeight="54.0" prefWidth="400.0">
+                        <Label fx:id="employeePosition" layoutX="10.0" layoutY="228.0" prefWidth="400.0">
                            <font>
                               <Font size="24.0" />
                            </font>
                         </Label>
-                        <Label fx:id="employeeSalary" layoutX="10.0" layoutY="663.0" prefHeight="54.0" prefWidth="400.0">
+                        <Label fx:id="employeeSalary" layoutX="10.0" layoutY="663.0" prefWidth="400.0">
                            <font>
                               <Font size="24.0" />
                            </font>
                         </Label>
-                        <Label fx:id="employeeCategory" layoutX="10.0" layoutY="296.0" prefHeight="54.0" prefWidth="400.0">
+                        <Label fx:id="employeeCategory" layoutX="10.0" layoutY="296.0" prefWidth="400.0">
                            <font>
                               <Font size="24.0" />
                            </font>
                         </Label>
-                        <Label fx:id="employeeSOO" layoutX="10.0" layoutY="315.0" prefHeight="54.0" prefWidth="400.0">
+                        <Label fx:id="employeeSOO" layoutX="10.0" layoutY="315.0" prefWidth="400.0">
                            <font>
                               <Font size="24.0" />
                            </font>
                         </Label>
-                        <Label fx:id="employeeCoursesHours" layoutX="10.0" layoutY="323.0" prefHeight="54.0" prefWidth="400.0">
+                        <Label fx:id="employeeCoursesHours" layoutX="10.0" layoutY="323.0" prefWidth="400.0">
                            <font>
                               <Font size="24.0" />
                            </font>
