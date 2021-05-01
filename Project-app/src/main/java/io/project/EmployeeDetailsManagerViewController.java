@@ -14,6 +14,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class EmployeeDetailsManagerViewController implements Initializable {
+	
 	@FXML
 	private AnchorPane employeePane;
 	
