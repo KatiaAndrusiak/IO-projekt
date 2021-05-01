@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="employeePane" prefHeight="750.0" prefWidth="1160.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.project.DashboardController">
+   <children>
+      <VBox prefHeight="750.0" prefWidth="1160.0">
+         <children>
+            <HBox prefHeight="375.0">
+               <children>
+                  <ImageView fitHeight="274.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../../../../../../Users/adale/OneDrive/Pulpit/person.jpg" />
+                     </image>
+                     <HBox.margin>
+                        <Insets bottom="50.0" left="100.0" right="20.0" top="50.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <VBox alignment="CENTER_RIGHT" prefWidth="250.0">
+                     <children>
+                        <Label graphicTextGap="0.0" text="Imię">
+                           <font>
+                              <Font name="System Bold" size="36.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </Label>
+                        <Label graphicTextGap="0.0" text="Nazwisko">
+                           <font>
+                              <Font name="System Bold" size="36.0" />
+                           </font>
+                        </Label>
+                        <Label text="Data urodzenia">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <Label text="Data zatrudnienia">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <Label text="Telefon">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <Label text="Stanowisko">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <Label text="Pensja">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <HBox.margin>
+                        <Insets bottom="50.0" right="50.0" top="50.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" prefWidth="400.0">
+                     <children>
+                        <Label fx:id="employeeFirstName" prefHeight="54.0" prefWidth="400.0">
+                           <font>
+                              <Font size="36.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="employeeLastName" layoutX="10.0" layoutY="10.0" prefHeight="54.0" prefWidth="400.0">
+                           <font>
+                              <Font size="36.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="employeeBirthDate" layoutX="10.0" layoutY="64.0" prefHeight="54.0" prefWidth="400.0">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="employeeEmploymentDate" layoutX="10.0" layoutY="500.0" prefHeight="54.0" prefWidth="400.0">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="employeePhoneNumber" layoutX="10.0" layoutY="554.0" prefHeight="54.0" prefWidth="400.0">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="employeePosition" layoutX="10.0" layoutY="228.0" prefHeight="54.0" prefWidth="400.0">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="employeeSalary" layoutX="10.0" layoutY="663.0" prefHeight="54.0" prefWidth="400.0">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <HBox.margin>
+                        <Insets bottom="50.0" right="50.0" top="50.0" />
+                     </HBox.margin>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox prefHeight="375.0">
+               <children>
+                  <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="510.0" spacing="20.0">
+                     <children>
+                        <Button fx:id="employeeDeleteButton" mnemonicParsing="false" text="Usuń pracownika">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="employeeAddCourseButton" layoutX="143.0" layoutY="10.0" mnemonicParsing="false" text="Dodaj kurs">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="employeeAssignToPlace" layoutX="143.0" layoutY="112.0" mnemonicParsing="false" text="Przypisz do obiektu">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Button>
+                     </children>
+                     <HBox.margin>
+                        <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox prefWidth="650.0">
+                     <HBox.margin>
+                        <Insets bottom="50.0" right="50.0" />
+                     </HBox.margin>
+                     <children>
+                        <Label fx:id="employeeFirstName1" prefHeight="54.0" prefWidth="400.0" text="Odpowiedzialny za:">
+                           <font>
+                              <Font size="36.0" />
+                           </font>
+                        </Label>
+                        <ListView fx:id="employeeResponsibilitiesList" prefHeight="300.0" prefWidth="580.0" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
