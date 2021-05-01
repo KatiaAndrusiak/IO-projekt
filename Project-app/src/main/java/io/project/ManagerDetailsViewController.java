@@ -16,51 +16,54 @@ import java.util.ResourceBundle;
 public class ManagerDetailsViewController implements Initializable {
 	
 	@FXML
-	private AnchorPane employeePane;
+	private AnchorPane managerPane;
 	
 	@FXML
-	private Label employeeFirstName;
+	private Label managerFirstName;
 	
 	@FXML
-	private Label employeeLastName;
+	private Label managerLastName;
 	
 	@FXML
-	private Label employeeBirthDate;
+	private Label managerBirthDate;
 	
 	@FXML
-	private Label employeePhoneNumber;
+	private Label managerPhoneNumber;
 	
 	@FXML
-	private Label employeePosition;
+	private Label managerEmploymentPlace;
 	
 	@FXML
-	private Label employeeSalary;
+	private Label managerPosition;
 	
 	@FXML
-	private Label employeeCategory;
+	private Label managerSalary;
 	
 	@FXML
-	private Label employeeSOO;
+	private Label managerCategory;
 	
 	@FXML
-	private Label employeeCoursesHours;
+	private Label managerSOO;
 	
 	@FXML
-	private ListView<?> employeeResponsibilitiesList;
+	private Label managerCoursesHours;
 	
 	@FXML
-	private Button employeeConfirmButton;
+	private ListView<?> managerResponsibilitiesList;
 	
 	@FXML
-	private Button employeeLogoutButton;
+	private Button managerConfirmButton;
+	
+	@FXML
+	private Button managerLogoutButton;
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/io/project/employeeDetailsView.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/io/project/managerDetailsView.fxml"));
 		try {
 			Parent root = loader.load();
-			employeePane.getChildren().clear();
-			employeePane.getChildren().addAll(root);
+			managerPane.getChildren().clear();
+			managerPane.getChildren().addAll(root);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
