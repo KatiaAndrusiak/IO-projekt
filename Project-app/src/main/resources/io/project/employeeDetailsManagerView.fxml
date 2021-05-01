@@ -45,6 +45,11 @@
                               <Font size="24.0" />
                            </font>
                         </Label>
+                        <Label layoutX="181.0" layoutY="117.0" text="Data zatrudnienia">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
                         <Label text="Telefon">
                            <font>
                               <Font size="24.0" />
@@ -93,6 +98,11 @@
                            </font>
                         </Label>
                         <Label fx:id="employeeBirthDate" layoutX="10.0" layoutY="64.0" prefWidth="400.0">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="employeeEmploymentDate" layoutX="10.0" layoutY="136.0" prefWidth="400.0">
                            <font>
                               <Font size="24.0" />
                            </font>

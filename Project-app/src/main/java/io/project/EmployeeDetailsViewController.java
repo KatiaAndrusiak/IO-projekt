@@ -28,6 +28,9 @@ public class EmployeeDetailsViewController implements Initializable {
 	private Label employeeBirthDate;
 	
 	@FXML
+	private Label employeeEmploymentDate;
+	
+	@FXML
 	private Label employeePhoneNumber;
 	
 	@FXML

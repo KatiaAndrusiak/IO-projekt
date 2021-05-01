@@ -45,6 +45,11 @@
                               <Font size="24.0" />
                            </font>
                         </Label>
+                        <Label layoutX="181.0" layoutY="117.0" text="Data zatrudnienia">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
                         <Label text="Telefon">
                            <font>
                               <Font size="24.0" />
@@ -97,6 +102,11 @@
                               <Font size="24.0" />
                            </font>
                         </Label>
+                        <Label fx:id="employeeEmploymentDate" layoutX="10.0" layoutY="323.0" prefWidth="400.0">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
                         <Label fx:id="employeePhoneNumber" layoutX="10.0" layoutY="554.0" prefWidth="400.0">
                            <font>
                               <Font size="24.0" />
@@ -122,7 +132,7 @@
                               <Font size="24.0" />
                            </font>
                         </Label>
-                        <Label fx:id="employeeCoursesHours" layoutX="10.0" layoutY="323.0" prefWidth="400.0">
+                        <Label fx:id="employeeBirthDate1" layoutX="10.0" layoutY="135.0" prefWidth="400.0">
                            <font>
                               <Font size="24.0" />
                            </font>
