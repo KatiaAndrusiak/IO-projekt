@@ -122,7 +122,7 @@
                               <Font size="24.0" />
                            </font>
                         </Label>
-                        <Label fx:id="employeeSalary1" layoutX="10.0" layoutY="240.0" prefWidth="400.0">
+                        <Label fx:id="employeeCoursesHours" layoutX="10.0" layoutY="240.0" prefWidth="400.0">
                            <font>
                               <Font size="24.0" />
                            </font>
