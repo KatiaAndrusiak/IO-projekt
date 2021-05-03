@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="holidayAdditionPane" prefHeight="750.0" prefWidth="1160.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.project.AccountantDetailsViewController">
+<AnchorPane fx:id="holidayAdditionPane" prefHeight="750.0" prefWidth="1160.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.project.HolidayAdditionController">
    <children>
       <VBox alignment="CENTER" prefHeight="750.0" prefWidth="1160.0">
          <children>
