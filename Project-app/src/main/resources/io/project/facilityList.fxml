@@ -76,7 +76,7 @@
       <Button fx:id="listInspectionButton" layoutX="24.0" layoutY="263.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="130.0" text="Wylistuj inspekcje" />
       <ListView fx:id="tableOptions" layoutX="24.0" layoutY="299.0" prefHeight="120.0" prefWidth="413.0" />
       <Button fx:id="listHolidayButton" layoutX="166.0" layoutY="263.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="130.0" text="Wylistuj święta" />
-      <Button fx:id="listEmployeeButton" layoutX="477.0" layoutY="263.0" mnemonicParsing="false" onAction="#showEmployees" prefHeight="33.0" prefWidth="179.0" text="Wylistuj pracowników" />
+      <Button fx:id="listEmployeeButton" layoutX="477.0" layoutY="263.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="179.0" text="Wylistuj pracowników" />
       <TableView fx:id="tableEmployee" layoutX="477.0" layoutY="299.0" onMouseClicked="#enableEmployeeInfoButton" prefHeight="120.0" prefWidth="450.0">
          <columns>
             <TableColumn fx:id="employeeFirstNameCol" prefWidth="137.0" text="Imię" />
@@ -84,7 +84,7 @@
             <TableColumn fx:id="employeePositionCol" prefWidth="132.0" text="Stanowisko" />
          </columns>
       </TableView>
-      <Button fx:id="employeeInfoButton" layoutX="748.0" layoutY="263.0" mnemonicParsing="false" onAction="#showEmployeeInfoPage" prefHeight="33.0" prefWidth="179.0" text="Pokaż dane pracownika" />
+      <Button fx:id="employeeInfoButton" layoutX="748.0" layoutY="263.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="179.0" text="Pokaż dane pracownika" />
       <Button fx:id="listDeliveriesButton" layoutX="307.0" layoutY="263.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="130.0" text="Wylistuj dostawy" />
       <Button fx:id="addEmployeeButton" layoutX="624.0" layoutY="423.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="303.0" text="Dodaj pracownika">
          <font>
