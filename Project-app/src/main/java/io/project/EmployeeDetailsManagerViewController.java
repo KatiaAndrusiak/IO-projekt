@@ -55,9 +55,6 @@ public class EmployeeDetailsManagerViewController implements Initializable {
 	private Button employeeAddCourseButton;
 	
 	@FXML
-	private Button employeeAssignToPlace;
-	
-	@FXML
 	private Label employeeFirstName1;
 	
 	@FXML

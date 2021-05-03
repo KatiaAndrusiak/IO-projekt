@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="employeePane" prefHeight="750.0" prefWidth="1160.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.project.EmployeeDetailsManagerViewController">
+<AnchorPane fx:id="employeePane" prefHeight="750.0" prefWidth="1160.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.project.EmployeeDetailsManagerViewController">
    <children>
       <VBox prefHeight="750.0" prefWidth="1160.0">
          <children>
@@ -154,11 +154,6 @@
                            </font>
                         </Button>
                         <Button fx:id="employeeAddCourseButton" layoutX="143.0" layoutY="10.0" mnemonicParsing="false" text="Dodaj kurs">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Button>
-                        <Button fx:id="employeeAssignToPlace" layoutX="143.0" layoutY="112.0" mnemonicParsing="false" text="Przypisz do obiektu">
                            <font>
                               <Font size="24.0" />
                            </font>

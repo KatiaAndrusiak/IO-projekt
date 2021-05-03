@@ -31,13 +31,6 @@ public class DeliveryListController implements Initializable {
     @FXML
     private TableColumn<Delivery, Integer> amountCol;
 
-    /// ---------------------
-    /// W tej kolumnie trzeba umiescic buttony do oplaty dostawy.
-    /// Jezeli jest oplacona, to button ma tekst "Oplacono" i jets disable.
-    /// Jezeli nie, to tekst "Zaplac" i enable.
-    /// Tu jest przykladowa implementacja:
-    /// https://stackoverflow.com/questions/29489366/how-to-add-button-in-javafx-table-view
-    /// ---------------------
     @FXML
     private TableColumn<Delivery, String> statusCol;
 
@@ -46,6 +39,9 @@ public class DeliveryListController implements Initializable {
 
     @FXML
     private Button supplierAddButton;
+
+    @FXML
+    private Button payButton;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

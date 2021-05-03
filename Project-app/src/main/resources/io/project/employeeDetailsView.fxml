@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="employeePane" prefHeight="750.0" prefWidth="1160.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.project.EmployeeDetailsViewController">
+<AnchorPane fx:id="employeePane" prefHeight="750.0" prefWidth="1160.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.project.EmployeeDetailsViewController">
    <children>
       <VBox prefHeight="750.0" prefWidth="1160.0">
          <children>
@@ -25,7 +25,7 @@
                         <Image url="@person.jpg" />
                      </image>
                   </ImageView>
-                  <VBox alignment="CENTER_RIGHT" prefWidth="400.0">
+                  <VBox alignment="CENTER_RIGHT" prefHeight="386.0" prefWidth="400.0">
                      <children>
                         <Label graphicTextGap="0.0" text="Imię">
                            <font>
@@ -85,12 +85,15 @@
                         <Insets right="50.0" top="50.0" />
                      </HBox.margin>
                   </VBox>
-                  <VBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" prefWidth="400.0">
+                  <VBox alignment="CENTER_LEFT" prefWidth="400.0">
                      <children>
                         <Label fx:id="employeeFirstName" prefWidth="400.0">
                            <font>
                               <Font size="36.0" />
                            </font>
+                           <VBox.margin>
+                              <Insets top="50.0" />
+                           </VBox.margin>
                         </Label>
                         <Label fx:id="employeeLastName" layoutX="10.0" layoutY="10.0" prefWidth="400.0">
                            <font>
@@ -102,7 +105,7 @@
                               <Font size="24.0" />
                            </font>
                         </Label>
-                        <Label fx:id="employeeEmploymentDate" layoutX="10.0" layoutY="323.0" prefWidth="400.0">
+                        <Label fx:id="employeeEmploymentDate" layoutX="10.0" layoutY="136.0" prefWidth="400.0">
                            <font>
                               <Font size="24.0" />
                            </font>
@@ -122,25 +125,22 @@
                               <Font size="24.0" />
                            </font>
                         </Label>
-                        <Label fx:id="employeeCategory" layoutX="10.0" layoutY="296.0" prefWidth="400.0">
+                        <Label fx:id="employeeCategory" layoutX="10.0" layoutY="293.0" prefWidth="400.0">
                            <font>
                               <Font size="24.0" />
                            </font>
                         </Label>
-                        <Label fx:id="employeeSOO" layoutX="10.0" layoutY="315.0" prefWidth="400.0">
+                        <Label fx:id="employeeSOO" layoutX="10.0" layoutY="500.0" prefWidth="400.0">
                            <font>
                               <Font size="24.0" />
                            </font>
                         </Label>
-                        <Label fx:id="employeeBirthDate1" layoutX="10.0" layoutY="135.0" prefWidth="400.0">
+                        <Label fx:id="employeeCoursesHours" layoutX="10.0" layoutY="240.0" prefWidth="400.0">
                            <font>
                               <Font size="24.0" />
                            </font>
                         </Label>
                      </children>
-                     <HBox.margin>
-                        <Insets right="50.0" top="50.0" />
-                     </HBox.margin>
                   </VBox>
                </children>
             </HBox>

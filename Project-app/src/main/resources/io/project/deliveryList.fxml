@@ -24,5 +24,10 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
+      <Button fx:id="payButton" disable="true" layoutX="916.0" layoutY="437.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="234.0" text="Zapłać">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

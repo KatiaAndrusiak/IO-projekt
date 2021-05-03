@@ -6,7 +6,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
@@ -44,6 +43,18 @@ public class CEODetailsViewController implements Initializable {
 	
 	@FXML
 	private Button CEOLogoutButton;
+
+	@FXML
+	private Label CEOCoursesHours;
+
+	@FXML
+	private Label CEOSOO;
+
+	@FXML
+	private Label CEOSalary;
+
+	@FXML
+	private Label CEOEmploymentDate;
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {

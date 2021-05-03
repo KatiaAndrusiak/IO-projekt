@@ -2,22 +2,24 @@ package io.project;
 
 import java.time.LocalDate;
 
-public class Course {
+public class Holiday {
     private int id;
     private String name;
     private LocalDate date;
-    private int hours;
+    private int proceeds;
     private Employee employee;
+    private Facility facility;
 
-    public Course() {
+    public Holiday() {
     }
 
-    public Course(int id, String name, LocalDate date, int hours, Employee employee) {
+    public Holiday(int id, String name, LocalDate date, int proceeds, Employee employee, Facility facility) {
         this.id = id;
         this.name = name;
         this.date = date;
-        this.hours = hours;
+        this.proceeds = proceeds;
         this.employee = employee;
+        this.facility = facility;
     }
 
     public int getId() {
@@ -44,12 +46,12 @@ public class Course {
         this.date = date;
     }
 
-    public int getHours() {
-        return hours;
+    public int getProceeds() {
+        return proceeds;
     }
 
-    public void setHours(int hours) {
-        this.hours = hours;
+    public void setProceeds(int proceeds) {
+        this.proceeds = proceeds;
     }
 
     public Employee getEmployee() {
@@ -58,5 +60,13 @@ public class Course {
 
     public void setEmployee(Employee employee) {
         this.employee = employee;
+    }
+
+    public Facility getFacility() {
+        return facility;
+    }
+
+    public void setFacility(Facility facility) {
+        this.facility = facility;
     }
 }
