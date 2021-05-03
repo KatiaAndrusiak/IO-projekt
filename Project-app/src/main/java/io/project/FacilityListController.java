@@ -5,6 +5,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -30,9 +32,6 @@ public class FacilityListController implements Initializable {
 
     @FXML
     private Button addInspectionButton;
-
-    @FXML
-    private Pane pane;
 
     @FXML
     private TextField employeeTF;
@@ -95,7 +94,7 @@ public class FacilityListController implements Initializable {
     private Button addButtonHoliday;
 
     @FXML
-    private Pane holidayPane;
+    private VBox holidayForm;
 
     @FXML
     private ComboBox<String> holidayName;
@@ -111,6 +110,12 @@ public class FacilityListController implements Initializable {
 
     @FXML
     private Button listInspectionButton;
+	
+	@FXML
+	private VBox inspectionForm;
+	
+	@FXML
+	private HBox inspectionQuestionsForm;
 
     @FXML
     private ListView<String> tableOptions;
@@ -120,6 +125,9 @@ public class FacilityListController implements Initializable {
 
     @FXML
     private Button listEmployeeButton;
+	
+	@FXML
+	private VBox employeeForm;
 
     @FXML
     private TableView<Employee> tableEmployee;
@@ -149,4 +157,8 @@ public class FacilityListController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
     }
+	
+	// po kliknieciu addButtonHoliday ma sie pokazac holidayForm,
+	// po kliknieciu listInspectionButton ma sie pokazac inspectionForm i inspectionQuestionsForm
+	// po kliknieciu addEmployeeButton ma sie pokazac employeeForm
 }
