@@ -22,7 +22,7 @@
                         <Insets bottom="50.0" left="100.0" right="20.0" top="50.0" />
                      </HBox.margin>
                      <image>
-                        <Image url="@person.jpg" />
+                        <Image url="@user.png" />
                      </image>
                   </ImageView>
                   <VBox alignment="CENTER_RIGHT" prefHeight="386.0" prefWidth="400.0">
