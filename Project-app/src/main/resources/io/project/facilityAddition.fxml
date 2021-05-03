@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="facilityAdditionPane" prefHeight="750.0" prefWidth="1160.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.project.AccountantDetailsViewController">
+   <children>
+      <VBox alignment="CENTER" prefHeight="750.0" prefWidth="1160.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="220.0" prefWidth="1160.0" spacing="50.0">
+               <children>
+                  <VBox alignment="CENTER_LEFT" spacing="30.0">
+                     <children>
+                        <Label text="Nazwa:">
+                           <font>
+                              <Font size="36.0" />
+                           </font>
+                        </Label>
+                        <Label text="Miasto:">
+                           <font>
+                              <Font size="36.0" />
+                           </font>
+                        </Label>
+                        <Label text="Adres:">
+                           <font>
+                              <Font size="36.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="178.0" text="Status:">
+                           <font>
+                              <Font size="36.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="262.0" text="Kategoria:">
+                           <font>
+                              <Font size="36.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" spacing="30.0">
+                     <children>
+                        <TextField fx:id="facilityNameTF">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </TextField>
+                        <TextField fx:id="facilityCityTF">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </TextField>
+                        <TextField fx:id="facilityAddressTF" layoutX="10.0" layoutY="137.0">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </TextField>
+                        <ComboBox fx:id="facilityStatusComboBox" prefHeight="51.0" prefWidth="297.0" />
+                        <ComboBox fx:id="facilityCategoryComboBox" layoutX="84.0" layoutY="356.0" prefHeight="51.0" prefWidth="297.0" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="300.0" text="Dodaj obiekt">
+               <VBox.margin>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="50.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Button>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
