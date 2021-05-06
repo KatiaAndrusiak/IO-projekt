@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.project.LoginController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.project.LoginController">
    <children>
       <VBox alignment="CENTER" layoutX="50.0" layoutY="49.0" spacing="10.0">
          <children>
@@ -41,7 +41,7 @@
                   <PasswordField fx:id="password" prefHeight="40.0" prefWidth="300.0" />
                </children>
             </VBox>
-            <Button fx:id="loginButton" defaultButton="true" mnemonicParsing="false" onAction="#login" prefHeight="35.0" prefWidth="131.0" text="Login">
+            <Button fx:id="loginButton" defaultButton="true" mnemonicParsing="false" onAction="#login" prefHeight="35.0" prefWidth="131.0" styleClass="green" stylesheets="@style.css" text="Login">
                <font>
                   <Font size="15.0" />
                </font>
