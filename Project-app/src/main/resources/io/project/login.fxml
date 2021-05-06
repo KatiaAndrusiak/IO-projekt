@@ -25,7 +25,7 @@
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <Button fx:id="loginButton" defaultButton="true" layoutX="50.0" layoutY="319.0" mnemonicParsing="false" onAction="#login" prefHeight="25.0" prefWidth="131.0" text="Login">
+      <Button fx:id="loginButton" defaultButton="true" layoutX="50.0" layoutY="319.0" mnemonicParsing="false" onAction="#login" prefHeight="25.0" prefWidth="131.0" styleClass="green" stylesheets="@style.css" text="Login">
          <font>
             <Font size="15.0" />
          </font>

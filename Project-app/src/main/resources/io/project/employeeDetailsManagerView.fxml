@@ -25,7 +25,7 @@
                         <Image url="@user.png" />
                      </image>
                   </ImageView>
-                  <VBox alignment="CENTER_RIGHT" prefWidth="400.0">
+                  <VBox alignment="CENTER_RIGHT" prefHeight="386.0" prefWidth="418.0">
                      <children>
                         <Label graphicTextGap="0.0" text="Imię">
                            <font>

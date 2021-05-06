@@ -5,6 +5,7 @@ module io.project {
     requires java.desktop;
     requires org.controlsfx.controls;
     requires org.postgresql.jdbc;
+    requires javafx.graphics;
 
     opens io.project;
     exports io.project;
