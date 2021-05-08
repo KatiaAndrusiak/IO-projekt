@@ -1,10 +1,11 @@
 package io.project;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
@@ -30,10 +31,45 @@ public class DashboardManagerController implements Initializable {
     @FXML
     private Button deliveryListButton;
 
-    public void mainPage(MouseEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("dashboard.fxml"));
+    public void mainPage(ActionEvent event) throws IOException {
+        try {
+            switch (Global.getCurrentUser().getRole()) {
+                case "CEO":
+                    initPanel(Global.getViewPane(), "CEODetailsView.fxml");
+                    break;
+                case  "manager":
+                    initPanel(Global.getViewPane(), "managerDetailsView.fxml");
+                    break;
+                case  "employee":
+                    initPanel(Global.getViewPane(), "employeeDetailsView.fxml");
+                    break;
+                case  "accountant":
+                    initPanel(Global.getViewPane(), "accountantDetailsView.fxml");
+                    break;
+                default:
+                    throw new IllegalStateException("Unexpected value: " + Global.getCurrentUser().getRole());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         System.out.println("Click on Main Page");
     }
+
+    public void initPanel(AnchorPane panel, String resource)throws IOException {
+        Parent fxml = FXMLLoader.load(getClass().getResource(resource));
+        panel.getChildren().clear();
+        panel.getChildren().addAll(fxml);
+    }
+
+    public void openFacilityList(ActionEvent event) throws IOException {
+//        FXMLLoader loader = new FXMLLoader(getClass().getResource("facilitiesManager.fxml"));
+//        Parent root = loader.load();
+//        Global.getManagerPane().getChildren().removeAll();
+//        Global.getManagerPane().getChildren().addAll(root);
+        initPanel( Global.getViewPane(), "facilityList.fxml");
+    }
+
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

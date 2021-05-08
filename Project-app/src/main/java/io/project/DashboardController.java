@@ -46,6 +46,8 @@ public class DashboardController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        Global.setViewPane(viewPane);
+        Global.setManagerPane(managerPane);
         try {
             switch (Global.getCurrentUser().getRole()) {
                 case "CEO":
