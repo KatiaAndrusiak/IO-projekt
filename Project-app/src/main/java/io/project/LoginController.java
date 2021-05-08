@@ -4,12 +4,15 @@ import io.project.database.DBManagment;
 import io.project.entities.Employee;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
@@ -23,13 +26,19 @@ public class LoginController implements Initializable {
     private Button loginButton;
 
     @FXML
-    void login(ActionEvent event) {
-        try {
-            Employee test = DBManagment.login("admin", "admin");
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+    void login(ActionEvent event) throws IOException {
+        Employee loggedInUser = DBManagment.login(username.getText(), password.getText());
+        Global.setCurrentUser(loggedInUser);
 
+        if (loggedInUser != null) {
+            Stage primaryStage = (Stage) loginButton.getScene().getWindow();
+            primaryStage.close();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("dashboard.fxml"));
+            Stage stage = new Stage();
+            stage.setTitle("LEDIKOM Menedżer");
+            stage.setScene(new Scene(loader.load()));
+            stage.show();
+        }
     }
 
     @Override

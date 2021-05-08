@@ -1,16 +1,15 @@
 package io.project;
 
+import io.project.entities.Employee;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 
-import java.io.IOException;
 import java.net.URL;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class EmployeeDetailsViewController implements Initializable {
@@ -59,13 +58,17 @@ public class EmployeeDetailsViewController implements Initializable {
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/io/project/employeeDetailsView.fxml"));
-		try {
-			Parent root = loader.load();
-			employeePane.getChildren().clear();
-			employeePane.getChildren().addAll(root);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		Employee currUser = Global.getCurrentUser();
+		employeeFirstName.setText(currUser.getFirstName());
+		employeeLastName.setText(currUser.getLastName());
+		employeeBirthDate.setText(currUser.getDOB().format(formatter));
+		employeePhoneNumber.setText(currUser.getPhone());
+		employeeEmploymentDate.setText(currUser.getEmploymentDate().format(formatter));
+		employeePosition.setText(currUser.getPosition());
+		employeeCategory.setText(currUser.getCategory());
+		employeeSalary.setText(currUser.getSalary());
+		employeeSOO.setText(currUser.getPPE().format(formatter));
+		employeeCoursesHours.setText(String.valueOf(currUser.getCourseHoursSum()));
 	}
 }

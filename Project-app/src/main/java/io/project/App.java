@@ -19,6 +19,7 @@ public class App extends Application {
         scene = new Scene(loadFXML("login"));
         stage.setScene(scene);
         stage.show();
+        stage.setTitle("Panel logowania");
         stage.setResizable(false);
         stage.setOnCloseRequest(event -> {
             try {

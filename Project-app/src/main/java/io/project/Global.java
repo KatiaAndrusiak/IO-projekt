@@ -5,10 +5,6 @@ import io.project.entities.Facility;
 
 
 public final class Global {
-
-
-
-
     private static Employee employee;
     private static Facility facility;
     private static Employee currentUser;

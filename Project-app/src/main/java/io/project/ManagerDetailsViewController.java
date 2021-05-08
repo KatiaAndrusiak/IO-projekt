@@ -1,16 +1,15 @@
 package io.project;
 
+import io.project.entities.Employee;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 
-import java.io.IOException;
 import java.net.URL;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class ManagerDetailsViewController implements Initializable {
@@ -59,13 +58,16 @@ public class ManagerDetailsViewController implements Initializable {
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/io/project/managerDetailsView.fxml"));
-		try {
-			Parent root = loader.load();
-			managerPane.getChildren().clear();
-			managerPane.getChildren().addAll(root);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		Employee currUser = Global.getCurrentUser();
+		managerFirstName.setText(currUser.getFirstName());
+		managerLastName.setText(currUser.getLastName());
+		managerBirthDate.setText(currUser.getDOB().format(formatter));
+		managerPhoneNumber.setText(currUser.getPhone());
+		managerPosition.setText(currUser.getPosition());
+		managerCategory.setText(currUser.getCategory());
+		managerSalary.setText(currUser.getSalary());
+		managerSOO.setText(currUser.getPPE().format(formatter));
+		managerCoursesHours.setText(String.valueOf(currUser.getCourseHoursSum()));
 	}
 }

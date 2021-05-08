@@ -1,15 +1,14 @@
 package io.project;
 
+import io.project.entities.Employee;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 
-import java.io.IOException;
 import java.net.URL;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class CEODetailsViewController implements Initializable {
@@ -58,13 +57,13 @@ public class CEODetailsViewController implements Initializable {
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/io/project/CEODetailsView.fxml"));
-		try {
-			Parent root = loader.load();
-			CEOPane.getChildren().clear();
-			CEOPane.getChildren().addAll(root);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		Employee currUser = Global.getCurrentUser();
+		CEOFirstName.setText(currUser.getFirstName());
+		CEOLastName.setText(currUser.getLastName());
+		CEOBirthDate.setText(currUser.getDOB().format(formatter));
+		CEOPhoneNumber.setText(currUser.getPhone());
+		CEOPosition.setText(currUser.getPosition());
+		CEOCategory.setText(currUser.getCategory());
 	}
 }

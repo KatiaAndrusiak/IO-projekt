@@ -18,15 +18,58 @@ public class DashboardController implements Initializable {
     @FXML
     private AnchorPane viewPane;
 
+    public AnchorPane getManagerPane() {
+        return managerPane;
+    }
+
+    public void setManagerPane(AnchorPane managerPane) {
+        this.managerPane = managerPane;
+    }
+
+    public AnchorPane getViewPane() {
+        return viewPane;
+    }
+
+    public void setViewPane(AnchorPane viewPane) {
+        this.viewPane = viewPane;
+    }
+
+    public void initPanel(AnchorPane panel, String resource)throws IOException {
+        Parent fxml = FXMLLoader.load(getClass().getResource(resource));
+        panel.getChildren().removeAll();
+        panel.getChildren().addAll(fxml);
+    }
+
+
+
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/io/project/dashboardManager.fxml"));
         try {
-            Parent root = loader.load();
-            managerPane.getChildren().clear();
-            managerPane.getChildren().addAll(root);
+            switch (Global.getCurrentUser().getRole()) {
+                case "CEO":
+                    initPanel(managerPane, "dashboardManager.fxml");
+                    initPanel(viewPane, "CEODetailsView.fxml");
+                    break;
+                case  "manager":
+                    initPanel(managerPane, "dashboardManager.fxml");
+                    initPanel(viewPane, "managerDetailsView.fxml");
+                    break;
+                case  "employee":
+                    initPanel(managerPane, "dashboardManager.fxml");
+                    initPanel(viewPane, "employeeDetailsView.fxml");
+                    break;
+                case  "accountant":
+                    initPanel(managerPane, "dashboardManager.fxml");
+                    initPanel(viewPane, "accountantDetailsView.fxml");
+                    break;
+                default:
+                    throw new IllegalStateException("Unexpected value: " + Global.getCurrentUser().getRole());
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 }
