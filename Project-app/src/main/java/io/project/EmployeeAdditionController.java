@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
@@ -27,10 +28,34 @@ public class EmployeeAdditionController implements Initializable
 	private DatePicker employeeDOBTF;
 	
 	@FXML
+	private TextField employeeAddressTF;
+	
+	@FXML
 	private TextField employeePositionTF;
 	
 	@FXML
+	private TextField employeeUsernameTF;
+	
+	@FXML
+	private PasswordField employeePasswordTF;
+	
+	@FXML
 	private TextField employeeSalaryTF;
+	
+	@FXML
+	private TextField employeePhoneTF;
+	
+	@FXML
+	private TextField employeeRoleTF;
+	
+	@FXML
+	private TextField employeeCategoryTF;
+	
+	@FXML
+	private TextField employeeSOOTF;
+	
+	@FXML
+	private TextField employeeCoursesHoursTF;
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
