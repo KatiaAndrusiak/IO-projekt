@@ -1,4 +1,4 @@
-package io.project;
+package io.project.entities;
 
 public class Checkup {
     private int id;

@@ -1,5 +1,7 @@
 package io.project;
 
+import io.project.entities.Course;
+import io.project.entities.Employee;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;

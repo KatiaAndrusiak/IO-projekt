@@ -1,4 +1,4 @@
-package io.project;
+package io.project.entities;
 
 public class Facility {
     private int id;

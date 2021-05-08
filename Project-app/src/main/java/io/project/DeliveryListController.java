@@ -1,5 +1,8 @@
 package io.project;
 
+import io.project.entities.Delivery;
+import io.project.entities.Facility;
+import io.project.entities.Supplier;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;

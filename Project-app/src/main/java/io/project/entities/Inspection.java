@@ -1,4 +1,4 @@
-package io.project;
+package io.project.entities;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

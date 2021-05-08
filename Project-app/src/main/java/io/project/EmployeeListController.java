@@ -1,5 +1,7 @@
 package io.project;
 
+import io.project.entities.Employee;
+import io.project.entities.Facility;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
