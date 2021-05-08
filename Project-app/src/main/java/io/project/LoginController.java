@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
@@ -23,7 +24,12 @@ public class LoginController implements Initializable {
 
     @FXML
     void login(ActionEvent event) {
-        Employee test = DBManagment.login("admin", "admin");
+        try {
+            Employee test = DBManagment.login("admin", "admin");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
     }
 
     @Override

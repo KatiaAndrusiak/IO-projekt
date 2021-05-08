@@ -1,5 +1,6 @@
 package io.project;
 
+import io.project.database.DBManagment;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -7,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class App extends Application {
 
@@ -18,6 +20,13 @@ public class App extends Application {
         stage.setScene(scene);
         stage.show();
         stage.setResizable(false);
+        stage.setOnCloseRequest(event -> {
+            try {
+                DBManagment.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     static void setRoot(String fxml) throws IOException {
