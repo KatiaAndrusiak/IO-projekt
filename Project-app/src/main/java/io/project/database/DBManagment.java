@@ -1,4 +1,6 @@
 package io.project.database;
+import io.project.entities.Employee;
+
 import java.sql.*;
 
 public class DBManagment {
@@ -14,7 +16,7 @@ public class DBManagment {
             conn = DriverManager.getConnection(url, user, pass);
             System.out.println("Polaczenie z baza danych OK ! ");
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println("Error" + e.getMessage());
         }
 
         return conn;
@@ -37,5 +39,13 @@ public class DBManagment {
                 con.close();
             } catch (SQLException e) {}
         }
+    }
+
+    public static Employee login(String username, String password) {
+        String sql = "select * from employee_role where username="+ username + " and password=" + password;
+
+        Connection conn = connect();
+
+        return new Employee();
     }
 }

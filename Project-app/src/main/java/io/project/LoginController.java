@@ -1,5 +1,7 @@
 package io.project;
 
+import io.project.database.DBManagment;
+import io.project.entities.Employee;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -21,7 +23,7 @@ public class LoginController implements Initializable {
 
     @FXML
     void login(ActionEvent event) {
-
+        Employee test = DBManagment.login("admin", "admin");
     }
 
     @Override
