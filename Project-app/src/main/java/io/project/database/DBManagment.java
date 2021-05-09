@@ -1,6 +1,7 @@
 package io.project.database;
 
 import io.project.alert.AlertBox;
+import io.project.entities.Course;
 import io.project.entities.Employee;
 import io.project.entities.Facility;
 import javafx.collections.FXCollections;
@@ -241,6 +242,31 @@ public class DBManagment {
                         rs.getString("name"),
                         rs.getString("address"),
                         rs.getString("schedule")));
+            }
+            closeAll(rs,ps);
+
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            AlertBox.errorAlert("Bład", e.getMessage());
+        }
+        return  list;
+    }
+
+    public static ObservableList<Course> getCourseInfo() {
+        ObservableList<Course> list = FXCollections.observableArrayList();
+        try{
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+            String sql = "SELECT * FROM employee_course_view";
+            ps = getConn().prepareStatement(sql);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                list.add(new Course(
+                        rs.getString("first_name"),
+                        rs.getString("last_name"),
+                        rs.getString("name"),
+                        rs.getDate("course_date").toLocalDate(),
+                        rs.getInt("hours")));
             }
             closeAll(rs,ps);
 

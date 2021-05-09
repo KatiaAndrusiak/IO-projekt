@@ -8,8 +8,18 @@ public class Course {
     private LocalDate date;
     private int hours;
     private Employee employee;
+    private String employeeName;
+    private String employeeLastName;
 
     public Course() {
+    }
+
+    public Course(String employeeName, String employeeLastName, String name, LocalDate date, int hours) {
+        this.name = name;
+        this.date = date;
+        this.hours = hours;
+        this.employeeName = employeeName;
+        this.employeeLastName = employeeLastName;
     }
 
     public Course(int id, String name, LocalDate date, int hours, Employee employee) {
@@ -58,5 +68,21 @@ public class Course {
 
     public void setEmployee(Employee employee) {
         this.employee = employee;
+    }
+
+    public String getEmployeeName() {
+        return employeeName;
+    }
+
+    public void setEmployeeName(String employeeName) {
+        this.employeeName = employeeName;
+    }
+
+    public String getEmployeeLastName() {
+        return employeeLastName;
+    }
+
+    public void setEmployeeLastName(String employeeLastName) {
+        this.employeeLastName = employeeLastName;
     }
 }

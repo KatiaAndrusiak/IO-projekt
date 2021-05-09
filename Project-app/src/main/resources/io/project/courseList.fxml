@@ -4,15 +4,15 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="viewPane" minHeight="-1.0" minWidth="-1.0" prefHeight="750.0" prefWidth="1160.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.project.CourseListController">
+<AnchorPane fx:id="viewPane" minHeight="-1.0" minWidth="-1.0" prefHeight="750.0" prefWidth="1160.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.project.CourseListController">
    <children>
       <TableView fx:id="table" layoutX="11.0" layoutY="14.0" prefHeight="354.0" prefWidth="1139.0">
          <columns>
-            <TableColumn fx:id="employeeCol" maxWidth="441.0" minWidth="-1.0" prefWidth="327.0" text="Pracownik" />
-            <TableColumn fx:id="nameCol" maxWidth="504.0" minWidth="-1.0" prefWidth="384.0" text="Kurs" />
-            <TableColumn fx:id="dateCol" maxWidth="349.0" minWidth="-1.0" prefWidth="142.0" text="Data" />
-            <TableColumn fx:id="hoursCol" maxWidth="596.0" minWidth="-1.0" prefWidth="109.0" text="Ilość godzin" />
-            <TableColumn fx:id="nextCourseCol" maxWidth="615.0" minWidth="-1.0" prefWidth="176.0" text="Następny kurs" />
+            <TableColumn fx:id="employeeNameCol" maxWidth="441.0" minWidth="-1.0" prefWidth="190.0" text="Imie" />
+            <TableColumn fx:id="employeeLastNameCol" prefWidth="204.0" text="Nazwisko" />
+            <TableColumn fx:id="nameCol" maxWidth="504.0" minWidth="-1.0" prefWidth="319.0" text="Kurs" />
+            <TableColumn fx:id="dateCol" maxWidth="419.0" minWidth="-1.0" prefWidth="226.0" text="Data" />
+            <TableColumn fx:id="hoursCol" minWidth="0.0" prefWidth="198.0" text="Ilość godzin" />
          </columns>
       </TableView>
    </children>
