@@ -148,7 +148,7 @@
                <children>
                   <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="510.0" spacing="20.0">
                      <children>
-                        <Button fx:id="employeeDeleteButton" mnemonicParsing="false" text="Usuń pracownika">
+                        <Button fx:id="employeeDeleteButton" onAction="#deleteEmployee" mnemonicParsing="false" text="Usuń pracownika">
                            <font>
                               <Font size="24.0" />
                            </font>
