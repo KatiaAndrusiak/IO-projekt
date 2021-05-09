@@ -4,11 +4,14 @@ import io.project.alert.AlertBox;
 import io.project.entities.Course;
 import io.project.entities.Employee;
 import io.project.entities.Facility;
+import io.project.entities.Holiday;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ComboBox;
 
 import java.sql.*;
+
+import static javax.swing.JOptionPane.showMessageDialog;
 
 public class DBManagment {
 
@@ -276,5 +279,71 @@ public class DBManagment {
         }
         return  list;
     }
+    public static void fillHolidayAdditionDataHoliday(ComboBox<String> holidayName) {
+        String sql = "SELECT e.enumlabel FROM pg_type t, pg_enum e WHERE t.oid = e.enumtypid AND typname = 'holiday_name';";
 
+        try {
+            PreparedStatement pst = conn.prepareStatement(sql);
+            ResultSet res = pst.executeQuery();
+            while (res.next()) {
+                holidayName.getItems().add(res.getString("enumlabel"));
+            }
+            closeAll(res, pst);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            AlertBox.errorAlert("Bład", e.getMessage());
+        }
     }
+    public static void fillHolidayAdditionDataEmployee(ComboBox<Employee> employeeComboBox) {
+        try {
+            String sql = "select * from employee";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet res = ps.executeQuery();
+            while (res.next()) {
+                Employee empToAdd = new Employee();
+                empToAdd.setId(res.getInt(1));
+                empToAdd.setFirstName(res.getString(2));
+                empToAdd.setLastName(res.getString(3));
+                employeeComboBox.getItems().add(empToAdd);
+            }
+            ps.close();
+        } catch (SQLException e) {
+            AlertBox.errorAlert("Bład", e.getMessage());
+            System.out.println(e.getMessage());
+        }
+    }
+    public static boolean addHoliday(Holiday holiday) {
+
+        try {
+            String sql = "select addHolidayForFacility(?,?,?,?,?)";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setInt(1, holiday.getFacility().getId());
+            pst.setInt(2, holiday.getEmployee().getId());
+            pst.setObject(3, holiday.getName(), Types.OTHER);
+            pst.setDate(4, Date.valueOf(holiday.getDate()));
+            pst.setDouble(5, holiday.getProceeds());
+            pst.execute();
+            pst.close();
+            return true;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            AlertBox.errorAlert("Bład", e.getMessage());
+        }
+        return false;
+    }
+    public static boolean deleteEmployee(Employee employee) {
+        String sql = "SELECT deleteEmployee(?)";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, employee.getId());
+            ps.execute();
+            ps.close();
+            return true;
+        } catch (SQLException e) {
+            showMessageDialog(null, e.getMessage());
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+
+}
