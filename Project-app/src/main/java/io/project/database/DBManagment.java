@@ -201,15 +201,13 @@ public class DBManagment {
 
     public static ObservableList<Employee> getEmployeeInfo(){
         ObservableList<Employee> list = FXCollections.observableArrayList();
-        try{
+        try {
             PreparedStatement ps = null;
             ResultSet rs = null;
-            System.out.println("before select");
             String sql = "SELECT * FROM employee_data_view";
             ps = getConn().prepareStatement(sql);
             rs = ps.executeQuery();
-            System.out.println("before while");
-            while(rs.next()){
+            while (rs.next()) {
                 list.add(new Employee(
                         rs.getString("first_name"),
                         rs.getString("last_name"),
@@ -220,14 +218,37 @@ public class DBManagment {
                         rs.getDate("ppe").toLocalDate()));
             }
             System.out.println(list);
+            closeAll(rs, ps);
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            AlertBox.errorAlert("Bład", e.getMessage());
+        }
+        return list;
+    }
+
+    public static ObservableList<Facility> getFacilityInfo() {
+        ObservableList<Facility> list = FXCollections.observableArrayList();
+        try{
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+            String sql = "SELECT * FROM facility_data_view";
+            ps = getConn().prepareStatement(sql);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                list.add(new Facility(
+                        rs.getString("city"),
+                        rs.getString("name"),
+                        rs.getString("address"),
+                        rs.getString("schedule")));
+            }
             closeAll(rs,ps);
 
         }catch(Exception e){
             System.out.println(e.getMessage());
-            AlertBox.errorAlert("Bład db", e.getMessage());
+            AlertBox.errorAlert("Bład", e.getMessage());
         }
         return  list;
     }
 
-
-}
+    }

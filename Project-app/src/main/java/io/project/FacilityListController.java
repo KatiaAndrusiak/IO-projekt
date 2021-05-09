@@ -1,10 +1,13 @@
 package io.project;
 
+import io.project.database.DBManagment;
 import io.project.entities.Employee;
 import io.project.entities.Facility;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -154,9 +157,19 @@ public class FacilityListController implements Initializable {
     @FXML
     private ComboBox<Employee> addEmployeeCB;
 
+    public void facilityList(){
+        cityCol.setCellValueFactory(new PropertyValueFactory<Facility,String>("city"));
+        nameCol.setCellValueFactory(new PropertyValueFactory<Facility,String>("name"));
+        addressCol.setCellValueFactory(new PropertyValueFactory<Facility,String>("address"));
+        scheduleCol.setCellValueFactory(new PropertyValueFactory<Facility,String>("schedule"));
+
+        ObservableList<Facility> list = DBManagment.getFacilityInfo();
+        table.setItems(list);
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        facilityList();
     }
 	
 	// po kliknieciu addButtonHoliday ma sie pokazac holidayForm,

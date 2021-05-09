@@ -10,6 +10,12 @@ public class Facility {
 
     public Facility() {
     }
+    public Facility( String city, String name,  String address,String schedule) {
+        this.city = city;
+        this.name = name;
+        this.address = address;
+        this.schedule = schedule;
+    }
 
     public Facility(int id, String name, String status, String address, String city, String schedule) {
         this.id = id;
