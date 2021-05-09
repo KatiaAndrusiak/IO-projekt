@@ -3,7 +3,6 @@ package io.project;
 import io.project.database.DBManagment;
 import io.project.entities.Employee;
 import io.project.entities.Facility;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -16,6 +15,8 @@ import javafx.scene.layout.AnchorPane;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
+
+
 
 public class EmployeeListController implements Initializable {
     @FXML
@@ -57,7 +58,7 @@ public class EmployeeListController implements Initializable {
         salaryCol.setCellValueFactory(new PropertyValueFactory<Employee, Integer>("salaryInt"));
         ppeCol.setCellValueFactory(new PropertyValueFactory<Employee, LocalDate>("PPE"));
 
-        ObservableList<Employee> list = FXCollections.observableArrayList();
+        ObservableList<Employee> list;
         list = DBManagment.getEmployeeInfo();
         table.setItems(list);
     }

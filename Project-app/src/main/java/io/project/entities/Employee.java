@@ -2,6 +2,7 @@ package io.project.entities;
 
 import java.time.LocalDate;
 
+
 public class Employee {
     private int id;
     private String firstName;
@@ -118,6 +119,14 @@ public class Employee {
         this.salary = salary;
     }
 
+    public Integer getSalaryInt() {
+        return salaryInt;
+    }
+
+    public void setSalaryInt(Integer salaryInt) {
+        this.salaryInt = salaryInt;
+    }
+
     public LocalDate getPPE() {
         return PPE;
     }
@@ -157,4 +166,6 @@ public class Employee {
     public void setPassword(String password) {
         this.password = password;
     }
+
+
 }

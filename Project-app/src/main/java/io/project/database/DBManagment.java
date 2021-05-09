@@ -8,7 +8,6 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.ComboBox;
 
 import java.sql.*;
-import java.time.ZoneId;
 
 public class DBManagment {
 

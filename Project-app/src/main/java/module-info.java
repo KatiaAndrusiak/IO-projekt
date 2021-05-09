@@ -10,4 +10,7 @@ module io.project {
     opens io.project;
     exports io.project;
 
+    exports  io.project.entities;
+    opens  io.project.entities;
+
 }
