@@ -6,7 +6,7 @@ public class Holiday {
     private int id;
     private String name;
     private LocalDate date;
-    private int proceeds;
+    private double proceeds;
     private Employee employee;
     private Facility facility;
 
@@ -46,11 +46,11 @@ public class Holiday {
         this.date = date;
     }
 
-    public int getProceeds() {
+    public double getProceeds() {
         return proceeds;
     }
 
-    public void setProceeds(int proceeds) {
+    public void setProceeds(double proceeds) {
         this.proceeds = proceeds;
     }
 
@@ -69,4 +69,5 @@ public class Holiday {
     public void setFacility(Facility facility) {
         this.facility = facility;
     }
+
 }
