@@ -3,9 +3,12 @@ package io.project.database;
 import io.project.alert.AlertBox;
 import io.project.entities.Employee;
 import io.project.entities.Facility;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.ComboBox;
 
 import java.sql.*;
+import java.time.ZoneId;
 
 public class DBManagment {
 
@@ -195,5 +198,37 @@ public class DBManagment {
         }
         return false;
     }
+
+
+    public static ObservableList<Employee> getEmployeeInfo(){
+        ObservableList<Employee> list = FXCollections.observableArrayList();
+        try{
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+            System.out.println("before select");
+            String sql = "SELECT * FROM employee_data_view";
+            ps = getConn().prepareStatement(sql);
+            rs = ps.executeQuery();
+            System.out.println("before while");
+            while(rs.next()){
+                list.add(new Employee(
+                        rs.getString("first_name"),
+                        rs.getString("last_name"),
+                        rs.getDate("dob").toLocalDate(),
+                        rs.getString("position"),
+                        rs.getString("category"),
+                        rs.getInt("salary"),
+                        rs.getDate("ppe").toLocalDate()));
+            }
+            System.out.println(list);
+            closeAll(rs,ps);
+
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            AlertBox.errorAlert("Bład db", e.getMessage());
+        }
+        return  list;
+    }
+
 
 }

@@ -12,6 +12,7 @@ public class Employee {
     private String position;
     private String category;
     private String salary;
+    private Integer salaryInt;
     private LocalDate PPE;
     private int courseHoursSum;
     private LocalDate employmentDate;
@@ -19,6 +20,15 @@ public class Employee {
     private String password;
 
     public Employee() {
+    }
+    public Employee(String firstName, String lastName, LocalDate DOB,  String position, String category, Integer salary, LocalDate PPE){
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.DOB = DOB;
+        this.position = position;
+        this.category = category;
+        this.salaryInt = salary;
+        this.PPE = PPE;
     }
 
     public Employee(int id, String firstName, String lastName, String role, LocalDate DOB, String phone, String position, String category, String salary, LocalDate PPE, int courseHoursSum, LocalDate employmentDate) {
