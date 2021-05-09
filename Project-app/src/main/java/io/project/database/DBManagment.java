@@ -2,6 +2,7 @@ package io.project.database;
 
 import io.project.alert.AlertBox;
 import io.project.entities.Employee;
+import javafx.scene.control.ComboBox;
 
 import java.sql.*;
 
@@ -103,6 +104,59 @@ public class DBManagment {
             System.out.println(e.getMessage());
             return null;
         }
+    }
+
+    public static void setEmployeeAdditionData(ComboBox<String> employeePosition, ComboBox<String> employeeRole, ComboBox<String> employeeCategory) {
+        try {
+            String sql = "select * from employee_enums_view";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet res = ps.executeQuery();
+            while (res.next()) {
+                switch (res.getString("typname")) {
+                    case "employee_category":
+                        employeeCategory.getItems().add(res.getString("enumlabel"));
+                        break;
+                    case "employee_position":
+                        employeePosition.getItems().add(res.getString("enumlabel"));
+                        break;
+                    case "employee_role":
+                        employeeRole.getItems().add(res.getString("enumlabel"));
+                        break;
+                    default:
+                        throw new IllegalStateException("Unexpected value: " + res.getString("typname"));
+                }
+            }
+            DBManagment.closeAll(res, ps);
+        } catch (SQLException e) {
+            AlertBox.errorAlert("Bład", e.getMessage());
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static boolean addEmployee(Employee employee) {
+        try {
+            String sql = "select addEmployee(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setString(1, employee.getFirstName());
+            pst.setString(2, employee.getLastName());
+            pst.setString(3, employee.getUsername());
+            pst.setString(4, employee.getPassword());
+            pst.setObject(5, employee.getRole(), Types.OTHER);
+            pst.setDate(6, Date.valueOf(employee.getDOB()));
+            pst.setString(7, employee.getPhone());
+            pst.setDate(8, Date.valueOf(employee.getEmploymentDate()));
+            pst.setObject(9, employee.getPosition(), Types.OTHER);
+            pst.setObject(10, employee.getCategory(), Types.OTHER);
+            pst.setInt(11, Integer.parseInt(employee.getSalary()));
+            pst.setDate(12, Date.valueOf(employee.getPPE()));
+            pst.setInt(13, employee.getCourseHoursSum());
+            pst.execute();
+            return true;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            AlertBox.errorAlert("Bład", e.getMessage());
+        }
+        return false;
     }
 
 }

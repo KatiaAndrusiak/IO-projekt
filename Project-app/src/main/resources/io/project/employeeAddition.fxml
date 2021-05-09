@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
@@ -34,7 +35,7 @@
                               <Font size="24.0" />
                            </font>
                         </Label>
-                        <Label layoutX="10.0" layoutY="346.0" text="Adres:">
+                        <Label layoutX="10.0" layoutY="346.0" text="Data zatrudnienia:">
                            <font>
                               <Font size="24.0" />
                            </font>
@@ -72,16 +73,8 @@
                            </font>
                         </TextField>
                         <DatePicker fx:id="employeeDOBTF" minHeight="39.0" prefWidth="297.0" />
-                        <TextField fx:id="employeeAddressTF" layoutX="10.0" layoutY="509.0">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </TextField>
-                        <TextField fx:id="employeePositionTF" layoutX="10.0" layoutY="262.0">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </TextField>
+                        <DatePicker fx:id="employmentDate" layoutX="10.0" layoutY="509.0" prefHeight="39.0" prefWidth="240.0" />
+                        <ComboBox fx:id="employeePosition" layoutX="10.0" layoutY="262.0" prefHeight="39.0" prefWidth="240.0" />
                         <TextField fx:id="employeeUsernameTF" layoutX="10.0" layoutY="384.0">
                            <font>
                               <Font size="18.0" />
@@ -143,21 +136,9 @@
                               <Font size="18.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="employeeRoleTF">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </TextField>
-                        <TextField fx:id="employeeCategoryTF">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </TextField>
-                        <TextField fx:id="employeeSOOTF" layoutX="10.0" layoutY="254.0">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </TextField>
+                        <ComboBox fx:id="employeeRole" prefHeight="39.0" prefWidth="240.0" />
+                        <ComboBox fx:id="employeeCategory" prefHeight="39.0" prefWidth="240.0" />
+                        <DatePicker fx:id="employeeSOO" prefHeight="39.0" prefWidth="240.0" />
                         <TextField fx:id="employeeCoursesHoursTF" layoutX="10.0" layoutY="358.0">
                            <font>
                               <Font size="18.0" />
@@ -170,7 +151,7 @@
                   </VBox>
                </children>
             </HBox>
-            <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="300.0" text="Dodaj pracownika">
+            <Button mnemonicParsing="false" onAction="#addEmployee" prefHeight="60.0" prefWidth="300.0" text="Dodaj pracownika">
                <VBox.margin>
                   <Insets bottom="20.0" left="20.0" right="20.0" top="40.0" />
                </VBox.margin>
