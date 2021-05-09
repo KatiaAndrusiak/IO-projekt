@@ -38,7 +38,7 @@
                               <Font size="36.0" />
                            </font>
                         </Label>
-                        <Label layoutX="10.0" layoutY="262.0" text="Kategoria:">
+                        <Label layoutX="10.0" layoutY="262.0" text="Czas pracy:">
                            <font>
                               <Font size="36.0" />
                            </font>
@@ -63,12 +63,12 @@
                            </font>
                         </TextField>
                         <ComboBox fx:id="facilityStatusComboBox" prefHeight="51.0" prefWidth="297.0" />
-                        <ComboBox fx:id="facilityCategoryComboBox" layoutX="84.0" layoutY="356.0" prefHeight="51.0" prefWidth="297.0" />
+                        <TextField fx:id="facilitySchedule" prefHeight="51.0" prefWidth="297.0" />
                      </children>
                   </VBox>
                </children>
             </HBox>
-            <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="300.0" text="Dodaj obiekt">
+            <Button mnemonicParsing="false" onAction="#addFacility" prefHeight="60.0" prefWidth="300.0" text="Dodaj obiekt">
                <VBox.margin>
                   <Insets bottom="20.0" left="20.0" right="20.0" top="50.0" />
                </VBox.margin>

@@ -2,6 +2,7 @@ package io.project.database;
 
 import io.project.alert.AlertBox;
 import io.project.entities.Employee;
+import io.project.entities.Facility;
 import javafx.scene.control.ComboBox;
 
 import java.sql.*;
@@ -151,6 +152,42 @@ public class DBManagment {
             pst.setDate(12, Date.valueOf(employee.getPPE()));
             pst.setInt(13, employee.getCourseHoursSum());
             pst.execute();
+            pst.close();
+            return true;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            AlertBox.errorAlert("Bład", e.getMessage());
+        }
+        return false;
+    }
+
+    public static void fillFacilityAdditionData(ComboBox<String> status) {
+        String sql = "SELECT e.enumlabel FROM pg_type t, pg_enum e WHERE t.oid = e.enumtypid AND typname = 'facility_status';";
+
+        try {
+            PreparedStatement pst = conn.prepareStatement(sql);
+            ResultSet res = pst.executeQuery();
+            while (res.next()) {
+                status.getItems().add(res.getString("enumlabel"));
+            }
+            closeAll(res, pst);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            AlertBox.errorAlert("Bład", e.getMessage());
+        }
+    }
+
+    public static boolean addFacility(Facility facility) {
+        try {
+            String sql = "select addFacility(?,?,?,?,?)";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setString(1, facility.getName());
+            pst.setString(2, facility.getAddress());
+            pst.setObject(3, facility.getStatus(), Types.OTHER);
+            pst.setString(4, facility.getSchedule());
+            pst.setString(5, facility.getCity());
+            pst.execute();
+            pst.close();
             return true;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
