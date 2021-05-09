@@ -345,5 +345,22 @@ public class DBManagment {
             return false;
         }
     }
+    public static boolean addCourseToEmployee(Course courseToAdd) {
+        String sql = "SELECT addCourse(?, ?, ?, ?)";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, courseToAdd.getEmployee().getId());
+            ps.setString(2, courseToAdd.getName());
+            ps.setInt(3, courseToAdd.getHours());
+            ps.setDate(4, Date.valueOf(courseToAdd.getDate()));
+            ps.execute();
+            ps.close();
+            return true;
+        } catch (SQLException e) {
+            showMessageDialog(null, e.getMessage());
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
 
 }
