@@ -55,6 +55,10 @@ public class DashboardManagerController implements Initializable {
         System.out.println("Click on Main Page");
     }
 
+    public void openEmployeeList(ActionEvent event) throws IOException {
+        initPanel(Global.getViewPane(), "employeeList.fxml");
+    }
+
     public void initPanel(AnchorPane panel, String resource)throws IOException {
         Parent fxml = FXMLLoader.load(getClass().getResource(resource));
         panel.getChildren().clear();
