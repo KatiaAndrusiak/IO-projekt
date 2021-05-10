@@ -3,6 +3,7 @@ package io.project;
 import io.project.alert.AlertBox;
 import io.project.database.DBManagment;
 import io.project.entities.Course;
+import io.project.entities.Employee;
 import io.project.validation.CheckAndClearTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -43,12 +44,14 @@ public class CourseAdditionController implements Initializable
 	public void addCourseToEmployee(ActionEvent event) {
 		try {
 			Course courseToAdd = new Course();
+			Employee employee = Global.getEmployee();
 			courseToAdd.setName(courseNameTF.getText());
 			courseToAdd.setHours(Integer.parseInt(courseHoursTF.getText()));
-			courseToAdd.setEmployee(Global.getEmployee());
+			courseToAdd.setEmployee(employee);
 			courseToAdd.setDate(courseDateTF.getValue());
 			if (DBManagment.addCourseToEmployee(courseToAdd)) {
 				AlertBox.infoAlert("Udało się!", "Dodano kurs " + courseToAdd.getName() + ", do pracownika " + courseToAdd.getEmployee().getFirstName() + ", " + courseToAdd.getEmployee().getFirstName() , "Obiekt został dodany do bazy");
+				employee.setCourseHoursSum(employee.getCourseHoursSum() + courseToAdd.getHours());
 				CheckAndClearTextField.clearTextField(courseNameTF);
 				CheckAndClearTextField.clearTextField(courseHoursTF);
 			}
