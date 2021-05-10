@@ -147,4 +147,6 @@ public class Employee {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public String toString(){ return this.id + " " + this.firstName + " " + this.lastName ;}
 }

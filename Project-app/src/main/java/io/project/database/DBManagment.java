@@ -6,11 +6,14 @@ import io.project.entities.Facility;
 import javafx.scene.control.ComboBox;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DBManagment {
 
 
-    public DBManagment() { }
+    public DBManagment() {
+    }
 
 
     private static Connection conn = connect();
@@ -194,6 +197,23 @@ public class DBManagment {
             AlertBox.errorAlert("Bład", e.getMessage());
         }
         return false;
+    }
+
+    public static List<Employee> getEmployees() throws SQLException {
+        String sql = "select * from employee";// tutaj select wszystkich pracowników powinien byc
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ResultSet res1 = ps.executeQuery();
+        List<Employee> result = new ArrayList<>();
+        while (res1.next()) {
+            Employee employee = new Employee();
+            employee.setId(res1.getInt("id_employee"));
+            employee.setFirstName(res1.getString("first_name"));
+            employee.setLastName(res1.getString("last_name"));
+            System.out.println(employee.toString());
+            result.add(employee);
+            }
+        System.out.println(result.toString());
+        return result;
     }
 
 }
