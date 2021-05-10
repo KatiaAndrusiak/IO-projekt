@@ -70,6 +70,7 @@ public class EmployeeAdditionController implements Initializable
 		userToAdd.setEmploymentDate(employmentDate.getValue());
 		userToAdd.setSalary(employeeSalaryTF.getText());
 		userToAdd.setPhone(employeePhoneTF.getText());
+		userToAdd.setPosition(employeePosition.getSelectionModel().getSelectedItem());
 		userToAdd.setRole(employeeRole.getSelectionModel().getSelectedItem());
 		userToAdd.setCategory(employeeCategory.getSelectionModel().getSelectedItem());
 		userToAdd.setPPE(employeeSOO.getValue());
