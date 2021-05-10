@@ -10,13 +10,16 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.ComboBox;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import static javax.swing.JOptionPane.showMessageDialog;
 
 public class DBManagment {
 
 
-    public DBManagment() { }
+    public DBManagment() {
+    }
 
 
     private static Connection conn = connect();
@@ -202,7 +205,6 @@ public class DBManagment {
         return false;
     }
 
-
     public static ObservableList<Employee> getEmployeeInfo(){
         ObservableList<Employee> list = FXCollections.observableArrayList();
         try {
@@ -361,6 +363,23 @@ public class DBManagment {
             System.out.println(e.getMessage());
             return false;
         }
+    }
+
+    public static List<Employee> getEmployees() throws SQLException {
+        String sql = "select * from employee";// tutaj select wszystkich pracowników powinien byc
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ResultSet res1 = ps.executeQuery();
+        List<Employee> result = new ArrayList<>();
+        while (res1.next()) {
+            Employee employee = new Employee();
+            employee.setId(res1.getInt("id_employee"));
+            employee.setFirstName(res1.getString("first_name"));
+            employee.setLastName(res1.getString("last_name"));
+            System.out.println(employee.toString());
+            result.add(employee);
+            }
+        System.out.println(result.toString());
+        return result;
     }
 
 }

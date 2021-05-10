@@ -1,11 +1,14 @@
 package io.project.entities;
 
+import java.util.Set;
+
 public class Facility {
     private int id;
     private String name;
     private String status;
     private String address;
     private String city;
+    private Set<Employee> employees;
     private String schedule;
 
     public Facility() {
@@ -17,12 +20,13 @@ public class Facility {
         this.schedule = schedule;
     }
 
-    public Facility(int id, String name, String status, String address, String city, String schedule) {
+    public Facility(int id, String name, String status, String address, String city, Set<Employee> employees, String schedule) {
         this.id = id;
         this.name = name;
         this.status = status;
         this.address = address;
         this.city = city;
+        this.employees = employees;
         this.schedule = schedule;
     }
 
@@ -73,4 +77,9 @@ public class Facility {
     public void setSchedule(String schedule) {
         this.schedule = schedule;
     }
+
+    public void setEmployees(Set<Employee> employees) { this.employees = employees; }
+
+    public Set<Employee> getEmployees() { return employees; }
+
 }

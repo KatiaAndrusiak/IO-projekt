@@ -4,6 +4,8 @@ import io.project.database.DBManagment;
 import io.project.entities.Employee;
 import io.project.entities.Facility;
 import javafx.collections.ObservableList;
+import javafx.collections.FXCollections;
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -11,9 +13,15 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.util.StringConverter;
 
 import java.net.URL;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class FacilityListController implements Initializable {
     @FXML
@@ -114,12 +122,12 @@ public class FacilityListController implements Initializable {
 
     @FXML
     private Button listInspectionButton;
-	
-	@FXML
-	private VBox inspectionForm;
-	
-	@FXML
-	private HBox inspectionQuestionsForm;
+
+    @FXML
+    private VBox inspectionForm;
+
+    @FXML
+    private HBox inspectionQuestionsForm;
 
     @FXML
     private ListView<String> tableOptions;
@@ -129,9 +137,9 @@ public class FacilityListController implements Initializable {
 
     @FXML
     private Button listEmployeeButton;
-	
-	@FXML
-	private VBox employeeForm;
+
+    @FXML
+    private VBox employeeForm;
 
     @FXML
     private TableView<Employee> tableEmployee;
@@ -157,6 +165,8 @@ public class FacilityListController implements Initializable {
     @FXML
     private ComboBox<Employee> addEmployeeCB;
 
+    private Facility selectedFacility; // gdzie to ustawic ??
+
     public void facilityList(){
         cityCol.setCellValueFactory(new PropertyValueFactory<Facility,String>("city"));
         nameCol.setCellValueFactory(new PropertyValueFactory<Facility,String>("name"));
@@ -170,9 +180,36 @@ public class FacilityListController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         facilityList();
+        initAddEmployeeComboBox();
     }
-	
-	// po kliknieciu addButtonHoliday ma sie pokazac holidayForm,
-	// po kliknieciu listInspectionButton ma sie pokazac inspectionForm i inspectionQuestionsForm
-	// po kliknieciu addEmployeeButton ma sie pokazac employeeForm
+
+    private void initAddEmployeeComboBox() {
+        try {
+            List<Employee> employeeList = DBManagment.getEmployees(); //.stream().filter(e -> !selectedFacility.getEmployees().contains(e))
+                  // .collect(Collectors.toList());
+            Map<String, Employee> employeeMap = employeeList.stream().collect(Collectors.toMap(this::employeeComboboxToString, Function.identity(), (e1, e2) -> e1));
+            addEmployeeCB.setItems(FXCollections.observableList(employeeList));
+            addEmployeeCB.setConverter(new StringConverter<>() {
+                @Override
+                public String toString(Employee employee) {
+                    return employeeComboboxToString(employee);
+                }
+
+                @Override
+                public Employee fromString(String s) {
+                    return employeeMap.get(s);
+                }
+            });
+        } catch ( SQLException e ) {
+            e.printStackTrace();
+        }
+    }
+
+    private String employeeComboboxToString(Employee employee) {
+        return employee.getFirstName() + " " + employee.getLastName() + " " + employee.getId();
+    }
+
+    // po kliknieciu addButtonHoliday ma sie pokazac holidayForm,
+    // po kliknieciu listInspectionButton ma sie pokazac inspectionForm i inspectionQuestionsForm
+    // po kliknieciu addEmployeeButton ma sie pokazac employeeForm
 }
