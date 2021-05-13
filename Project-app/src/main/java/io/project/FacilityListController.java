@@ -1,15 +1,17 @@
 package io.project;
 
+import io.project.alert.AlertBox;
 import io.project.database.DBManagment;
 import io.project.entities.Employee;
 import io.project.entities.Facility;
-import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
-
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -165,7 +167,8 @@ public class FacilityListController implements Initializable {
     @FXML
     private ComboBox<Employee> addEmployeeCB;
 
-    private Facility selectedFacility; // gdzie to ustawic ??
+    private Facility selectedFacility;
+
 
     public void facilityList(){
         cityCol.setCellValueFactory(new PropertyValueFactory<Facility,String>("city"));
@@ -180,15 +183,39 @@ public class FacilityListController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         facilityList();
-        initAddEmployeeComboBox();
     }
 
-    private void initAddEmployeeComboBox() {
+    @FXML
+    private void initAddEmployeeComboBox(MouseEvent mouseevent ) {
+        if (table.getSelectionModel().getSelectedIndex() < 0)
+        {
+            return;
+        }
+        selectedFacility = table.getSelectionModel().getSelectedItem();
+        displayEmployeeComboBox();
+    }
+
+    public void addEmployeeToFacility(ActionEvent event) {
+        int facilityId = selectedFacility.getId();
+        int employeeId = addEmployeeCB.getSelectionModel().getSelectedItem().getId();
+        if (DBManagment.addEmployeeToFacility(employeeId, facilityId)) {
+            AlertBox.infoAlert("Udało się!", "Pracownik o id " + employeeId + "  został dodany do obiektu o id " + facilityId + ".", "success");
+        }
+
+        displayEmployeeComboBox();
+
+    }
+
+    private void displayEmployeeComboBox() {
         try {
-            List<Employee> employeeList = DBManagment.getEmployees(); //.stream().filter(e -> !selectedFacility.getEmployees().contains(e))
-                  // .collect(Collectors.toList());
-            Map<String, Employee> employeeMap = employeeList.stream().collect(Collectors.toMap(this::employeeComboboxToString, Function.identity(), (e1, e2) -> e1));
-            addEmployeeCB.setItems(FXCollections.observableList(employeeList));
+            List<Employee> dbEmployees = DBManagment.getEmployees();
+            List<Employee> facilityEmployees = DBManagment.getEmployeesByFacilityID(selectedFacility.getId());
+            List<Employee> diff = dbEmployees.stream()
+                    .filter(e -> ! (facilityEmployees.contains(e)))
+                    .collect (Collectors.toList());
+
+            Map<String, Employee> employeeMap = diff.stream().collect(Collectors.toMap(this::employeeComboboxToString, Function.identity(), (e1, e2) -> e1));
+            addEmployeeCB.setItems(FXCollections.observableList(diff));
             addEmployeeCB.setConverter(new StringConverter<>() {
                 @Override
                 public String toString(Employee employee) {
@@ -204,6 +231,7 @@ public class FacilityListController implements Initializable {
             e.printStackTrace();
         }
     }
+
 
     private String employeeComboboxToString(Employee employee) {
         return employee.getFirstName() + " " + employee.getLastName() + " " + employee.getId();

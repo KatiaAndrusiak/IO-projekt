@@ -172,4 +172,16 @@ public class Employee {
         return firstName + " " + lastName;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+        if (!(o instanceof Employee)) {
+            return false;
+        }
+        Employee employee = (Employee) o;
+        return employee.getId()==this.getId();
+    }
+
 }

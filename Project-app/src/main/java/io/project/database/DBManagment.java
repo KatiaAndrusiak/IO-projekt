@@ -238,11 +238,12 @@ public class DBManagment {
         try{
             PreparedStatement ps = null;
             ResultSet rs = null;
-            String sql = "SELECT * FROM facility_data_view";
+            String sql = "SELECT * FROM facility_data_view2";
             ps = getConn().prepareStatement(sql);
             rs = ps.executeQuery();
             while(rs.next()){
                 list.add(new Facility(
+                        rs.getInt("id_facility"),
                         rs.getString("city"),
                         rs.getString("name"),
                         rs.getString("address"),
@@ -375,11 +376,41 @@ public class DBManagment {
             employee.setId(res1.getInt("id_employee"));
             employee.setFirstName(res1.getString("first_name"));
             employee.setLastName(res1.getString("last_name"));
-            System.out.println(employee.toString());
             result.add(employee);
             }
-        System.out.println(result.toString());
         return result;
     }
+
+    public static List<Employee> getEmployeesByFacilityID(int id) throws SQLException {
+        String sql = "select employee.* from employee JOIN employee_facility ON employee.id_employee = employee_facility.id_employee WHERE id_facility = " + id;
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ResultSet res1 = ps.executeQuery();
+        List<Employee> result = new ArrayList<>();
+        while (res1.next()) {
+            Employee employee = new Employee();
+            employee.setId(res1.getInt("id_employee"));
+            employee.setFirstName(res1.getString("first_name"));
+            employee.setLastName(res1.getString("last_name"));
+            result.add(employee);
+        }
+        return result;
+    }
+
+
+    public static boolean addEmployeeToFacility(int employeeId, int facilityID) {
+        String sql = "SELECT addemployeetofacilitybyid(?, ?)";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, employeeId);
+            ps.setInt(2, facilityID);
+            ps.execute();
+            ps.close();
+            return true;
+        } catch (SQLException e) {
+            showMessageDialog(null, e.getMessage());
+            return false;
+        }
+    }
+
 
 }
