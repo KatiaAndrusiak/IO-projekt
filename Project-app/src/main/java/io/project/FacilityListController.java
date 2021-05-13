@@ -4,6 +4,8 @@ import io.project.alert.AlertBox;
 import io.project.database.DBManagment;
 import io.project.entities.Employee;
 import io.project.entities.Facility;
+import io.project.entities.Holiday;
+import io.project.validation.CheckAndClearTextField;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -182,6 +184,8 @@ public class FacilityListController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        DBManagment.fillHolidayAdditionDataEmployee(holidayEmployee);
+        DBManagment.fillHolidayAdditionDataHoliday(holidayName);
         facilityList();
     }
 
@@ -240,4 +244,18 @@ public class FacilityListController implements Initializable {
     // po kliknieciu addButtonHoliday ma sie pokazac holidayForm,
     // po kliknieciu listInspectionButton ma sie pokazac inspectionForm i inspectionQuestionsForm
     // po kliknieciu addEmployeeButton ma sie pokazac employeeForm
+    public void addHoliday(ActionEvent actionEvent) {
+        Holiday holidayToAdd = new Holiday();
+        holidayToAdd.setName(holidayName.getSelectionModel().getSelectedItem());
+        holidayToAdd.setProceeds(Double.parseDouble(holidayProceeds.getText()));
+        holidayToAdd.setEmployee(holidayEmployee.getSelectionModel().getSelectedItem());
+        holidayToAdd.setDate(holidayDate.getValue());
+        holidayToAdd.setFacility(Global.getFacility());
+        if (DBManagment.addHoliday(holidayToAdd)) {
+            AlertBox.infoAlert("Udało się!", "Dodano święto " + holidayToAdd.getName() + ", do pracownika " + holidayToAdd.getEmployee().getFirstName() + ", " + holidayToAdd.getEmployee().getFirstName() , "Obiekt został dodany do bazy");
+            CheckAndClearTextField.clearTextField(holidayProceeds);
+        }else{
+            AlertBox.infoAlert("Ups", "Nie udało się dodać święta", "Obiekt nie został dodany");
+        }
+    }
 }
