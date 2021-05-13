@@ -1,12 +1,17 @@
 package io.project;
 
+import io.project.database.DBManagment;
 import io.project.entities.Employee;
+import io.project.entities.Violation;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
+import javafx.util.Callback;
 
 import java.net.URL;
 import java.time.format.DateTimeFormatter;
@@ -48,7 +53,7 @@ public class ManagerDetailsViewController implements Initializable {
 	private Label managerCoursesHours;
 	
 	@FXML
-	private ListView<?> managerResponsibilitiesList;
+	private ListView<Violation> managerResponsibilitiesList;
 	
 	@FXML
 	private Button managerConfirmButton;
@@ -69,5 +74,24 @@ public class ManagerDetailsViewController implements Initializable {
 		managerSalary.setText(currUser.getSalary());
 		managerSOO.setText(currUser.getPPE().format(formatter));
 		managerCoursesHours.setText(String.valueOf(currUser.getCourseHoursSum()));
+		ObservableList<Violation> data = DBManagment.getViolationInfo(currUser);
+		managerResponsibilitiesList.setItems(data);
+		managerResponsibilitiesList.setCellFactory(new Callback<>() {
+			@Override
+			public ListCell<Violation> call(ListView<Violation> ListView) {
+				return new ListCell<>() {
+					@Override
+					protected void updateItem(Violation item, boolean empty) {
+						super.updateItem(item, empty);
+						if (item.getCorrectionDate() == null) {
+							setDisable(true);
+						} else {
+							setDisable(false);
+						}
+						setText(item.toString());
+					}
+				};
+			}
+		});
 	}
 }

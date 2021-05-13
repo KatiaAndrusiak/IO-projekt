@@ -1,6 +1,7 @@
 package io.project.entities;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Violation {
     private int id;
@@ -58,5 +59,13 @@ public class Violation {
 
     public void setCorrectionDate(LocalDate correctionDate) {
         this.correctionDate = correctionDate;
+    }
+
+    @Override
+    public String toString(){
+        boolean eq = correctionDate.isEqual(LocalDate.of(1970,1,1));
+        String endline = eq ? "ongoing" : correctionDate.format(DateTimeFormatter.ofPattern("dd-MMM-yyyy"));
+        return note + " start: " + correctionTerm.format(DateTimeFormatter.ofPattern("dd-MMM-yyyy")) +
+                " end: " + endline;
     }
 }

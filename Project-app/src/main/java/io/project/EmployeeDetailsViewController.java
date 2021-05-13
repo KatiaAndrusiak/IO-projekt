@@ -1,14 +1,20 @@
 package io.project;
 
+import io.project.database.DBManagment;
 import io.project.entities.Employee;
+import io.project.entities.Violation;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
+import javafx.util.Callback;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
@@ -48,7 +54,7 @@ public class EmployeeDetailsViewController implements Initializable {
 	private Label employeeCoursesHours;
 	
 	@FXML
-	private ListView<?> employeeResponsibilitiesList;
+	private ListView<Violation> employeeResponsibilitiesList;
 	
 	@FXML
 	private Button employeeConfirmButton;
@@ -70,5 +76,26 @@ public class EmployeeDetailsViewController implements Initializable {
 		employeeSalary.setText(currUser.getSalary());
 		employeeSOO.setText(currUser.getPPE().format(formatter));
 		employeeCoursesHours.setText(String.valueOf(currUser.getCourseHoursSum()));
+		ObservableList<Violation> data = DBManagment.getViolationInfo(currUser);
+		employeeResponsibilitiesList.setItems(data);
+		employeeResponsibilitiesList.setCellFactory(new Callback<>() {
+			@Override
+			public ListCell<Violation> call(ListView<Violation> param) {
+				return new ListCell<>() {
+					@Override
+					protected void updateItem(Violation item, boolean empty) {
+						super.updateItem(item, empty);
+						if (item != null) {
+							if (item.getCorrectionDate().isEqual(LocalDate.of(1970, 1, 1))) {
+								setDisable(false);
+							} else {
+								setDisable(true);
+							}
+							setText(item.toString());
+						}
+					}
+				};
+			}
+		});
 	}
 }

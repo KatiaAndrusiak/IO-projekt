@@ -1,17 +1,16 @@
 package io.project.database;
 
 import io.project.alert.AlertBox;
-import io.project.entities.Course;
-import io.project.entities.Employee;
-import io.project.entities.Facility;
-import io.project.entities.Holiday;
+import io.project.entities.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ComboBox;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static javax.swing.JOptionPane.showMessageDialog;
 
@@ -410,6 +409,36 @@ public class DBManagment {
             showMessageDialog(null, e.getMessage());
             return false;
         }
+    }
+    public static ObservableList<Violation> getViolationInfo(Employee employee) {
+        ObservableList<Violation> list = FXCollections.observableArrayList();
+        try{
+            int id = employee.getId();
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+            String sql = "SELECT * FROM violation WHERE id_employee = ?";
+
+            ps = getConn().prepareStatement(sql);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                Date date1 = rs.getDate("correction_date");
+                list.add(new Violation(
+                        rs.getInt("id_violation"),
+                        rs.getString("description"),
+                        employee,
+                        rs.getDate("correction_term").toLocalDate(),
+                        Objects.isNull(date1) ? LocalDate.of(1970,1,1) : date1.toLocalDate()
+                       ));
+
+            }
+            closeAll(rs,ps);
+
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            AlertBox.errorAlert("Bład", e.getMessage());
+        }
+        return  list;
     }
 
 
