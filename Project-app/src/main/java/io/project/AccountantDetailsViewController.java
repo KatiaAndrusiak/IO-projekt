@@ -1,6 +1,7 @@
 package io.project;
 
 import io.project.entities.Employee;
+import io.project.entities.Violation;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -51,7 +52,7 @@ public class AccountantDetailsViewController implements Initializable {
 	private Label accountantCompanyAccountBalance;
 	
 	@FXML
-	private ListView<?> accountantResponsibilitiesList;
+	private ListView<Violation> accountantResponsibilitiesList;
 	
 	@FXML
 	private Button accountantConfirmButton;

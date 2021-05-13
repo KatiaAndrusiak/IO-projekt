@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="CEOPane" prefHeight="750.0" prefWidth="1160.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.project.CEODetailsViewController">
+<AnchorPane fx:id="CEOPane" prefHeight="750.0" prefWidth="1160.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.project.CEODetailsViewController">
    <children>
       <VBox prefHeight="750.0" prefWidth="1160.0">
          <children>
@@ -119,11 +119,6 @@
                      <children>
                         <HBox alignment="TOP_RIGHT" spacing="20.0">
                            <children>
-                              <Button fx:id="CEOConfirmButton" mnemonicParsing="false" text="Zatwierdź">
-                                 <font>
-                                    <Font size="24.0" />
-                                 </font>
-                              </Button>
                               <Button fx:id="CEOLogoutButton" mnemonicParsing="false" text="Wyloguj">
                                  <font>
                                     <Font size="24.0" />
