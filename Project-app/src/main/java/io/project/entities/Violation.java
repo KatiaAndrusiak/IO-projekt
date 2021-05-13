@@ -64,8 +64,7 @@ public class Violation {
     @Override
     public String toString(){
         boolean eq = correctionDate.isEqual(LocalDate.of(1970,1,1));
-        String endline = eq ? "ongoing" : correctionDate.format(DateTimeFormatter.ofPattern("dd-MMM-yyyy"));
-        return note + " start: " + correctionTerm.format(DateTimeFormatter.ofPattern("dd-MMM-yyyy")) +
-                " end: " + endline;
+        String endline = eq ? " W REALIZACJI" : " ZAKOŃCZONO";
+        return note + " ,termin do: " + correctionTerm.format(DateTimeFormatter.ofPattern("dd-MMM-yyyy")) + endline;
     }
 }

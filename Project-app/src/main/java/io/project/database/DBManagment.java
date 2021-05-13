@@ -440,6 +440,20 @@ public class DBManagment {
         }
         return  list;
     }
+    public static boolean approveResponsibility(Violation item){
+        String sql = "UPDATE violation SET correction_date = ? WHERE id_violation = ?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setDate(1, Date.valueOf(LocalDate.now()));
+            ps.setInt(2, item.getId());
+            ps.execute();
+            ps.close();
+            return true;
+        } catch (SQLException e) {
+            showMessageDialog(null, e.getMessage());
+            return false;
+        }
+    }
 
 
 }
