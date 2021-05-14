@@ -75,6 +75,7 @@ public class AccountantDetailsViewController implements Initializable {
         accountantCoursesHours.setText(String.valueOf(currUser.getCourseHoursSum()));
         ObservableList<Violation> data = DBManagment.getViolationInfo(currUser);
         accountantResponsibilitiesList.setItems(data);
+        accountantCompanyAccountBalance.setText(String.valueOf(DBManagment.getAccountMoney()));
         accountantResponsibilitiesList.setCellFactory(new Callback<>() {
             @Override
             public ListCell<Violation> call(ListView<Violation> param) {

@@ -1,5 +1,6 @@
 package io.project;
 
+import io.project.database.DBManagment;
 import io.project.entities.Employee;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -62,5 +63,6 @@ public class CEODetailsViewController implements Initializable {
 		CEOPhoneNumber.setText(currUser.getPhone());
 		CEOPosition.setText(currUser.getPosition());
 		CEOCategory.setText(currUser.getCategory());
+		CEOCompanyAccountBalance.setText(String.valueOf(DBManagment.getAccountMoney()));
 	}
 }

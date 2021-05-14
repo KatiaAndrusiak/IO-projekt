@@ -455,5 +455,21 @@ public class DBManagment {
         }
     }
 
+    public static double getAccountMoney() {
+        String sql = "select get_account_money()";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet res = ps.executeQuery();
+
+            if (res.next()) {
+                return res.getDouble("get_account_money");
+            }
+            closeAll(res, ps);
+        } catch (SQLException e) {
+            AlertBox.errorAlert("Błąd", e.getMessage());
+        }
+        return 0.0;
+    }
+
 
 }
