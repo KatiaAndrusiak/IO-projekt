@@ -161,11 +161,6 @@
                                     <Font size="24.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="managerLogoutButton" mnemonicParsing="false" text="Wyloguj">
-                                 <font>
-                                    <Font size="24.0" />
-                                 </font>
-                              </Button>
                            </children>
                         </HBox>
                      </children>

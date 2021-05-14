@@ -3,7 +3,10 @@ package io.project;
 import io.project.entities.Delivery;
 import io.project.entities.Facility;
 import io.project.entities.Supplier;
+import io.project.screenloader.ChangeScreen;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -11,6 +14,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
@@ -45,6 +49,10 @@ public class DeliveryListController implements Initializable {
 
     @FXML
     private Button payButton;
+
+    public void openSupplierAddition(ActionEvent event) throws IOException {
+        ChangeScreen.initPanel(Global.getViewPane(), FXMLLoader.load(getClass().getResource("supplierAddition.fxml")));
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

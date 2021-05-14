@@ -39,9 +39,6 @@ public class CEODetailsViewController implements Initializable {
 	
 	@FXML
 	private Button CEOConfirmButton;
-	
-	@FXML
-	private Button CEOLogoutButton;
 
 	@FXML
 	private Label CEOCoursesHours;

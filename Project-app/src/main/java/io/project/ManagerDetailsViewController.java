@@ -57,9 +57,7 @@ public class ManagerDetailsViewController implements Initializable {
 	
 	@FXML
 	private Button managerConfirmButton;
-	
-	@FXML
-	private Button managerLogoutButton;
+
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {

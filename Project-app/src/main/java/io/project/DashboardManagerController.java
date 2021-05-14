@@ -1,5 +1,6 @@
 package io.project;
 
+import io.project.screenloader.ChangeScreen;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -31,46 +32,39 @@ public class DashboardManagerController implements Initializable {
     @FXML
     private Button deliveryListButton;
 
+    @FXML
+    private Button logoutButton;
+
     public void mainPage(ActionEvent event) throws IOException {
-        try {
-            switch (Global.getCurrentUser().getRole()) {
-                case "CEO":
-                    initPanel(Global.getViewPane(), "CEODetailsView.fxml");
-                    break;
-                case  "manager":
-                    initPanel(Global.getViewPane(), "managerDetailsView.fxml");
-                    break;
-                case  "employee":
-                    initPanel(Global.getViewPane(), "employeeDetailsView.fxml");
-                    break;
-                case  "accountant":
-                    initPanel(Global.getViewPane(), "accountantDetailsView.fxml");
-                    break;
-                default:
-                    throw new IllegalStateException("Unexpected value: " + Global.getCurrentUser().getRole());
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        System.out.println("Click on Main Page");
+        Parent ceo = FXMLLoader.load(getClass().getResource("CEODetailsView.fxml"));
+        Parent manager = FXMLLoader.load(getClass().getResource("managerDetailsView.fxml"));
+        Parent employee = FXMLLoader.load(getClass().getResource("employeeDetailsView.fxml"));
+        Parent accountant = FXMLLoader.load(getClass().getResource("accountantDetailsView.fxml"));
+        ChangeScreen.openMainPage(ceo, manager, employee, accountant);
     }
 
     public void openEmployeeList(ActionEvent event) throws IOException {
-        initPanel(Global.getViewPane(), "employeeList.fxml");
+        ChangeScreen.initPanel(Global.getViewPane(), FXMLLoader.load(getClass().getResource("employeeList.fxml")));
+        ChangeScreen.initPanel(Global.getManagerPane(), FXMLLoader.load(getClass().getResource("employeesManager.fxml")));
     }
 
-    public void initPanel(AnchorPane panel, String resource)throws IOException {
-        Parent fxml = FXMLLoader.load(getClass().getResource(resource));
-        panel.getChildren().clear();
-        panel.getChildren().addAll(fxml);
-    }
 
     public void openFacilityList(ActionEvent event) throws IOException {
-//        FXMLLoader loader = new FXMLLoader(getClass().getResource("facilitiesManager.fxml"));
-//        Parent root = loader.load();
-//        Global.getManagerPane().getChildren().removeAll();
-//        Global.getManagerPane().getChildren().addAll(root);
-        initPanel( Global.getViewPane(), "facilityList.fxml");
+        ChangeScreen.initPanel(Global.getViewPane(), FXMLLoader.load(getClass().getResource("facilityList.fxml")));
+        ChangeScreen.initPanel(Global.getManagerPane(), FXMLLoader.load(getClass().getResource("facilitiesManager.fxml")));
+    }
+
+    public void openDeliveryAcceptance(ActionEvent event) throws IOException {
+        ChangeScreen.initPanel(Global.getViewPane(), FXMLLoader.load(getClass().getResource("deliveryAcceptance.fxml")));
+    }
+
+    public void openDeliveryList(ActionEvent event) throws IOException {
+        ChangeScreen.initPanel(Global.getViewPane(), FXMLLoader.load(getClass().getResource("deliveryList.fxml")));
+    }
+
+    public void logout(ActionEvent event) throws IOException {
+        System.out.println("Click logout");
+        ChangeScreen.logout(logoutButton, FXMLLoader.load(getClass().getResource("login.fxml")));
     }
 
 

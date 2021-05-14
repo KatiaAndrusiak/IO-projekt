@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -10,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="CEOPane" prefHeight="750.0" prefWidth="1160.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.project.CEODetailsViewController">
+<AnchorPane fx:id="CEOPane" prefHeight="750.0" prefWidth="1160.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.project.CEODetailsViewController">
    <children>
       <VBox prefHeight="750.0" prefWidth="1160.0">
          <children>
@@ -117,15 +116,7 @@
                <children>
                   <VBox alignment="BOTTOM_LEFT" prefHeight="400.0" prefWidth="1200.0" spacing="10.0">
                      <children>
-                        <HBox alignment="TOP_RIGHT" spacing="20.0">
-                           <children>
-                              <Button fx:id="CEOLogoutButton" mnemonicParsing="false" text="Wyloguj">
-                                 <font>
-                                    <Font size="24.0" />
-                                 </font>
-                              </Button>
-                           </children>
-                        </HBox>
+                        <HBox alignment="TOP_RIGHT" spacing="20.0" />
                      </children>
                      <HBox.margin>
                         <Insets bottom="30.0" left="50.0" right="50.0" top="10.0" />

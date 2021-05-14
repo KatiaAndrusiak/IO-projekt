@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="accountantPane" prefHeight="750.0" prefWidth="1160.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.project.AccountantDetailsViewController">
+<AnchorPane fx:id="accountantPane" prefHeight="750.0" prefWidth="1160.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.project.AccountantDetailsViewController">
    <children>
       <VBox prefHeight="750.0" prefWidth="1160.0">
          <children>
@@ -166,12 +166,7 @@
                         <ListView fx:id="accountantResponsibilitiesList" prefHeight="400.0" prefWidth="200.0" />
                         <HBox alignment="TOP_RIGHT" spacing="20.0">
                            <children>
-                              <Button fx:id="accountantConfirmButton" onAction="#approveResponsibility" mnemonicParsing="false" styleClass="green" stylesheets="@style.css" text="Zatwierdź">
-                                 <font>
-                                    <Font size="24.0" />
-                                 </font>
-                              </Button>
-                              <Button fx:id="accountantLogoutButton" mnemonicParsing="false" styleClass="red" stylesheets="@style.css" text="Wyloguj">
+                              <Button fx:id="accountantConfirmButton" mnemonicParsing="false" onAction="#approveResponsibility" styleClass="green" stylesheets="@style.css" text="Zatwierdź">
                                  <font>
                                     <Font size="24.0" />
                                  </font>

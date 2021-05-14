@@ -55,9 +55,7 @@ public class EmployeeDetailsViewController implements Initializable {
 	
 	@FXML
 	private Button employeeConfirmButton;
-	
-	@FXML
-	private Button employeeLogoutButton;
+
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {

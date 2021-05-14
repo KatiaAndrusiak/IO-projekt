@@ -4,24 +4,29 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="managerPane" prefHeight="750.0" prefWidth="240.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.project.EmployeesManagerController">
+<AnchorPane fx:id="managerPane" prefHeight="750.0" prefWidth="240.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.project.EmployeesManagerController">
    <children>
-      <Button fx:id="mainPageButton" layoutX="10.0" layoutY="14.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="220.0" text="Strona główna">
+      <Button fx:id="mainPageButton" layoutX="10.0" layoutY="14.0" mnemonicParsing="false" onAction="#mainPage" prefHeight="44.0" prefWidth="220.0" text="Strona główna">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
       </Button>
-      <Button fx:id="employeeListButton" layoutX="10.0" layoutY="88.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="220.0" text="Lista pracowników">
+      <Button fx:id="employeeListButton" layoutX="10.0" layoutY="88.0" mnemonicParsing="false" onAction="#openEmployeeList" prefHeight="44.0" prefWidth="220.0" text="Lista pracowników">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
       </Button>
-      <Button fx:id="coursesButton" layoutX="10.0" layoutY="139.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="220.0" text="Kursy">
+      <Button fx:id="coursesButton" layoutX="10.0" layoutY="139.0" mnemonicParsing="false" onAction="#openCourseList" prefHeight="44.0" prefWidth="220.0" text="Kursy">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
       </Button>
-      <Button fx:id="employeeAddButton" layoutX="10.0" layoutY="190.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="220.0" text="Dodaj pracownika">
+      <Button fx:id="employeeAddButton" layoutX="10.0" layoutY="190.0" mnemonicParsing="false" onAction="#openEmployeeAddition" prefHeight="44.0" prefWidth="220.0" text="Dodaj pracownika">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="logoutButton" layoutX="10.0" layoutY="698.0" mnemonicParsing="false" onAction="#logout" prefHeight="44.0" prefWidth="220.0" text="Wyloguj">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>

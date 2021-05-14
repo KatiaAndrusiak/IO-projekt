@@ -1,9 +1,9 @@
 package io.project;
 
+import io.project.screenloader.ChangeScreen;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
@@ -34,11 +34,7 @@ public class DashboardController implements Initializable {
         this.viewPane = viewPane;
     }
 
-    public void initPanel(AnchorPane panel, String resource)throws IOException {
-        Parent fxml = FXMLLoader.load(getClass().getResource(resource));
-        panel.getChildren().removeAll();
-        panel.getChildren().addAll(fxml);
-    }
+
 
 
 
@@ -51,20 +47,20 @@ public class DashboardController implements Initializable {
         try {
             switch (Global.getCurrentUser().getRole()) {
                 case "CEO":
-                    initPanel(managerPane, "dashboardManager.fxml");
-                    initPanel(viewPane, "CEODetailsView.fxml");
+                    ChangeScreen.initPanel(managerPane, FXMLLoader.load(getClass().getResource("dashboardManager.fxml")));
+                    ChangeScreen.initPanel(viewPane, FXMLLoader.load(getClass().getResource("CEODetailsView.fxml")));
                     break;
                 case  "manager":
-                    initPanel(managerPane, "dashboardManager.fxml");
-                    initPanel(viewPane, "managerDetailsView.fxml");
+                    ChangeScreen.initPanel(managerPane, FXMLLoader.load(getClass().getResource("dashboardManager.fxml")));
+                    ChangeScreen.initPanel(viewPane, FXMLLoader.load(getClass().getResource("managerDetailsView.fxml")));
                     break;
                 case  "employee":
-                    initPanel(managerPane, "dashboardManager.fxml");
-                    initPanel(viewPane, "employeeDetailsView.fxml");
+                    ChangeScreen.initPanel(managerPane, FXMLLoader.load(getClass().getResource("dashboardManager.fxml")));
+                    ChangeScreen.initPanel(viewPane, FXMLLoader.load(getClass().getResource("employeeDetailsView.fxml")));
                     break;
                 case  "accountant":
-                    initPanel(managerPane, "dashboardManager.fxml");
-                    initPanel(viewPane, "accountantDetailsView.fxml");
+                    ChangeScreen.initPanel(managerPane, FXMLLoader.load(getClass().getResource("dashboardManager.fxml")));
+                    ChangeScreen.initPanel(viewPane, FXMLLoader.load(getClass().getResource("accountantDetailsView.fxml")));
                     break;
                 default:
                     throw new IllegalStateException("Unexpected value: " + Global.getCurrentUser().getRole());

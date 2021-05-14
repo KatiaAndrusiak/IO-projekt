@@ -3,9 +3,11 @@ package io.project;
 import io.project.alert.AlertBox;
 import io.project.database.DBManagment;
 import io.project.entities.Employee;
+import io.project.screenloader.ChangeScreen;
 import io.project.validation.CheckAndClearTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -13,6 +15,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -60,7 +63,7 @@ public class EmployeeAdditionController implements Initializable
 	@FXML
 	private TextField employeeCoursesHoursTF;
 
-	public void addEmployee(ActionEvent event) {
+	public void addEmployee(ActionEvent event) throws IOException {
 		Employee userToAdd = new Employee();
 		userToAdd.setFirstName(employeeFirstNameTF.getText());
 		userToAdd.setLastName(employeeLastNameTF.getText());
@@ -85,6 +88,7 @@ public class EmployeeAdditionController implements Initializable
 			CheckAndClearTextField.clearTextField(employeeSalaryTF);
 			CheckAndClearTextField.clearTextField(employeePhoneTF);
 			CheckAndClearTextField.clearTextField(employeeCoursesHoursTF);
+			ChangeScreen.initPanel(Global.getViewPane(), FXMLLoader.load(getClass().getResource("employeeList.fxml")));
 		}
 	}
 

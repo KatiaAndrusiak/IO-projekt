@@ -59,8 +59,6 @@ public class AccountantDetailsViewController implements Initializable {
     @FXML
     private Button accountantConfirmButton;
 
-    @FXML
-    private Button accountantLogoutButton;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

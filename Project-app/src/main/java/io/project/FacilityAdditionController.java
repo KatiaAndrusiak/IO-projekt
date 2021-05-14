@@ -3,14 +3,17 @@ package io.project;
 import io.project.alert.AlertBox;
 import io.project.database.DBManagment;
 import io.project.entities.Facility;
+import io.project.screenloader.ChangeScreen;
 import io.project.validation.CheckAndClearTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -34,7 +37,7 @@ public class FacilityAdditionController implements Initializable
 	@FXML
 	private TextField facilitySchedule;
 
-	public void addFacility(ActionEvent event) {
+	public void addFacility(ActionEvent event) throws IOException {
 		Facility facilityToAdd = new Facility();
 		facilityToAdd.setName(facilityNameTF.getText());
 		facilityToAdd.setAddress(facilityAddressTF.getText());
@@ -48,6 +51,7 @@ public class FacilityAdditionController implements Initializable
 			CheckAndClearTextField.clearTextField(facilityAddressTF);
 			CheckAndClearTextField.clearTextField(facilitySchedule);
 			CheckAndClearTextField.clearTextField(facilityCityTF);
+			ChangeScreen.initPanel(Global.getViewPane(), FXMLLoader.load(getClass().getResource("facilityList.fxml")));
 		}
 	}
 	
