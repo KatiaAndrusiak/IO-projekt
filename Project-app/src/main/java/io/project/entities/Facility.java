@@ -8,8 +8,8 @@ public class Facility {
     private String city;
     private String schedule;
 
-    public Facility() {
-    }
+    public Facility() {}
+
     public Facility( int id, String city, String name,  String address,String schedule) {
         this.id = id;
         this.city = city;

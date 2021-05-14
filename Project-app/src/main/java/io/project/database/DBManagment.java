@@ -471,5 +471,42 @@ public class DBManagment {
         return 0.0;
     }
 
+    public static ObservableList<Delivery> getDeliveryInfo(){
+        ObservableList<Delivery> list = FXCollections.observableArrayList();;
+        try{
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+            String sql = "SELECT * FROM delivery_supplier_facility_view";
+             ps = getConn().prepareStatement(sql);
+             rs = ps.executeQuery();
+            while(rs.next()){
+                Supplier sup = new Supplier( rs.getInt("id_supplier"),
+                        rs.getString("supName"),
+                        rs.getString("supPhone"),
+                        rs.getString("supEmail"));
+
+                Facility fac = new Facility(rs.getInt("id_facility"),
+                        rs.getString("fasCity"),
+                        rs.getString("fasName"),
+                        rs.getString("fasAddress"),
+                       rs.getString("fasSchedule"));
+                list.add(new Delivery(
+                        rs.getInt("id_delivery_record"),
+                        sup,
+                        rs.getDate("delivery_date").toLocalDate(),
+                        rs.getInt("payment_delay"),
+                        Math.round(rs.getFloat("amount_to_pay")),
+                        rs.getBoolean("is_paid"),
+                        fac));
+            }
+            closeAll(rs,ps);
+
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            AlertBox.errorAlert("Bład", e.getMessage());
+        }
+        return  list;
+    }
+
 
 }

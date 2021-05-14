@@ -11,6 +11,9 @@ public class Delivery {
     private boolean isPaid;
     private Facility facility;
 
+    private String supplierName;
+    private String status;
+
     public Delivery() {
     }
 
@@ -22,6 +25,8 @@ public class Delivery {
         this.amountToPay = amountToPay;
         this.isPaid = isPaid;
         this.facility = facility;
+        this.supplierName = supplier.getName() + "\t" + supplier.getEmail();
+        this.status = isPaid ? "opłacono" : "nie opłacono";
     }
 
     public boolean isPaid() {
@@ -78,5 +83,21 @@ public class Delivery {
 
     public void setFacility(Facility facility) {
         this.facility = facility;
+    }
+
+    public String getSupplierName() {
+        return supplierName;
+    }
+
+    public void setSupplierName(String supplierName) {
+        this.supplierName = supplierName;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
