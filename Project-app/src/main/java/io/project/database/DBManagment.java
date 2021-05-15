@@ -516,7 +516,7 @@ public class DBManagment {
             ResultSet rs = ps.executeQuery();
             double currentWallet = 0;
             if (rs.next()) {
-                 rs.getDouble("wallet");
+                 currentWallet = rs.getDouble("wallet");
             }
             closeAll(rs,ps);
             String sql1 = "update supplier set wallet = ? where id_supplier = ?";
@@ -553,6 +553,23 @@ public class DBManagment {
             AlertBox.errorAlert("Błąd opłaty", e.getMessage());
         }
 
+    }
+
+    public static boolean addSupplier(Supplier supplier){
+        String sql = "INSERT INTO supplier(name, email, phone) values (?, ?, ?)";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, supplier.getName());
+            ps.setString(2, supplier.getEmail());
+            ps.setString(3, supplier.getPhone());
+            ps.execute();
+            ps.close();
+            return true;
+        } catch (SQLException e) {
+            showMessageDialog(null, e.getMessage());
+            System.out.println(e.getMessage());
+            return false;
+        }
     }
 
 
