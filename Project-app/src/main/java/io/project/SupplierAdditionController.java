@@ -34,6 +34,9 @@ public class SupplierAdditionController implements Initializable
 					supplierEmailTF.getText());
 			if(DBManagment.addSupplier(supplier)){
 				AlertBox.infoAlert("OK", "Udało się!", "Dodano dostawcę ");
+				supplierEmailTF.clear();
+				supplierNameTF.clear();
+				supplierPhoneTF.clear();
 			}else {
 				AlertBox.errorAlert("Błąd", "Nie udało się dodać dostawcę");
 			}
