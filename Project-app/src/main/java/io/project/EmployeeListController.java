@@ -1,17 +1,17 @@
 package io.project;
 
+import io.project.alert.AlertBox;
 import io.project.database.DBManagment;
 import io.project.entities.Employee;
+import io.project.screenloader.ChangeScreen;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 
@@ -56,7 +56,13 @@ public class EmployeeListController implements Initializable {
     @FXML
     private TextField searchField;
 
+    @FXML
+    private Button employeeDataButton;
+
     ObservableList<Employee> list;
+
+    Employee selectedItem;
+
 
     public void employeeList() {
         firstNameCol.setCellValueFactory(new PropertyValueFactory<>("firstName"));
@@ -98,6 +104,7 @@ public class EmployeeListController implements Initializable {
     }
 
     public void onFacilitySelection(){
+        searchField.clear();
         if(!facilityCB.getSelectionModel().isEmpty()){
             int facilityId=Integer.parseInt(facilityCB.getSelectionModel().getSelectedItem().split(" | ")[0]);
             ArrayList<Integer> employeeIds =DBManagment.getEmployeeByFacilityID(facilityId);
@@ -112,8 +119,32 @@ public class EmployeeListController implements Initializable {
         }
     }
 
+    public void enableEmployeeDataCheck(){
+        try {
+            if (table.getSelectionModel().getSelectedItem() != null) {
+                selectedItem = table.getSelectionModel().getSelectedItem();
+                Global.setEmployee(selectedItem);
+                employeeDataButton.setDisable(false);
+            }
+        }
+        catch (Exception e){
+            AlertBox.errorAlert("Błąd", e.getMessage());
+        }
+    }
+
+    public void employeeDetails() {
+        try {
+            ChangeScreen.initPanel(Global.getViewPane(), FXMLLoader.load(getClass().getResource("employeeDetailsManagerView.fxml")));
+        }
+        catch (Exception e){
+            AlertBox.errorAlert("Błąd", e.getMessage());
+        }
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        table.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        employeeDataButton.setDisable(true);
         employeeList();
         DBManagment.addFacilityToComboBox(facilityCB);
     }

@@ -10,7 +10,7 @@
 
 <AnchorPane fx:id="viewPane" minHeight="-1.0" minWidth="-1.0" prefHeight="750.0" prefWidth="1160.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.project.EmployeeListController">
    <children>
-      <TableView fx:id="table" layoutX="11.0" layoutY="67.0" prefHeight="354.0" prefWidth="1139.0">
+      <TableView fx:id="table" layoutX="11.0" layoutY="67.0" onMouseClicked="#enableEmployeeDataCheck" prefHeight="354.0" prefWidth="1139.0">
          <columns>
             <TableColumn fx:id="firstNameCol" maxWidth="232.0" minWidth="-1.0" prefWidth="207.0" text="Imię" />
             <TableColumn fx:id="lastNameCol" maxWidth="233.0" minWidth="-1.0" prefWidth="197.0" text="Nazwisko" />
@@ -27,7 +27,7 @@
             <Font size="14.0" />
          </font>
       </TextField>
-      <Button layoutX="943.0" layoutY="433.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="207.0" text="Dane pracownika">
+      <Button fx:id="employeeDataButton" layoutX="943.0" layoutY="433.0" mnemonicParsing="false" onAction="#employeeDetails" prefHeight="51.0" prefWidth="207.0" text="Dane pracownika">
          <font>
             <Font size="18.0" />
          </font>

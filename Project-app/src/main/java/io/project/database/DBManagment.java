@@ -219,10 +219,14 @@ public class DBManagment {
                         rs.getString("first_name"),
                         rs.getString("last_name"),
                         rs.getDate("dob").toLocalDate(),
+                        rs.getString("phone"),
                         rs.getString("position"),
                         rs.getString("category"),
                         rs.getInt("salary"),
-                        rs.getDate("ppe").toLocalDate()));
+                        rs.getDate("ppe").toLocalDate(),
+                        rs.getInt("course_hours_sum"),
+                        rs.getDate("employment_date").toLocalDate()
+                ));
             }
             System.out.println(list);
             closeAll(rs, ps);

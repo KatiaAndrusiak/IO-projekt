@@ -22,15 +22,18 @@ public class Employee {
 
     public Employee() {
     }
-    public Employee( int id, String firstName, String lastName, LocalDate DOB,  String position, String category, Integer salary, LocalDate PPE){
+    public Employee( int id, String firstName,String lastName, LocalDate DOB, String phone, String position, String category, int salary, LocalDate PPE, int courseHoursSum, LocalDate employmentDate){
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.phone = phone;
         this.DOB = DOB;
         this.position = position;
         this.category = category;
         this.salaryInt = salary;
         this.PPE = PPE;
+        this.courseHoursSum = courseHoursSum;
+        this.employmentDate = employmentDate;
     }
 
     public Employee(int id, String firstName, String lastName, String role, LocalDate DOB, String phone, String position, String category, String salary, LocalDate PPE, int courseHoursSum, LocalDate employmentDate) {

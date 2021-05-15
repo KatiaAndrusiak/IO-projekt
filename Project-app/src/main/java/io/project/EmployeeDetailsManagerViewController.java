@@ -1,11 +1,14 @@
 package io.project;
 
+import io.project.alert.AlertBox;
 import io.project.database.DBManagment;
 import io.project.entities.Employee;
 import io.project.entities.Violation;
+import io.project.screenloader.ChangeScreen;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
@@ -61,9 +64,33 @@ public class EmployeeDetailsManagerViewController implements Initializable {
 	
 	@FXML
 	private ListView<Violation> employeeResponsibilitiesList;
+
+	public void setEmployeeDetails(){
+		Employee e = Global.getEmployee();
+		employeeFirstName.setText(e.getFirstName());
+		employeeLastName.setText(e.getLastName());
+		employeeBirthDate.setText(e.getDOB().toString());
+		employeeEmploymentDate.setText(e.getEmploymentDate().toString());
+		employeePhoneNumber.setText(e.getPhone());
+		employeePosition.setText(e.getPosition());
+		employeeSalary.setText(e.getSalary());
+		employeeCategory.setText(e.getCategory());
+		employeeSOO.setText(e.getPPE().toString());
+		employeeCoursesHours.setText(""+e.getCourseHoursSum());
+	}
+
+	public  void addCourseToEmployee(){
+		try {
+			ChangeScreen.initPanel(Global.getViewPane(), FXMLLoader.load(getClass().getResource("courseAddition.fxml")));
+		}
+		catch (Exception e){
+			AlertBox.errorAlert("Błąd", e.getMessage());
+		}
+	}
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		setEmployeeDetails();
 		ObservableList<Violation> data = DBManagment.getViolationInfo(Global.getEmployee());
 		employeeResponsibilitiesList.setItems(data);
 		employeeResponsibilitiesList.setCellFactory(new Callback<>() {
