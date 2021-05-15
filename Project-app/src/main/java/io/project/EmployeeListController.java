@@ -76,6 +76,10 @@ public class EmployeeListController implements Initializable {
         list = DBManagment.getEmployeeInfo();
         table.setItems(list);
 
+        searchInSearchField(list);
+    }
+
+    public void searchInSearchField(ObservableList<Employee> list) {
         FilteredList<Employee> filteredData = new FilteredList<>(list, b -> true);
 
         searchField.textProperty().addListener((observable, oldValue, newValue) -> filteredData.setPredicate(employee -> {
@@ -107,12 +111,13 @@ public class EmployeeListController implements Initializable {
         searchField.clear();
         if(!facilityCB.getSelectionModel().isEmpty()){
             int facilityId=Integer.parseInt(facilityCB.getSelectionModel().getSelectedItem().split(" | ")[0]);
-            ArrayList<Integer> employeeIds =DBManagment.getEmployeeByFacilityID(facilityId);
-            table.setItems(FXCollections.observableArrayList(list
-                    .stream()
-                    .filter(el -> employeeIds.contains(el.getId()))
-                    .collect(Collectors.toList()))
-            );
+            ArrayList<Integer> employeeIds = DBManagment.getEmployeeByFacilityID(facilityId);
+            ObservableList<Employee> employeeListByFacility = FXCollections.observableArrayList(list
+                                                                .stream()
+                                                                .filter(el -> employeeIds.contains(el.getId()))
+                                                                .collect(Collectors.toList()));
+            table.setItems(employeeListByFacility);
+            searchInSearchField(employeeListByFacility);
         }
         else {
             employeeList();
