@@ -18,6 +18,13 @@ public class Facility {
         this.schedule = schedule;
     }
 
+    public Facility( int id, String city,  String address,String schedule) {
+        this.id = id;
+        this.city = city;
+        this.address = address;
+        this.schedule = schedule;
+    }
+
 
     public int getId() {
         return id;

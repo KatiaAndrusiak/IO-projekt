@@ -16,6 +16,16 @@ public class Delivery {
 
     public Delivery() {
     }
+    public Delivery(Supplier supplier, LocalDate date, int paymentDelay, int amountToPay, boolean isPaid, Facility facility) {
+        this.supplier = supplier;
+        this.date = date;
+        this.paymentDelay = paymentDelay;
+        this.amountToPay = amountToPay;
+        this.isPaid = isPaid;
+        this.facility = facility;
+        this.supplierName = supplier.getName() + "\t" + supplier.getEmail();
+        this.status = isPaid ? "opłacono" : "nie opłacono";
+    }
 
     public Delivery(int id, Supplier supplier, LocalDate date, int paymentDelay, int amountToPay, boolean isPaid, Facility facility) {
         this.id = id;

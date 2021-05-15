@@ -3,7 +3,9 @@ package io.project;
 import io.project.alert.AlertBox;
 import io.project.database.DBManagment;
 import io.project.entities.Supplier;
+import io.project.screenloader.ChangeScreen;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 
@@ -24,22 +26,29 @@ public class SupplierAdditionController implements Initializable
 	private TextField supplierPhoneTF;
 
 	public void addSupplier(){
-		if(supplierNameTF.getText().isEmpty() ||
-				supplierEmailTF.getText().isEmpty() ||
-				supplierPhoneTF.getText().isEmpty()){
-			AlertBox.errorAlert("Błąd", "Wypełnij wszystkie pola");
-		}else{
-			Supplier supplier = new Supplier(supplierNameTF.getText(),
-					supplierPhoneTF.getText(),
-					supplierEmailTF.getText());
-			if(DBManagment.addSupplier(supplier)){
-				AlertBox.infoAlert("OK", "Udało się!", "Dodano dostawcę ");
-				supplierEmailTF.clear();
-				supplierNameTF.clear();
-				supplierPhoneTF.clear();
-			}else {
-				AlertBox.errorAlert("Błąd", "Nie udało się dodać dostawcę");
+		try {
+			if (supplierNameTF.getText().isEmpty() ||
+					supplierEmailTF.getText().isEmpty() ||
+					supplierPhoneTF.getText().isEmpty()) {
+				AlertBox.errorAlert("Błąd", "Wypełnij wszystkie pola");
+			} else {
+				Supplier supplier = new Supplier(supplierNameTF.getText(),
+						supplierPhoneTF.getText(),
+						supplierEmailTF.getText());
+				if (DBManagment.addSupplier(supplier)) {
+					AlertBox.infoAlert("OK", "Udało się!", "Dodano dostawcę ");
+					supplierEmailTF.clear();
+					supplierNameTF.clear();
+					supplierPhoneTF.clear();
+					ChangeScreen.initPanel(Global.getViewPane(), FXMLLoader.load(getClass().getResource("deliveryList.fxml")));
+
+				} else {
+					throw  new Exception("Nie udało się dodać dostawcę");
+				}
 			}
+		}
+		catch (Exception e){
+			AlertBox.errorAlert("Błąd", e.getMessage());
 		}
 	}
 	

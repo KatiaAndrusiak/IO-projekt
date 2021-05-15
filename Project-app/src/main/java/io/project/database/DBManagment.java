@@ -91,6 +91,7 @@ public class DBManagment {
                 PreparedStatement ps1 = conn.prepareStatement(sql1);
                 ResultSet res1 = ps1.executeQuery();
                 if (res1.next()) {
+                    user.setId(res1.getInt("id_employee"));
                     user.setRole(res1.getString("role"));
                     user.setFirstName(res1.getString("first_name"));
                     user.setLastName(res1.getString("last_name"));
@@ -566,6 +567,76 @@ public class DBManagment {
             ps.close();
             return true;
         } catch (SQLException e) {
+            showMessageDialog(null, e.getMessage());
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+
+    public static void getSupplierToComboBox(ComboBox<String> deliverySupplierComboBox){
+        try{
+            String sql = "select * from supplier";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                String tmp = rs.getInt("id_supplier") +
+                        " | "+ rs.getString("name") +
+                        " | " + rs.getString("email");
+                deliverySupplierComboBox.getItems().add(tmp);
+            }
+
+            ps.close();
+            rs.close();
+
+        }
+        catch (Exception e){
+            AlertBox.errorAlert("Błąd", e.getMessage());
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static Facility getFacilityByManagerId(int id_manager) throws SQLException {
+        Facility facility = new Facility();
+        try{
+            String sql = "select f.id_facility,  f.address, f.schedule, f.city from employee_facility ef, facility_info f " +
+                    "where ef.id_employee = ? and ef.id_facility = f.id_facility";
+            System.out.println("selected");
+            PreparedStatement ps = conn.prepareStatement(sql);
+            System.out.println("ps");
+            ps.setInt(1, id_manager);
+
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            facility = new Facility(rs.getInt("id_facility"),
+                    rs.getString("city"),
+                    rs.getString("address"),
+                    rs.getString("schedule")
+                    );
+            closeAll(rs,ps);
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+            throw new SQLException("Nie udało się pobrać danych obiektu");
+        }
+        return facility;
+    }
+
+    public static boolean addDelivery(Delivery delivery){
+        String sql = "select addDelivery(?,?,?,?,?,?)";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, delivery.getSupplier().getId());
+            ps.setInt(2,delivery.getFacility().getId());
+            ps.setDate(3, Date.valueOf(delivery.getDate()));
+            ps.setInt(4, delivery.getPaymentDelay());
+            ps.setInt(5, delivery.getAmountToPay());
+            ps.setBoolean(6, delivery.isPaid());
+            ps.execute();
+            ps.close();
+            return true;
+        } catch (SQLException e) {
+            AlertBox.errorAlert("Błąd sql", e.getMessage());
             showMessageDialog(null, e.getMessage());
             System.out.println(e.getMessage());
             return false;

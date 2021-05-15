@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="deliveryAcceptancePane" prefHeight="750.0" prefWidth="1160.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.project.DeliveryAcceptanceController">
+<AnchorPane fx:id="deliveryAcceptancePane" prefHeight="750.0" prefWidth="1160.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.project.DeliveryAcceptanceController">
    <children>
       <VBox alignment="CENTER" prefHeight="750.0" prefWidth="1160.0">
          <children>
@@ -59,7 +59,7 @@
                   </VBox>
                </children>
             </HBox>
-            <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="300.0" text="Dodaj dostawę">
+            <Button mnemonicParsing="false" onAction="#acceptDelivery" prefHeight="60.0" prefWidth="300.0" text="Dodaj dostawę">
                <VBox.margin>
                   <Insets bottom="20.0" left="20.0" right="20.0" top="50.0" />
                </VBox.margin>
