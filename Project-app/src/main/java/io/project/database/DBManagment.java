@@ -215,6 +215,7 @@ public class DBManagment {
             rs = ps.executeQuery();
             while (rs.next()) {
                 list.add(new Employee(
+                        rs.getInt("id_employee"),
                         rs.getString("first_name"),
                         rs.getString("last_name"),
                         rs.getDate("dob").toLocalDate(),
@@ -657,6 +658,23 @@ public class DBManagment {
             AlertBox.errorAlert("Bład", e.getMessage());
         }
 
+    }
+
+    public static ArrayList<Integer> getEmployeeByFacilityID(int facilityId){
+        ArrayList<Integer> employeeIds = new ArrayList<>();
+        try{
+            String sql = "SELECT id_employee FROM employee_facility where id_facility = ?";
+            PreparedStatement ps = getConn().prepareStatement(sql);
+            ps.setInt(1, facilityId);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+               employeeIds.add(rs.getInt("id_employee"));
+            }
+            closeAll(rs,ps);
+        }catch(Exception e){
+            AlertBox.errorAlert("Bład", e.getMessage());
+        }
+        return employeeIds;
     }
 
 

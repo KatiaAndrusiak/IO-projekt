@@ -22,7 +22,8 @@ public class Employee {
 
     public Employee() {
     }
-    public Employee(String firstName, String lastName, LocalDate DOB,  String position, String category, Integer salary, LocalDate PPE){
+    public Employee( int id, String firstName, String lastName, LocalDate DOB,  String position, String category, Integer salary, LocalDate PPE){
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.DOB = DOB;

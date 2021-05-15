@@ -2,6 +2,7 @@ package io.project;
 
 import io.project.database.DBManagment;
 import io.project.entities.Employee;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
@@ -16,8 +17,9 @@ import javafx.scene.layout.AnchorPane;
 
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
-
+import java.util.stream.Collectors;
 
 
 public class EmployeeListController implements Initializable {
@@ -54,6 +56,8 @@ public class EmployeeListController implements Initializable {
     @FXML
     private TextField searchField;
 
+    ObservableList<Employee> list;
+
     public void employeeList() {
         firstNameCol.setCellValueFactory(new PropertyValueFactory<>("firstName"));
         lastNameCol.setCellValueFactory(new PropertyValueFactory<>("lastName"));
@@ -63,7 +67,6 @@ public class EmployeeListController implements Initializable {
         salaryCol.setCellValueFactory(new PropertyValueFactory<>("salaryInt"));
         ppeCol.setCellValueFactory(new PropertyValueFactory<>("PPE"));
 
-        ObservableList<Employee> list;
         list = DBManagment.getEmployeeInfo();
         table.setItems(list);
 
@@ -92,6 +95,21 @@ public class EmployeeListController implements Initializable {
         sortedData.comparatorProperty().bind(table.comparatorProperty());
 
         table.setItems(sortedData);
+    }
+
+    public void onFacilitySelection(){
+        if(!facilityCB.getSelectionModel().isEmpty()){
+            int facilityId=Integer.parseInt(facilityCB.getSelectionModel().getSelectedItem().split(" | ")[0]);
+            ArrayList<Integer> employeeIds =DBManagment.getEmployeeByFacilityID(facilityId);
+            table.setItems(FXCollections.observableArrayList(list
+                    .stream()
+                    .filter(el -> employeeIds.contains(el.getId()))
+                    .collect(Collectors.toList()))
+            );
+        }
+        else {
+            employeeList();
+        }
     }
 
     @Override
