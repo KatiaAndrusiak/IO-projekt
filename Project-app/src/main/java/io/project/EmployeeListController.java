@@ -4,11 +4,14 @@ import io.project.database.DBManagment;
 import io.project.entities.Employee;
 import io.project.entities.Facility;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 
@@ -49,18 +52,47 @@ public class EmployeeListController implements Initializable {
     @FXML
     private ComboBox<Facility> facilityCB;
 
+    @FXML
+    private TextField searchField;
+
     public void employeeList() {
-        firstNameCol.setCellValueFactory(new PropertyValueFactory<Employee, String>("firstName"));
-        lastNameCol.setCellValueFactory(new PropertyValueFactory<Employee, String>("lastName"));
-        dobCol.setCellValueFactory(new PropertyValueFactory<Employee, LocalDate>("DOB"));
-        positionCol.setCellValueFactory(new PropertyValueFactory<Employee, String>("position"));
-        categoryCol.setCellValueFactory(new PropertyValueFactory<Employee, String>("category"));
-        salaryCol.setCellValueFactory(new PropertyValueFactory<Employee, Integer>("salaryInt"));
-        ppeCol.setCellValueFactory(new PropertyValueFactory<Employee, LocalDate>("PPE"));
+        firstNameCol.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+        lastNameCol.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+        dobCol.setCellValueFactory(new PropertyValueFactory<>("DOB"));
+        positionCol.setCellValueFactory(new PropertyValueFactory<>("position"));
+        categoryCol.setCellValueFactory(new PropertyValueFactory<>("category"));
+        salaryCol.setCellValueFactory(new PropertyValueFactory<>("salaryInt"));
+        ppeCol.setCellValueFactory(new PropertyValueFactory<>("PPE"));
 
         ObservableList<Employee> list;
         list = DBManagment.getEmployeeInfo();
         table.setItems(list);
+
+        FilteredList<Employee> filteredData = new FilteredList<>(list, b -> true);
+
+        searchField.textProperty().addListener((observable, oldValue, newValue) -> filteredData.setPredicate(employee -> {
+            if (newValue == null || newValue.isEmpty())
+                return true;
+
+            String lowerCaseFilter = newValue.toLowerCase();
+
+            if (employee.getFirstName().toLowerCase().contains(lowerCaseFilter)) {
+                return true;
+            } else if (employee.getLastName().toLowerCase().contains(lowerCaseFilter)) {
+                return true;
+            } else if (String.valueOf(employee.getSalaryInt()).contains(lowerCaseFilter)) {
+                return true;
+            } else if (employee.getCategory().contains(lowerCaseFilter)) {
+                return true;
+            } else
+                return false;
+        }));
+
+        SortedList<Employee> sortedData = new SortedList<>(filteredData);
+
+        sortedData.comparatorProperty().bind(table.comparatorProperty());
+
+        table.setItems(sortedData);
     }
 
     @Override

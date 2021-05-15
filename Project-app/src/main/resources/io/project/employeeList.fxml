@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="viewPane" minHeight="-1.0" minWidth="-1.0" prefHeight="750.0" prefWidth="1160.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.project.EmployeeListController">
+<AnchorPane fx:id="viewPane" minHeight="-1.0" minWidth="-1.0" prefHeight="750.0" prefWidth="1160.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.project.EmployeeListController">
    <children>
       <TableView fx:id="table" layoutX="11.0" layoutY="67.0" prefHeight="354.0" prefWidth="1139.0">
          <columns>
@@ -22,7 +22,7 @@
          </columns>
       </TableView>
       <ComboBox fx:id="facilityCB" layoutX="11.0" layoutY="14.0" prefHeight="35.0" prefWidth="207.0" promptText="Obiekt" />
-      <TextField layoutX="317.0" layoutY="14.0" prefHeight="35.0" prefWidth="207.0" promptText="Szukaj">
+      <TextField fx:id="searchField" layoutX="317.0" layoutY="14.0" prefHeight="35.0" prefWidth="207.0" promptText="Szukaj">
          <font>
             <Font size="14.0" />
          </font>
