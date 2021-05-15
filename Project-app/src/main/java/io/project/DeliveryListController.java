@@ -3,9 +3,9 @@ package io.project;
 import io.project.alert.AlertBox;
 import io.project.database.DBManagment;
 import io.project.entities.Delivery;
-import io.project.entities.Facility;
 import io.project.entities.Supplier;
 import io.project.screenloader.ChangeScreen;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 public class DeliveryListController implements Initializable {
     @FXML
@@ -43,7 +44,7 @@ public class DeliveryListController implements Initializable {
     private TableColumn<Delivery, String> statusCol;
 
     @FXML
-    private ComboBox<Facility> facilityCB;
+    private ComboBox<String> facilityCB;
 
     @FXML
     private Button supplierAddButton;
@@ -69,9 +70,23 @@ public class DeliveryListController implements Initializable {
         amountCol.setCellValueFactory(new PropertyValueFactory<Delivery, Integer>("amountToPay"));
         statusCol.setCellValueFactory(new PropertyValueFactory<Delivery, String>("status"));
 
-
         list = DBManagment.getDeliveryInfo();
         table.setItems(list);
+
+    }
+
+    public void onFacilitySelection(){
+        if(!facilityCB.getSelectionModel().isEmpty()){
+            int facilityId=Integer.parseInt(facilityCB.getSelectionModel().getSelectedItem().split(" | ")[0]);
+            table.setItems(FXCollections.observableArrayList(list
+                    .stream()
+                    .filter(el -> el.getFacility().getId() == facilityId)
+                    .collect(Collectors.toList()))
+            );
+        }
+        else {
+            deliveryList();
+        }
     }
 
     public  void  payForDeliveryButton(){
@@ -80,7 +95,7 @@ public class DeliveryListController implements Initializable {
                 selectedItem.getAmountToPay());
         payButton.setDisable(true);
         selectedItem.setPaid(true);
-        deliveryList();
+        onFacilitySelection();
     }
 
     public void enablePay(){
@@ -103,5 +118,6 @@ public class DeliveryListController implements Initializable {
         table.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         payButton.setDisable(true);
         deliveryList();
+        DBManagment.addFacilityToComboBox(facilityCB);
     }
 }

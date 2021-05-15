@@ -633,12 +633,32 @@ public class DBManagment {
             ps.close();
             return true;
         } catch (SQLException e) {
-            AlertBox.errorAlert("Błąd sql", e.getMessage());
+            AlertBox.errorAlert("Błąd", e.getMessage());
             showMessageDialog(null, e.getMessage());
             System.out.println(e.getMessage());
             return false;
         }
     }
+
+    public static void addFacilityToComboBox(ComboBox<String> box){
+        try{
+            String sql = "SELECT * FROM facility_data_view2";
+            PreparedStatement ps = getConn().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                String tmp = rs.getInt("id_facility")+
+                        " | " + rs.getString("name") +
+                        " | " + rs.getString("city") +
+                        " | " +   rs.getString("address");
+                box.getItems().add(tmp);
+            }
+            closeAll(rs,ps);
+        }catch(Exception e){
+            AlertBox.errorAlert("Bład", e.getMessage());
+        }
+
+    }
+
 
 
 }

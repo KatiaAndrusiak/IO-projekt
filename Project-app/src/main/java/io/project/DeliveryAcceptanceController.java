@@ -60,7 +60,7 @@ public class DeliveryAcceptanceController implements Initializable
 				}
 			}
 		}catch (Exception e){
-			AlertBox.errorAlert("Błąd contr", e.getMessage());
+			AlertBox.errorAlert("Błąd", e.getMessage());
 		}
 	}
 	

@@ -2,7 +2,6 @@ package io.project;
 
 import io.project.database.DBManagment;
 import io.project.entities.Employee;
-import io.project.entities.Facility;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
@@ -50,7 +49,7 @@ public class EmployeeListController implements Initializable {
     private TableColumn<Employee, LocalDate> ppeCol;
 
     @FXML
-    private ComboBox<Facility> facilityCB;
+    private ComboBox<String> facilityCB;
 
     @FXML
     private TextField searchField;
@@ -98,5 +97,6 @@ public class EmployeeListController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         employeeList();
+        DBManagment.addFacilityToComboBox(facilityCB);
     }
 }

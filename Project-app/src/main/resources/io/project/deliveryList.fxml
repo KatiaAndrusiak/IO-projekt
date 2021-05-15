@@ -18,7 +18,7 @@
             <TableColumn fx:id="statusCol" maxWidth="426.0" minWidth="-1.0" prefWidth="179.0" text="Status" />
          </columns>
       </TableView>
-      <ComboBox fx:id="facilityCB" layoutX="11.0" layoutY="14.0" prefHeight="35.0" prefWidth="207.0" promptText="Obiekt" />
+      <ComboBox fx:id="facilityCB" layoutX="11.0" layoutY="14.0" onAction="#onFacilitySelection" prefHeight="35.0" prefWidth="207.0" promptText="Obiekt" />
       <Button fx:id="supplierAddButton" layoutX="943.0" layoutY="14.0" mnemonicParsing="false" onAction="#openSupplierAddition" prefHeight="35.0" prefWidth="207.0" text="Dodaj dostawcę">
          <font>
             <Font name="System Bold" size="14.0" />
