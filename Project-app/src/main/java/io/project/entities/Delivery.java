@@ -35,6 +35,7 @@ public class Delivery {
 
     public void setPaid(boolean paid) {
         isPaid = paid;
+        status = isPaid ? "opłacono" : "nie opłacono";
     }
 
     public int getId() {

@@ -508,5 +508,52 @@ public class DBManagment {
         return  list;
     }
 
+    public static void payToSupplier(int id_supplier, int amountToPay){
+        try {
+            String sql = "select * from supplier where id_supplier = ?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setDouble(1,id_supplier);
+            ResultSet rs = ps.executeQuery();
+            double currentWallet = 0;
+            if (rs.next()) {
+                 rs.getDouble("wallet");
+            }
+            closeAll(rs,ps);
+            String sql1 = "update supplier set wallet = ? where id_supplier = ?";
+            PreparedStatement ps1 = conn.prepareStatement(sql1);
+            ps1.setDouble(1, currentWallet+amountToPay);
+            ps1.setInt(2, id_supplier);
+            ps1.executeUpdate();
+            ps1.close();
+        } catch (SQLException e) {
+            AlertBox.errorAlert("Błąd", e.getMessage());
+        }
+    }
+
+    public static void payForDelivery(int id_delivery_record, int id_supplier, int amountToPay){
+        double currentTotal = getAccountMoney();
+        try {
+            String sql = "CREATE OR REPLACE FUNCTION  get_account_money() returns double precision" +
+                    " language plpgsql" +
+                    " as" +
+                    " $$" +
+                    " begin" +
+                    " return "+ (currentTotal - amountToPay) +";" +
+                    " end;" +
+                    " $$;";
+            conn.createStatement().execute(sql);
+            String sql1 = "update delivery_record set is_paid = ? where id_delivery_record = ?";
+            PreparedStatement ps = conn.prepareStatement(sql1);
+            ps.setBoolean(1, true);
+            ps.setInt(2, id_delivery_record);
+            ps.executeUpdate();
+            ps.close();
+            payToSupplier(id_supplier,amountToPay);
+        } catch (SQLException e) {
+            AlertBox.errorAlert("Błąd opłaty", e.getMessage());
+        }
+
+    }
+
 
 }

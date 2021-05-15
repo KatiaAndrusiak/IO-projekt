@@ -1,5 +1,6 @@
 package io.project;
 
+import io.project.alert.AlertBox;
 import io.project.database.DBManagment;
 import io.project.entities.Delivery;
 import io.project.entities.Facility;
@@ -10,10 +11,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 
@@ -53,6 +51,13 @@ public class DeliveryListController implements Initializable {
     @FXML
     private Button payButton;
 
+    ObservableList<Delivery> list;
+    Delivery selectedItem;
+
+    public  void onTableClick(){
+        enablePay();
+    }
+
     public void openSupplierAddition(ActionEvent event) throws IOException {
         ChangeScreen.initPanel(Global.getViewPane(), FXMLLoader.load(getClass().getResource("supplierAddition.fxml")));
     }
@@ -64,13 +69,39 @@ public class DeliveryListController implements Initializable {
         amountCol.setCellValueFactory(new PropertyValueFactory<Delivery, Integer>("amountToPay"));
         statusCol.setCellValueFactory(new PropertyValueFactory<Delivery, String>("status"));
 
-        ObservableList<Delivery> list;
+
         list = DBManagment.getDeliveryInfo();
         table.setItems(list);
     }
 
+    public  void  payForDeliveryButton(){
+        DBManagment.payForDelivery(selectedItem.getId(),
+                selectedItem.getSupplier().getId(),
+                selectedItem.getAmountToPay());
+        payButton.setDisable(true);
+        selectedItem.setPaid(true);
+        deliveryList();
+    }
+
+    public void enablePay(){
+        try {
+            if (table.getSelectionModel().getSelectedItem() != null) {
+                selectedItem = table.getSelectionModel().getSelectedItem();
+                if(!selectedItem.isPaid()){
+                    payButton.setDisable(false);
+
+                }
+            }
+        }
+        catch (Exception e){
+            AlertBox.errorAlert("Błąd", e.getMessage());
+        }
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        table.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        payButton.setDisable(true);
         deliveryList();
     }
 }

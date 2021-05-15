@@ -4323,7 +4323,7 @@ true posixrules
     <database id="730" parent="1" name="gvfmqimz">
       <ObjectId>466582</ObjectId>
       <Owner>gvfmqimz</Owner>
-      <IntrospectionStateNumber>47072724</IntrospectionStateNumber>
+      <IntrospectionStateNumber>47091211</IntrospectionStateNumber>
       <Current>1</Current>
       <Relations>sequence|table|2961502|2961504|1
 sequence|table|2961513|2961515|1
@@ -10593,7 +10593,7 @@ sequence|table|3439482|2961537|1
       <Owner>uukjqyho</Owner>
     </database>
     <database id="2294" parent="1" name="uuvqhtvs">
-      <ObjectId>3779904</ObjectId>
+      <ObjectId>3780556</ObjectId>
       <Owner>uuvqhtvs</Owner>
     </database>
     <database id="2295" parent="1" name="uvihjama">
@@ -27425,7 +27425,7 @@ UC/10
 </Acl>
       <StateNumber>359</StateNumber>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>47072725</IntrospectionStateNumber>
+      <IntrospectionStateNumber>47091212</IntrospectionStateNumber>
       <Current>1</Current>
     </schema>
     <foreign-data-wrapper id="5779" parent="730" name="dblink_fdw">
@@ -32536,9 +32536,10 @@ r/10
     </routine>
     <routine id="6261" parent="5778" name="get_account_money">
       <ObjectId>3769542</ObjectId>
+      <Outdated>1</Outdated>
       <Owner>gvfmqimz</Owner>
-      <SourceTextLength>33</SourceTextLength>
-      <StateNumber>46996770</StateNumber>
+      <SourceTextLength>29</SourceTextLength>
+      <StateNumber>47091203</StateNumber>
       <ResultsDefinition>double precision</ResultsDefinition>
       <LanguageName>plpgsql</LanguageName>
       <RoutineKind>function</RoutineKind>
