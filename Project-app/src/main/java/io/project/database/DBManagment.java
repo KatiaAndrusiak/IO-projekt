@@ -601,11 +601,8 @@ public class DBManagment {
         try{
             String sql = "select f.id_facility,  f.address, f.schedule, f.city from employee_facility ef, facility_info f " +
                     "where ef.id_employee = ? and ef.id_facility = f.id_facility";
-            System.out.println("selected");
             PreparedStatement ps = conn.prepareStatement(sql);
-            System.out.println("ps");
             ps.setInt(1, id_manager);
-
             ResultSet rs = ps.executeQuery();
             rs.next();
             facility = new Facility(rs.getInt("id_facility"),

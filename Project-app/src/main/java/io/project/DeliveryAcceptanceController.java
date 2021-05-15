@@ -40,20 +40,14 @@ public class DeliveryAcceptanceController implements Initializable
 				AlertBox.errorAlert("Błąd", "Wypełnij wszystkie pola");
 			} else {
 				Supplier supplier = new Supplier();
-
-				System.out.println("start");
 				supplier.setId(Integer.parseInt(deliverySupplierComboBox.getSelectionModel().getSelectedItem().split(" | ")[0]));
-				System.out.println("supplier added");
-				System.out.println(Global.getCurrentUser().getId());
 				Facility facility = DBManagment.getFacilityByManagerId(Global.getCurrentUser().getId());
-				System.out.println("facility created");
 				Delivery delivery = new Delivery(supplier,
 						deliveryDateTF.getValue(),
 						Integer.parseInt(deliveryPaymentDelayTF.getText()),
 						Integer.parseInt(deliveryPaymentTF.getText()),
 						false,
 						facility);
-				System.out.println("facility created");
 
 				if (DBManagment.addDelivery(delivery)) {
 					AlertBox.infoAlert("OK", "Udało się!", "Dodano dostawę ");
