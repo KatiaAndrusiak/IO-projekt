@@ -73,6 +73,25 @@ public class DeliveryListController implements Initializable {
         list = DBManagment.getDeliveryInfo();
         table.setItems(list);
 
+        statusCol.setCellFactory((tableColumn) -> {
+            TableCell<Delivery, String> tableCell = new TableCell<>() {
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if(!empty){
+                        if (item.equals("opłacono")) {
+                            setDisable(true);
+                        } else {
+                            setDisable(false);
+                        }
+                        setText(item.toString());
+                    }
+                }
+            };
+
+            return tableCell;
+        });
+
     }
 
     public void onFacilitySelection(){
@@ -104,7 +123,8 @@ public class DeliveryListController implements Initializable {
                 selectedItem = table.getSelectionModel().getSelectedItem();
                 if(!selectedItem.isPaid()){
                     payButton.setDisable(false);
-
+                }else{
+                    payButton.setDisable(true);
                 }
             }
         }

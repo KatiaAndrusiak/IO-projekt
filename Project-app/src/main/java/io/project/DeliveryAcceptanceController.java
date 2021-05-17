@@ -34,7 +34,7 @@ public class DeliveryAcceptanceController implements Initializable
 
 	public void acceptDelivery(){
 		try {
-			if (deliveryDateTF.isShowWeekNumbers() ||
+			if (deliveryDateTF.getValue() == null ||
 					deliveryPaymentDelayTF.getText().isEmpty() ||
 					deliveryPaymentTF.getText().isEmpty()) {
 				AlertBox.errorAlert("Błąd", "Wypełnij wszystkie pola");
