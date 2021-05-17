@@ -9,7 +9,6 @@ import javafx.scene.control.ComboBox;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 import static javax.swing.JOptionPane.showMessageDialog;
@@ -205,31 +204,49 @@ public class DBManagment {
         return false;
     }
 
+
     public static ObservableList<Employee> getEmployeeInfo(){
         ObservableList<Employee> list = FXCollections.observableArrayList();
         try {
-            PreparedStatement ps = null;
-            ResultSet rs = null;
             String sql = "SELECT * FROM employee_data_view";
-            ps = getConn().prepareStatement(sql);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                list.add(new Employee(
-                        rs.getInt("id_employee"),
-                        rs.getString("first_name"),
-                        rs.getString("last_name"),
-                        rs.getDate("dob").toLocalDate(),
-                        rs.getString("phone"),
-                        rs.getString("position"),
-                        rs.getString("category"),
-                        rs.getInt("salary"),
-                        rs.getDate("ppe").toLocalDate(),
-                        rs.getInt("course_hours_sum"),
-                        rs.getDate("employment_date").toLocalDate()
-                ));
-            }
-            System.out.println(list);
-            closeAll(rs, ps);
+            getEmployeeInfoInner(list, sql);
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            AlertBox.errorAlert("Bład", e.getMessage());
+        }
+        return list;
+    }
+
+    private static void getEmployeeInfoInner(ObservableList<Employee> list, String sql) throws SQLException {
+        PreparedStatement ps;
+        ResultSet rs;
+        ps = getConn().prepareStatement(sql);
+        rs = ps.executeQuery();
+        while (rs.next()) {
+            list.add(new Employee(
+                    rs.getInt("id_employee"),
+                    rs.getString("first_name"),
+                    rs.getString("last_name"),
+                    rs.getDate("dob").toLocalDate(),
+                    rs.getString("phone"),
+                    rs.getString("position"),
+                    rs.getString("category"),
+                    rs.getInt("salary"),
+                    rs.getDate("ppe").toLocalDate(),
+                    rs.getInt("course_hours_sum"),
+                    rs.getDate("employment_date").toLocalDate()
+            ));
+        }
+        System.out.println(list);
+        closeAll(rs, ps);
+    }
+
+    public static ObservableList<Employee> getEmployeeInfoByFacilityId(int id){
+        ObservableList<Employee> list = FXCollections.observableArrayList();
+        try {
+            String sql = "select employee_data_view.* from employee_data_view JOIN employee_facility ON employee_data_view.id_employee = employee_facility.id_employee WHERE id_facility = " + id;
+            getEmployeeInfoInner(list, sql);
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -371,11 +388,11 @@ public class DBManagment {
         }
     }
 
-    public static List<Employee> getEmployees() throws SQLException {
+    public static ObservableList<Employee> getEmployees() throws SQLException {
         String sql = "select * from employee";// tutaj select wszystkich pracowników powinien byc
         PreparedStatement ps = conn.prepareStatement(sql);
         ResultSet res1 = ps.executeQuery();
-        List<Employee> result = new ArrayList<>();
+        ObservableList<Employee> result = FXCollections.observableArrayList();
         while (res1.next()) {
             Employee employee = new Employee();
             employee.setId(res1.getInt("id_employee"));
@@ -386,16 +403,17 @@ public class DBManagment {
         return result;
     }
 
-    public static List<Employee> getEmployeesByFacilityID(int id) throws SQLException {
-        String sql = "select employee.* from employee JOIN employee_facility ON employee.id_employee = employee_facility.id_employee WHERE id_facility = " + id;
+    public static ObservableList<Employee> getEmployeesByFacilityID(int id) throws SQLException {
+        String sql = "select employee_data_view.* from employee_data_view JOIN employee_facility ON employee_data_view.id_employee = employee_facility.id_employee WHERE id_facility = " + id;
         PreparedStatement ps = conn.prepareStatement(sql);
         ResultSet res1 = ps.executeQuery();
-        List<Employee> result = new ArrayList<>();
+        ObservableList<Employee> result = FXCollections.observableArrayList();
         while (res1.next()) {
             Employee employee = new Employee();
             employee.setId(res1.getInt("id_employee"));
             employee.setFirstName(res1.getString("first_name"));
             employee.setLastName(res1.getString("last_name"));
+            employee.setPosition(res1.getString("position"));
             result.add(employee);
         }
         return result;
@@ -682,5 +700,71 @@ public class DBManagment {
     }
 
 
+    public static ObservableList<String> getHolidayInfoByFacilityID(int id) {
+        ObservableList<String> list = FXCollections.observableArrayList();
+        try{
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+            String sql = "SELECT h.* from facility_holiday fh JOIN holiday h ON fh.id_holiday=h.id_holiday WHERE fh.id_facility = " + id;
+            ps = getConn().prepareStatement(sql);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                Date date1 = rs.getDate("date");
+                list.add(date1.toString() + "  " + rs.getString("name"));
+            }
+            closeAll(rs,ps);
+
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            AlertBox.errorAlert("Bład", e.getMessage());
+        }
+        return  list;
+    }
+
+
+    public static ObservableList<String> getDeliveryInfoByFacilityID(int id) {
+        ObservableList<String> list = FXCollections.observableArrayList();
+        try{
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+            String sql = "SELECT * from delivery_supplier_facility_view WHERE id_facility = " + id;
+            ps = getConn().prepareStatement(sql);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                Date date1 = rs.getDate("delivery_date");
+                Float amount = rs.getFloat("amount_to_pay");
+                list.add("Dzień: " + date1.toString() + "     Dostawca:  " + rs.getString("supemail") + "     Koszt: " + amount.toString());
+            }
+            closeAll(rs,ps);
+
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            AlertBox.errorAlert("Bład", e.getMessage());
+        }
+        return  list;
+    }
+
+    public static ObservableList<String> getInspectionInfoByFacilityID(/* int id */) {
+        ObservableList<String> list = FXCollections.observableArrayList();
+        try{
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+            String sql = "SELECT * from inspection"; // WHERE id_facility = " + id;
+            ps = getConn().prepareStatement(sql);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                Date date1 = rs.getDate("date");
+                int employeeid = rs.getInt("id_employee");
+                list.add("Pracownik o ID: " + employeeid + " Dzien: " + date1.toString() + " Opis: " + rs.getString("description") );
+            }
+            closeAll(rs,ps);
+
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            AlertBox.errorAlert("Bład", e.getMessage());
+        }
+        return  list;
+    }
 
 }
+

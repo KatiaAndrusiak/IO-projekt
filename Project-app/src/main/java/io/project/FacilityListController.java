@@ -5,11 +5,13 @@ import io.project.database.DBManagment;
 import io.project.entities.Employee;
 import io.project.entities.Facility;
 import io.project.entities.Holiday;
+import io.project.screenloader.ChangeScreen;
 import io.project.validation.CheckAndClearTextField;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -175,6 +177,7 @@ public class FacilityListController implements Initializable {
 
     private Facility selectedFacility;
 
+    private Employee selectedEmployee;
 
     public void facilityList(){
         cityCol.setCellValueFactory(new PropertyValueFactory<Facility,String>("city"));
@@ -186,10 +189,34 @@ public class FacilityListController implements Initializable {
         table.setItems(list);
     }
 
+        public void employeeListByFacility(){
+        employeeFirstNameCol.setCellValueFactory(new PropertyValueFactory<Employee,String>("firstName"));
+        employeeLastNameCol.setCellValueFactory(new PropertyValueFactory<Employee,String>("lastName"));
+        employeePositionCol.setCellValueFactory(new PropertyValueFactory<Employee,String>("position"));
+        ObservableList<Employee> list = DBManagment.getEmployeeInfoByFacilityId( selectedFacility.getId() );
+        tableEmployee.setItems(list);
+    }
+
+    public void holidayListByFacility(){
+        ObservableList<String> data = DBManagment.getHolidayInfoByFacilityID(selectedFacility.getId() );
+        tableOptions.setItems(data);
+    }
+
+    public void deliveryListByFacility(){
+        ObservableList<String> data = DBManagment.getDeliveryInfoByFacilityID(selectedFacility.getId() );
+        tableOptions.setItems(data);
+    }
+
+    public void inspectionListByFacility(){
+        ObservableList<String> data = DBManagment.getInspectionInfoByFacilityID( /* selectedFacility.getId() */ );
+        tableOptions.setItems(data);
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         inspectionQuestionsForm.setVisible(false);
         additionComboBoxes.setVisible(false);
+        employeeInfoButton.setDisable(true);
         DBManagment.fillHolidayAdditionDataEmployee(holidayEmployee);
         DBManagment.fillHolidayAdditionDataHoliday(holidayName);
         facilityList();
@@ -201,7 +228,12 @@ public class FacilityListController implements Initializable {
         {
             return;
         }
-        inspectionQuestionsForm.setVisible(true);
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////
+        // inspectionQuestionsForm.setVisible(true);
+        inspectionQuestionsForm.setVisible(false); // chwilowo wylaczone
+        ////////////////////////////////////////////////////////////////////////////////////////////////
+
         additionComboBoxes.setVisible(true);
         selectedFacility = table.getSelectionModel().getSelectedItem();
         displayEmployeeComboBox();
@@ -266,4 +298,27 @@ public class FacilityListController implements Initializable {
             AlertBox.infoAlert("Ups", "Nie udało się dodać święta", "Obiekt nie został dodany");
         }
     }
+
+    public void employeeDetails() {
+        try {
+            ChangeScreen.initPanel(Global.getViewPane(), FXMLLoader.load(getClass().getResource("employeeDetailsManagerView.fxml")));
+        }
+        catch (Exception e){
+            AlertBox.errorAlert("Błąd", e.getMessage());
+        }
+    }
+
+    public void enableEmployeeDataCheck(){
+        try {
+            if (table.getSelectionModel().getSelectedItem() != null) {
+                selectedEmployee = tableEmployee.getSelectionModel().getSelectedItem();
+                Global.setEmployee(selectedEmployee);
+                employeeInfoButton.setDisable(false);
+            }
+        }
+        catch (Exception e){
+            AlertBox.errorAlert("Błąd", e.getMessage());
+        }
+    }
+
 }

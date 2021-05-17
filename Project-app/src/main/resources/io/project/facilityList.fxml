@@ -32,9 +32,9 @@
                      <children>
                         <HBox alignment="CENTER" prefHeight="35.0" prefWidth="200.0" spacing="20.0">
                            <children>
-                              <Button fx:id="listInspectionButton" mnemonicParsing="false" prefHeight="33.0" prefWidth="130.0" styleClass="blue" stylesheets="@style.css" text="Wylistuj inspekcje" />
-                              <Button fx:id="listHolidayButton" mnemonicParsing="false" prefHeight="33.0" prefWidth="130.0" styleClass="blue" stylesheets="@style.css" text="Wylistuj święta" />
-                              <Button fx:id="listDeliveriesButton" mnemonicParsing="false" prefHeight="33.0" prefWidth="130.0" styleClass="blue" stylesheets="@style.css" text="Wylistuj dostawy" />
+                              <Button fx:id="listInspectionButton" mnemonicParsing="false" onAction="#inspectionListByFacility" prefHeight="33.0" prefWidth="130.0" styleClass="blue" stylesheets="@style.css" text="Wylistuj inspekcje" />
+                              <Button fx:id="listHolidayButton" mnemonicParsing="false" onAction="#holidayListByFacility" prefHeight="33.0" prefWidth="130.0" styleClass="blue" stylesheets="@style.css" text="Wylistuj święta" />
+                              <Button fx:id="listDeliveriesButton" mnemonicParsing="false" onAction="#deliveryListByFacility" prefHeight="33.0" prefWidth="130.0" styleClass="blue" stylesheets="@style.css" text="Wylistuj dostawy" />
                            </children>
                            <VBox.margin>
                               <Insets bottom="5.0" top="5.0" />
@@ -51,14 +51,14 @@
                      <children>
                         <HBox alignment="CENTER" prefHeight="35.0" prefWidth="200.0" spacing="20.0">
                            <children>
-                              <Button fx:id="listEmployeeButton" mnemonicParsing="false" prefHeight="33.0" prefWidth="179.0" styleClass="blue" stylesheets="@style.css" text="Wylistuj pracowników" />
-                              <Button fx:id="employeeInfoButton" mnemonicParsing="false" prefHeight="33.0" prefWidth="179.0" styleClass="blue" stylesheets="@style.css" text="Pokaż dane pracownika" />
+                              <Button fx:id="listEmployeeButton" mnemonicParsing="false" onAction="#employeeListByFacility" prefHeight="33.0" prefWidth="179.0" styleClass="blue" stylesheets="@style.css" text="Wylistuj pracowników" />
+                              <Button fx:id="employeeInfoButton" mnemonicParsing="false" onAction="#employeeDetails" prefHeight="33.0" prefWidth="179.0" styleClass="blue" stylesheets="@style.css" text="Pokaż dane pracownika" />
                            </children>
                            <VBox.margin>
                               <Insets bottom="5.0" top="5.0" />
                            </VBox.margin>
                         </HBox>
-                        <TableView fx:id="tableEmployee" prefHeight="120.0" prefWidth="500.0">
+                        <TableView fx:id="tableEmployee" onMouseClicked="#enableEmployeeDataCheck" prefHeight="120.0" prefWidth="500.0">
                            <columns>
                               <TableColumn fx:id="employeeFirstNameCol" prefWidth="137.0" text="Imię" />
                               <TableColumn fx:id="employeeLastNameCol" prefWidth="180.0" text="Nazwisko" />
