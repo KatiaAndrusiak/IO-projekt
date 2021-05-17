@@ -356,6 +356,9 @@ public class DBManagment {
         return false;
     }
     public static boolean deleteEmployee(Employee employee) {
+        if(Objects.isNull(employee) || employee.getId() < 0){
+            return false;
+        }
         String sql = "SELECT deleteEmployee(?)";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
