@@ -151,7 +151,7 @@
                   </VBox>
                </children>
             </HBox>
-            <Button mnemonicParsing="false" onAction="#addEmployee" prefHeight="60.0" prefWidth="300.0" text="Dodaj pracownika">
+            <Button mnemonicParsing="false" onAction="#addEmployee" prefHeight="60.0" prefWidth="300.0" styleClass="green" stylesheets="@style.css" text="Dodaj pracownika">
                <VBox.margin>
                   <Insets bottom="20.0" left="20.0" right="20.0" top="40.0" />
                </VBox.margin>

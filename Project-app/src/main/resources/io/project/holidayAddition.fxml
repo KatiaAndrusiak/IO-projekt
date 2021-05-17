@@ -55,7 +55,7 @@
                   </VBox>
                </children>
             </HBox>
-            <Button mnemonicParsing="false" onAction="#addHoliday" prefHeight="60.0" prefWidth="300.0" text="Dodaj święto">
+            <Button mnemonicParsing="false" onAction="#addHoliday" prefHeight="60.0" prefWidth="300.0" styleClass="green" stylesheets="@style.css" text="Dodaj święto">
                <VBox.margin>
                   <Insets bottom="20.0" left="20.0" right="20.0" top="50.0" />
                </VBox.margin>

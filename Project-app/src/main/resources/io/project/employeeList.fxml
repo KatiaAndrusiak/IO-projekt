@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="viewPane" minHeight="-1.0" minWidth="-1.0" prefHeight="750.0" prefWidth="1160.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.project.EmployeeListController">
+<AnchorPane fx:id="viewPane" minHeight="-1.0" minWidth="-1.0" prefHeight="750.0" prefWidth="1160.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.project.EmployeeListController">
    <children>
       <TableView fx:id="table" layoutX="11.0" layoutY="67.0" onMouseClicked="#enableEmployeeDataCheck" prefHeight="354.0" prefWidth="1139.0">
          <columns>
@@ -27,7 +27,7 @@
             <Font size="14.0" />
          </font>
       </TextField>
-      <Button fx:id="employeeDataButton" layoutX="943.0" layoutY="433.0" mnemonicParsing="false" onAction="#employeeDetails" prefHeight="51.0" prefWidth="207.0" text="Dane pracownika">
+      <Button fx:id="employeeDataButton" layoutX="943.0" layoutY="433.0" mnemonicParsing="false" onAction="#employeeDetails" prefHeight="51.0" prefWidth="207.0" styleClass="blue" stylesheets="@style.css" text="Dane pracownika">
          <font>
             <Font size="18.0" />
          </font>

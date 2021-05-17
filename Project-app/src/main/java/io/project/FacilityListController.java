@@ -250,7 +250,7 @@ public class FacilityListController implements Initializable {
         holidayToAdd.setProceeds(Double.parseDouble(holidayProceeds.getText()));
         holidayToAdd.setEmployee(holidayEmployee.getSelectionModel().getSelectedItem());
         holidayToAdd.setDate(holidayDate.getValue());
-        holidayToAdd.setFacility(Global.getFacility());
+        holidayToAdd.setFacility(table.getSelectionModel().getSelectedItem());
         if (DBManagment.addHoliday(holidayToAdd)) {
             AlertBox.infoAlert("Udało się!", "Dodano święto " + holidayToAdd.getName() + ", do pracownika " + holidayToAdd.getEmployee().getFirstName() + ", " + holidayToAdd.getEmployee().getFirstName() , "Obiekt został dodany do bazy");
             CheckAndClearTextField.clearTextField(holidayProceeds);
