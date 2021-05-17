@@ -337,7 +337,10 @@ public class DBManagment {
         }
     }
     public static boolean addHoliday(Holiday holiday) {
-
+        if(Objects.isNull(holiday) || holiday.getEmployee().getId() < 0 ||
+            holiday.getFacility().getId() < 0 || holiday.getProceeds() < 0){
+            return false;
+        }
         try {
             String sql = "select addHolidayForFacility(?,?,?,?,?)";
             PreparedStatement pst = conn.prepareStatement(sql);
@@ -356,6 +359,9 @@ public class DBManagment {
         return false;
     }
     public static boolean deleteEmployee(Employee employee) {
+        if(Objects.isNull(employee) || employee.getId() < 0){
+            return false;
+        }
         String sql = "SELECT deleteEmployee(?)";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -370,6 +376,9 @@ public class DBManagment {
         }
     }
     public static boolean addCourseToEmployee(Course courseToAdd) {
+        if(Objects.isNull(courseToAdd) || courseToAdd.getEmployee().getId() < 0 || courseToAdd.getHours() <0){
+            return false;
+        }
         String sql = "SELECT addCourse(?, ?, ?, ?)";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);

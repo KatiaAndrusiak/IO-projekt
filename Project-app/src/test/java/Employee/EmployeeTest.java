@@ -119,4 +119,20 @@ public class EmployeeTest {
     public void checkCompanyBudgetTest() {
         Assertions.assertTrue(DBManagment.getAccountMoney() > 0);
     }
+    @Test
+    public void deleteNullEmployeeTest(){
+        Assertions.assertEquals(false, DBManagment.deleteEmployee(null));
+    }
+    @Test
+    public void deleteEmployeeWithNegativeIdTest(){
+        Employee emp  = new Employee(-1, "firstName", "lastName", "manager", LocalDate.now(), "phone", "Pracownik", "1",
+                "1000", LocalDate.now(), 9876553, LocalDate.now());
+        Assertions.assertEquals(false, DBManagment.deleteEmployee(emp));
+    }
+    @Test
+    public void deleteEmployeeWhichNotExistTest(){
+        Employee emp  = new Employee(19999999, "test", "test", "manager", LocalDate.now(), "phone", "Pracownik", "1",
+                "1000", LocalDate.now(), 76553, LocalDate.now());
+        Assertions.assertEquals(false, DBManagment.deleteEmployee(emp));
+    }
 }
