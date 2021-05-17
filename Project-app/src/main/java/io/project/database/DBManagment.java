@@ -337,7 +337,10 @@ public class DBManagment {
         }
     }
     public static boolean addHoliday(Holiday holiday) {
-
+        if(Objects.isNull(holiday) || holiday.getEmployee().getId() < 0 ||
+            holiday.getFacility().getId() < 0 || holiday.getProceeds() < 0){
+            return false;
+        }
         try {
             String sql = "select addHolidayForFacility(?,?,?,?,?)";
             PreparedStatement pst = conn.prepareStatement(sql);
