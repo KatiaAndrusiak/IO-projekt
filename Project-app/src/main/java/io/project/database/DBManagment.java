@@ -376,6 +376,9 @@ public class DBManagment {
         }
     }
     public static boolean addCourseToEmployee(Course courseToAdd) {
+        if(Objects.isNull(courseToAdd) || courseToAdd.getEmployee().getId() < 0 || courseToAdd.getHours() <0){
+            return false;
+        }
         String sql = "SELECT addCourse(?, ?, ?, ?)";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
