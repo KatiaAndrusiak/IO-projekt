@@ -47,7 +47,7 @@ public class FacilityListController implements Initializable {
     private TableColumn<Facility, String> scheduleCol;
 
     @FXML
-    private Button addInspectionButton;
+    private Label addInspectionButton;
 
     @FXML
     private TextField employeeTF;
@@ -107,7 +107,7 @@ public class FacilityListController implements Initializable {
     private TextField descriptionText2;
 
     @FXML
-    private Button addButtonHoliday;
+    private Label addButtonHoliday;
 
     @FXML
     private VBox holidayForm;
@@ -164,7 +164,7 @@ public class FacilityListController implements Initializable {
     private Button listDeliveriesButton;
 
     @FXML
-    private Button addEmployeeButton;
+    private Label addEmployeeButton;
 
     @FXML
     private ComboBox<Employee> addEmployeeCB;

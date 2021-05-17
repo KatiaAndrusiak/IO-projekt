@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="viewPane" minHeight="-1.0" minWidth="-1.0" prefHeight="750.0" prefWidth="1160.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.project.FacilityListController">
+<AnchorPane fx:id="viewPane" minHeight="-1.0" minWidth="-1.0" prefHeight="750.0" prefWidth="1160.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.project.FacilityListController">
    <children>
       <VBox prefHeight="750.0" prefWidth="1160.0">
          <children>
@@ -91,11 +91,11 @@
                <children>
                   <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="387.0" spacing="10.0">
                      <children>
-                        <Button fx:id="addInspectionButton" mnemonicParsing="false" prefHeight="53.0" prefWidth="303.0" text="Dodaj inspekcję">
+                        <Label fx:id="addInspectionButton" mnemonicParsing="false" prefHeight="53.0" prefWidth="303.0" text="              Dodaj inspekcję">
                            <font>
-                              <Font size="15.0" />
+                              <Font name="System Bold" size="18.0" />
                            </font>
-                        </Button>
+                        </Label>
                         <VBox fx:id="inspectionForm" alignment="TOP_CENTER" prefHeight="50.0" prefWidth="100.0">
                            <children>
                               <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
@@ -121,11 +121,11 @@
                   </VBox>
                   <VBox alignment="TOP_CENTER" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="386.0">
                      <children>
-                        <Button fx:id="addButtonHoliday" mnemonicParsing="false" prefHeight="53.0" prefWidth="303.0" text="Dodaj święto">
+                        <Label fx:id="addButtonHoliday" mnemonicParsing="false" prefHeight="53.0" prefWidth="303.0" text="                  Dodaj święto">
                            <font>
-                              <Font size="15.0" />
+                              <Font name="System Bold" size="18.0" />
                            </font>
-                        </Button>
+                        </Label>
                         <VBox fx:id="holidayForm" alignment="TOP_CENTER" prefHeight="100.0" prefWidth="100.0">
                            <children>
                               <HBox prefHeight="110.0" spacing="10.0">
@@ -161,11 +161,11 @@
                   </VBox>
                   <VBox alignment="TOP_CENTER" layoutX="110.0" layoutY="10.0" prefHeight="200.0" prefWidth="387.0" spacing="10.0">
                      <children>
-                        <Button fx:id="addEmployeeButton" mnemonicParsing="false" onMouseClicked="#initAddEmployeeComboBox" prefHeight="53.0" prefWidth="303.0" text="Dodaj pracownika">
+                        <Label fx:id="addEmployeeButton" mnemonicParsing="false" onMouseClicked="#initAddEmployeeComboBox" prefHeight="53.0" prefWidth="303.0" text="               Dodaj pracownika">
                            <font>
-                              <Font size="15.0" />
+                              <Font name="System Bold" size="18.0" />
                            </font>
-                        </Button>
+                        </Label>
                         <VBox fx:id="employeeForm" alignment="CENTER" spacing="5.0">
                            <children>
                               <ComboBox fx:id="addEmployeeCB" onKeyPressed="#initAddEmployeeComboBox" prefHeight="25.0" prefWidth="234.0" promptText="Pracownik" />
