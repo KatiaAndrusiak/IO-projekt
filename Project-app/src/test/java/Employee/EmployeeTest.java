@@ -3,7 +3,6 @@ package Employee;
 
 import io.project.database.DBManagment;
 import io.project.entities.Employee;
-import io.project.entities.Facility;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +10,6 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Random;
 
 public class EmployeeTest {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -115,33 +113,6 @@ public class EmployeeTest {
         employeeToTest.setUsername("empl");
         employeeToTest.setPassword("empl");
         Assertions.assertThrows(java.lang.ExceptionInInitializerError.class, () -> DBManagment.addEmployee(employeeToTest));
-    }
-
-    @Test
-    public void facilityAdditionTest() throws SQLException {
-        int sizeBeforeAddition = DBManagment.getFacilityInfo().size();
-        Facility facilityToTest = new Facility();
-        facilityToTest.setCity("Kraków");
-        facilityToTest.setStatus("Apteka");
-        facilityToTest.setName("facilityTestName");
-        facilityToTest.setAddress("Testaddress, " + (new Random().nextInt(100) + 1));
-        facilityToTest.setSchedule("07:00-23:00");
-        DBManagment.addFacility(facilityToTest);
-        Assertions.assertEquals(sizeBeforeAddition + 1, DBManagment.getFacilityInfo().size());
-    }
-
-
-    @Test
-    public void facilityAdditionWithExitingCityAndAddressTest() throws SQLException {
-        Facility facilityToTest = new Facility();
-        facilityToTest.setCity("Kraków");
-        facilityToTest.setStatus("Apteka");
-        facilityToTest.setName("facilityTestName");
-        facilityToTest.setAddress("Testaddress, " + 33);
-        facilityToTest.setSchedule("07:00-23:00");
-
-
-        Assertions.assertThrows(java.lang.NoClassDefFoundError.class, () -> DBManagment.addFacility(facilityToTest));
     }
 
     @Test
