@@ -84,7 +84,6 @@ public class DBManagment {
 
             if (res.next()) {
                 user = new Employee();
-                System.out.println("BD working");
                 user.setId(res.getInt("id_employee"));
                 String sql1 = "select * from employee_data_view where id_employee =  " + res.getInt("id_employee");
                 PreparedStatement ps1 = conn.prepareStatement(sql1);
