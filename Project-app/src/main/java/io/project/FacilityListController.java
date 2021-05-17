@@ -28,6 +28,10 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class FacilityListController implements Initializable {
+
+    @FXML
+    public HBox additionComboBoxes;
+
     @FXML
     private AnchorPane viewPane;
 
@@ -47,7 +51,7 @@ public class FacilityListController implements Initializable {
     private TableColumn<Facility, String> scheduleCol;
 
     @FXML
-    private Label addInspectionButton;
+    private Label addInspectionLabel;
 
     @FXML
     private TextField employeeTF;
@@ -107,7 +111,7 @@ public class FacilityListController implements Initializable {
     private TextField descriptionText2;
 
     @FXML
-    private Label addButtonHoliday;
+    private Label addLabelHoliday;
 
     @FXML
     private VBox holidayForm;
@@ -164,7 +168,7 @@ public class FacilityListController implements Initializable {
     private Button listDeliveriesButton;
 
     @FXML
-    private Label addEmployeeButton;
+    private Label addEmployeeLabel;
 
     @FXML
     private ComboBox<Employee> addEmployeeCB;
@@ -184,6 +188,8 @@ public class FacilityListController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        inspectionQuestionsForm.setVisible(false);
+        additionComboBoxes.setVisible(false);
         DBManagment.fillHolidayAdditionDataEmployee(holidayEmployee);
         DBManagment.fillHolidayAdditionDataHoliday(holidayName);
         facilityList();
@@ -195,6 +201,8 @@ public class FacilityListController implements Initializable {
         {
             return;
         }
+        inspectionQuestionsForm.setVisible(true);
+        additionComboBoxes.setVisible(true);
         selectedFacility = table.getSelectionModel().getSelectedItem();
         displayEmployeeComboBox();
     }

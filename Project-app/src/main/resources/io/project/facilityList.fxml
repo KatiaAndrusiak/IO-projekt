@@ -1,20 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="viewPane" minHeight="-1.0" minWidth="-1.0" prefHeight="750.0" prefWidth="1160.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.project.FacilityListController">
+<AnchorPane fx:id="viewPane" minHeight="-1.0" minWidth="-1.0" prefHeight="750.0" prefWidth="1160.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.project.FacilityListController">
    <children>
       <VBox prefHeight="750.0" prefWidth="1160.0">
          <children>
@@ -87,11 +78,11 @@
                   <Insets top="5.0" />
                </VBox.margin>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="170.0" prefWidth="1160.0">
+            <HBox fx:id="additionComboBoxes" alignment="CENTER" prefHeight="170.0" prefWidth="1160.0">
                <children>
                   <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="387.0" spacing="10.0">
                      <children>
-                        <Label fx:id="addInspectionButton" mnemonicParsing="false" prefHeight="53.0" prefWidth="303.0" text="              Dodaj inspekcję">
+                        <Label fx:id="addInspectionLabel" mnemonicParsing="false" prefHeight="53.0" prefWidth="303.0" text="              Dodaj inspekcję">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
@@ -121,7 +112,7 @@
                   </VBox>
                   <VBox alignment="TOP_CENTER" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="386.0">
                      <children>
-                        <Label fx:id="addButtonHoliday" mnemonicParsing="false" prefHeight="53.0" prefWidth="303.0" text="                  Dodaj święto">
+                        <Label fx:id="addLabelHoliday" mnemonicParsing="false" prefHeight="53.0" prefWidth="303.0" text="                  Dodaj święto">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
@@ -161,7 +152,7 @@
                   </VBox>
                   <VBox alignment="TOP_CENTER" layoutX="110.0" layoutY="10.0" prefHeight="200.0" prefWidth="387.0" spacing="10.0">
                      <children>
-                        <Label fx:id="addEmployeeButton" mnemonicParsing="false" onMouseClicked="#initAddEmployeeComboBox" prefHeight="53.0" prefWidth="303.0" text="               Dodaj pracownika">
+                        <Label fx:id="addEmployeeLabel" mnemonicParsing="false" onMouseClicked="#initAddEmployeeComboBox" prefHeight="53.0" prefWidth="303.0" text="               Dodaj pracownika">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
