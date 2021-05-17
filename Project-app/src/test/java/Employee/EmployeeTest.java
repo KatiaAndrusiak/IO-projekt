@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 public class EmployeeTest {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -135,4 +136,24 @@ public class EmployeeTest {
                 "1000", LocalDate.now(), 76553, LocalDate.now());
         Assertions.assertEquals(false, DBManagment.deleteEmployee(emp));
     }
+
+    @Test
+    public void getEmployeeByFacilityIdTest(){
+        int facilityId = 5;
+        ArrayList<Integer> employeeIdsExpected = new ArrayList<>();
+        employeeIdsExpected.add(13);
+        ArrayList<Integer> employeeIds = DBManagment.getEmployeeByFacilityID(facilityId);
+        Assertions.assertEquals(employeeIdsExpected, employeeIds);
+    }
+
+    @Test
+    public void getEmployeeByNotExistingFacilityIdTest(){
+        int facilityId = 100;
+        ArrayList<Integer> employeeIdsExpected = new ArrayList<>();
+        ArrayList<Integer> employeeIds = DBManagment.getEmployeeByFacilityID(facilityId);
+        Assertions.assertEquals(employeeIdsExpected, employeeIds);
+    }
+
+
+
 }

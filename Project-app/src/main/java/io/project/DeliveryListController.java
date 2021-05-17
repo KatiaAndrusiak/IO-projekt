@@ -78,6 +78,8 @@ public class DeliveryListController implements Initializable {
                 @Override
                 protected void updateItem(String item, boolean empty) {
                     super.updateItem(item, empty);
+                    this.setText(null);
+                    this.setGraphic(null);
                     if(!empty){
                         if (item.equals("opłacono")) {
                             setDisable(true);
@@ -97,6 +99,7 @@ public class DeliveryListController implements Initializable {
     public void onFacilitySelection(){
         if(!facilityCB.getSelectionModel().isEmpty()){
             int facilityId=Integer.parseInt(facilityCB.getSelectionModel().getSelectedItem().split(" | ")[0]);
+
             table.setItems(FXCollections.observableArrayList(list
                     .stream()
                     .filter(el -> el.getFacility().getId() == facilityId)

@@ -588,6 +588,9 @@ public class DBManagment {
     }
 
     public static boolean addSupplier(Supplier supplier){
+        if(Objects.isNull(supplier) ){
+            return false;
+        }
         String sql = "INSERT INTO supplier(name, email, phone) values (?, ?, ?)";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -651,18 +654,22 @@ public class DBManagment {
     }
 
     public static boolean addDelivery(Delivery delivery){
+        if(Objects.isNull(delivery) ){
+            return false;
+        }
         String sql = "select addDelivery(?,?,?,?,?,?)";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, delivery.getSupplier().getId());
-            ps.setInt(2,delivery.getFacility().getId());
+            ps.setInt(2, delivery.getFacility().getId());
             ps.setDate(3, Date.valueOf(delivery.getDate()));
             ps.setInt(4, delivery.getPaymentDelay());
             ps.setInt(5, delivery.getAmountToPay());
             ps.setBoolean(6, delivery.isPaid());
             ps.execute();
             ps.close();
-            return true;
+                return true;
+
         } catch (SQLException e) {
             AlertBox.errorAlert("Błąd", e.getMessage());
             showMessageDialog(null, e.getMessage());
