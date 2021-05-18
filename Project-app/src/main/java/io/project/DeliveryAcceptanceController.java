@@ -5,6 +5,7 @@ import io.project.database.DBManagment;
 import io.project.entities.Delivery;
 import io.project.entities.Facility;
 import io.project.entities.Supplier;
+import io.project.validation.FieldValidation;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
@@ -34,10 +35,11 @@ public class DeliveryAcceptanceController implements Initializable
 
 	public void acceptDelivery(){
 		try {
-			if (deliveryDateTF.getValue() == null ||
-					deliveryPaymentDelayTF.getText().isEmpty() ||
-					deliveryPaymentTF.getText().isEmpty()) {
-				AlertBox.errorAlert("Błąd", "Wypełnij wszystkie pola");
+			if ( FieldValidation.validateComboBox(deliverySupplierComboBox) ||
+					deliveryDateTF.getValue() == null ||
+					FieldValidation.validateNum(deliveryPaymentDelayTF) ||
+					FieldValidation.validateNum(deliveryPaymentTF)) {
+				AlertBox.errorAlert("Błąd", "Sprawdź poprawność danych");
 			} else {
 				Supplier supplier = new Supplier();
 				supplier.setId(Integer.parseInt(deliverySupplierComboBox.getSelectionModel().getSelectedItem().split(" | ")[0]));

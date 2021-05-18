@@ -4,6 +4,7 @@ import io.project.alert.AlertBox;
 import io.project.database.DBManagment;
 import io.project.entities.Supplier;
 import io.project.screenloader.ChangeScreen;
+import io.project.validation.FieldValidation;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -27,10 +28,10 @@ public class SupplierAdditionController implements Initializable
 
 	public void addSupplier(){
 		try {
-			if (supplierNameTF.getText().isEmpty() ||
-					supplierEmailTF.getText().isEmpty() ||
-					supplierPhoneTF.getText().isEmpty()) {
-				AlertBox.errorAlert("Błąd", "Wypełnij wszystkie pola");
+			if (FieldValidation.validateCharField(supplierNameTF) ||
+					FieldValidation.validateEmail(supplierEmailTF) ||
+					FieldValidation.validateNum(supplierPhoneTF)) {
+				AlertBox.errorAlert("Błąd", "Sprawdź poprawność danych");
 			} else {
 				Supplier supplier = new Supplier(supplierNameTF.getText(),
 						supplierPhoneTF.getText(),
