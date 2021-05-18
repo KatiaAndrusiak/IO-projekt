@@ -217,6 +217,7 @@ public class FacilityListController implements Initializable {
         inspectionQuestionsForm.setVisible(false);
         additionComboBoxes.setVisible(false);
         employeeInfoButton.setDisable(true);
+        listEmployeeButton.setDisable(true);
         DBManagment.fillHolidayAdditionDataEmployee(holidayEmployee);
         DBManagment.fillHolidayAdditionDataHoliday(holidayName);
         facilityList();
@@ -233,7 +234,7 @@ public class FacilityListController implements Initializable {
         // inspectionQuestionsForm.setVisible(true);
         inspectionQuestionsForm.setVisible(false); // chwilowo wylaczone
         ////////////////////////////////////////////////////////////////////////////////////////////////
-
+        listEmployeeButton.setDisable(false);
         additionComboBoxes.setVisible(true);
         selectedFacility = table.getSelectionModel().getSelectedItem();
         displayEmployeeComboBox();
