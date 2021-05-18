@@ -498,7 +498,7 @@ public class DBManagment {
             }
             closeAll(res, ps);
         } catch (SQLException e) {
-            AlertBox.errorAlert("Błąd", e.getMessage());
+            AlertBox.errorAlert("Błąd", e.getMessage().split("Where")[0]);
         }
         return 0.0;
     }
@@ -542,23 +542,14 @@ public class DBManagment {
 
     public static void payToSupplier(int id_supplier, int amountToPay){
         try {
-            String sql = "select * from supplier where id_supplier = ?";
+            String sql = "select payToSupplier(?, ?)";
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setDouble(1,id_supplier);
-            ResultSet rs = ps.executeQuery();
-            double currentWallet = 0;
-            if (rs.next()) {
-                 currentWallet = rs.getDouble("wallet");
-            }
-            closeAll(rs,ps);
-            String sql1 = "update supplier set wallet = ? where id_supplier = ?";
-            PreparedStatement ps1 = conn.prepareStatement(sql1);
-            ps1.setDouble(1, currentWallet+amountToPay);
-            ps1.setInt(2, id_supplier);
-            ps1.executeUpdate();
-            ps1.close();
+            ps.setInt(1,id_supplier);
+            ps.setInt(2, amountToPay);
+            ps.execute();
+            ps.close();
         } catch (SQLException e) {
-            AlertBox.errorAlert("Błąd", e.getMessage());
+            AlertBox.errorAlert("Błąd", e.getMessage().split("Where")[0]);
         }
     }
 
@@ -574,15 +565,15 @@ public class DBManagment {
                     " end;" +
                     " $$;";
             conn.createStatement().execute(sql);
+            payToSupplier(id_supplier,amountToPay);
             String sql1 = "update delivery_record set is_paid = ? where id_delivery_record = ?";
             PreparedStatement ps = conn.prepareStatement(sql1);
             ps.setBoolean(1, true);
             ps.setInt(2, id_delivery_record);
             ps.executeUpdate();
             ps.close();
-            payToSupplier(id_supplier,amountToPay);
         } catch (SQLException e) {
-            AlertBox.errorAlert("Błąd opłaty", e.getMessage());
+            AlertBox.errorAlert("Błąd opłaty", e.getMessage().split("Where")[0]);
         }
 
     }
@@ -591,7 +582,7 @@ public class DBManagment {
         if(Objects.isNull(supplier) ){
             return false;
         }
-        String sql = "INSERT INTO supplier(name, email, phone) values (?, ?, ?)";
+        String sql = "select addSupplier(?, ?, ?)";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, supplier.getName());
@@ -601,7 +592,7 @@ public class DBManagment {
             ps.close();
             return true;
         } catch (SQLException e) {
-            showMessageDialog(null, e.getMessage());
+            AlertBox.errorAlert("Błąd", e.getMessage().split("Where")[0]);
             System.out.println(e.getMessage());
             return false;
         }
@@ -671,8 +662,7 @@ public class DBManagment {
                 return true;
 
         } catch (SQLException e) {
-            AlertBox.errorAlert("Błąd", e.getMessage());
-            showMessageDialog(null, e.getMessage());
+            AlertBox.errorAlert("Błąd", e.getMessage().split("Where")[0]);
             System.out.println(e.getMessage());
             return false;
         }

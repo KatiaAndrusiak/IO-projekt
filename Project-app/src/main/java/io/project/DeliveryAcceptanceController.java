@@ -56,7 +56,7 @@ public class DeliveryAcceptanceController implements Initializable
 					deliveryDateTF.getEditor().clear();
 					deliverySupplierComboBox.getSelectionModel().clearSelection();
 				} else {
-					throw  new Exception("Nie udało się dodać dostawcę");
+					throw  new Exception("Nie udało się przyjąć dostawę");
 				}
 			}
 		}catch (Exception e){
