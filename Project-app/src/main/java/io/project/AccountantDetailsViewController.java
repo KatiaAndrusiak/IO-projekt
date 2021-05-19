@@ -67,6 +67,7 @@ public class AccountantDetailsViewController implements Initializable {
         accountantFirstName.setText(currUser.getFirstName());
         accountantLastName.setText(currUser.getLastName());
         accountantBirthDate.setText(currUser.getDOB().format(formatter));
+        accountantEmploymentPlace.setText(DBManagment.getEmploymentPlace(currUser.getId()).get(0));
         accountantPhoneNumber.setText(currUser.getPhone());
         accountantPosition.setText(currUser.getPosition());
         accountantCategory.setText(currUser.getCategory());

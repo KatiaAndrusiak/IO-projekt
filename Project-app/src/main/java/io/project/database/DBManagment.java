@@ -9,6 +9,7 @@ import javafx.scene.control.ComboBox;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import static javax.swing.JOptionPane.showMessageDialog;
@@ -769,6 +770,22 @@ public class DBManagment {
             AlertBox.errorAlert("Bład", e.getMessage());
         }
         return  list;
+    }
+
+    public static List<String> getEmploymentPlace(int id) {
+        List<String> employmentPlace = new ArrayList<>();
+        try {
+            String sql = "select * from employee_facility ef join facility_data_view2 fv on ef.id_facility = fv.id_facility where ef.id_employee = " + id;
+            PreparedStatement pst = conn.prepareStatement(sql);
+            ResultSet res = pst.executeQuery();
+            while (res.next()) {
+                employmentPlace.add(res.getString("name") + ", " + res.getString("city") + ", " + res.getString("address"));
+            }
+            closeAll(res, pst);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return employmentPlace;
     }
 
 }

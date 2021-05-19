@@ -68,6 +68,7 @@ public class ManagerDetailsViewController implements Initializable {
 		managerBirthDate.setText(currUser.getDOB().format(formatter));
 		managerPhoneNumber.setText(currUser.getPhone());
 		managerPosition.setText(currUser.getPosition());
+		managerEmploymentPlace.setText(DBManagment.getEmploymentPlace(currUser.getId()).get(0));
 		managerCategory.setText(currUser.getCategory());
 		managerSalary.setText(currUser.getSalary());
 		managerSOO.setText(currUser.getPPE().format(formatter));
