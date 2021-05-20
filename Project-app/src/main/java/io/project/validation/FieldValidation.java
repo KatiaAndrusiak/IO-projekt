@@ -2,6 +2,7 @@ package io.project.validation;
 
 import io.project.alert.AlertBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 
 import java.util.regex.Matcher;
@@ -79,4 +80,35 @@ public class FieldValidation {
             return false;
         }
     }
+    /**
+     * Walidacja pól gdzie oczekujemy liczbę zmiennoprzecinkowa
+     *
+     * @param data TextField
+     * @return true jeśli wprowadzone dane są ok
+     */
+    public static boolean validateFloatingNum(TextField data) {
+        Pattern p = Pattern.compile("[+-]?([0-9]*[.])?[0-9]+");
+        Matcher m = p.matcher(data.getText());
+        if (m.find() && m.group().equals(data.getText())) {
+            return true;
+        } else {
+            AlertBox.errorAlert(" Niepoprawnie wprowadzona liczba.", "Sprawdź poprawność wprowadzonych danych.");
+            return false;
+        }
+    }
+    /**
+     * Walidacja DatePicker
+
+     * @return true gdy  zotało coś wybrane
+     */
+    public static boolean validateDatePicker(DatePicker picker) {
+        if (!(picker.getValue() == null)) {
+            return true;
+        } else {
+            AlertBox.errorAlert("Nie wprowadzone wszystkie dane! ", "Wybierz date!!!");
+            return false;
+        }
+    }
+
+
 }

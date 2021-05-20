@@ -7,6 +7,7 @@ import io.project.entities.Facility;
 import io.project.entities.Holiday;
 import io.project.screenloader.ChangeScreen;
 import io.project.validation.CheckAndClearTextField;
+import io.project.validation.FieldValidation;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -282,21 +283,22 @@ public class FacilityListController implements Initializable {
         return employee.getFirstName() + " " + employee.getLastName() + " " + employee.getId();
     }
 
-    // po kliknieciu addButtonHoliday ma sie pokazac holidayForm,
-    // po kliknieciu listInspectionButton ma sie pokazac inspectionForm i inspectionQuestionsForm
-    // po kliknieciu addEmployeeButton ma sie pokazac employeeForm
+
     public void addHoliday(ActionEvent actionEvent) {
-        Holiday holidayToAdd = new Holiday();
-        holidayToAdd.setName(holidayName.getSelectionModel().getSelectedItem());
-        holidayToAdd.setProceeds(Double.parseDouble(holidayProceeds.getText()));
-        holidayToAdd.setEmployee(holidayEmployee.getSelectionModel().getSelectedItem());
-        holidayToAdd.setDate(holidayDate.getValue());
-        holidayToAdd.setFacility(table.getSelectionModel().getSelectedItem());
-        if (DBManagment.addHoliday(holidayToAdd)) {
-            AlertBox.infoAlert("Udało się!", "Dodano święto " + holidayToAdd.getName() + ", do pracownika " + holidayToAdd.getEmployee().getFirstName() + ", " + holidayToAdd.getEmployee().getFirstName() , "Obiekt został dodany do bazy");
-            CheckAndClearTextField.clearTextField(holidayProceeds);
-        }else{
-            AlertBox.infoAlert("Ups", "Nie udało się dodać święta", "Obiekt nie został dodany");
+        if(FieldValidation.validateFloatingNum(holidayProceeds) && FieldValidation.validateComboBox(holidayName) &&
+                FieldValidation.validateComboBox(holidayEmployee) && FieldValidation.validateDatePicker(holidayDate)) {
+            Holiday holidayToAdd = new Holiday();
+            holidayToAdd.setName(holidayName.getSelectionModel().getSelectedItem());
+            holidayToAdd.setProceeds(Double.parseDouble(holidayProceeds.getText()));
+            holidayToAdd.setEmployee(holidayEmployee.getSelectionModel().getSelectedItem());
+            holidayToAdd.setDate(holidayDate.getValue());
+            holidayToAdd.setFacility(table.getSelectionModel().getSelectedItem());
+            if (DBManagment.addHoliday(holidayToAdd)) {
+                AlertBox.infoAlert("Udało się!", "Dodano święto " + holidayToAdd.getName() + ", do pracownika " + holidayToAdd.getEmployee().getFirstName() + ", " + holidayToAdd.getEmployee().getFirstName(), "Obiekt został dodany do bazy");
+                CheckAndClearTextField.clearTextField(holidayProceeds);
+            } else {
+                AlertBox.infoAlert("Ups", "Nie udało się dodać święta", "Obiekt nie został dodany");
+            }
         }
     }
 

@@ -5,10 +5,10 @@ import io.project.database.DBManagment;
 import io.project.entities.Course;
 import io.project.entities.Employee;
 import io.project.validation.CheckAndClearTextField;
+import io.project.validation.FieldValidation;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -32,40 +32,30 @@ public class CourseAdditionController implements Initializable
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		/*FXMLLoader loader = new FXMLLoader(getClass().getResource("/io/project/courseAddition.fxml"));
-		try {
-			Parent root = loader.load();
-			courseAdditionPane.getChildren().clear();
-			courseAdditionPane.getChildren().addAll(root);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}*/
 	}
 	public void addCourseToEmployee(ActionEvent event) {
 		try {
-			Course courseToAdd = new Course();
-			Employee employee = Global.getEmployee();
-			courseToAdd.setName(courseNameTF.getText());
-			courseToAdd.setHours(Integer.parseInt(courseHoursTF.getText()));
-			courseToAdd.setEmployee(employee);
-			courseToAdd.setDate(courseDateTF.getValue());
-			if (DBManagment.addCourseToEmployee(courseToAdd)) {
-				AlertBox.infoAlert("Udało się!", "Dodano kurs " + courseToAdd.getName() + ", do pracownika " + courseToAdd.getEmployee().getFirstName() + ", " + courseToAdd.getEmployee().getFirstName() , "Obiekt został dodany do bazy");
-				employee.setCourseHoursSum(employee.getCourseHoursSum() + courseToAdd.getHours());
-				CheckAndClearTextField.clearTextField(courseNameTF);
-				CheckAndClearTextField.clearTextField(courseHoursTF);
+			if(FieldValidation.validateCharField(courseNameTF)
+					&& FieldValidation.validateNum(courseHoursTF)
+			&& FieldValidation.validateDatePicker(courseDateTF)) {
+				Course courseToAdd = new Course();
+				Employee employee = Global.getEmployee();
+				courseToAdd.setName(courseNameTF.getText());
+				courseToAdd.setHours(Integer.parseInt(courseHoursTF.getText()));
+				courseToAdd.setEmployee(employee);
+				courseToAdd.setDate(courseDateTF.getValue());
+				if (DBManagment.addCourseToEmployee(courseToAdd)) {
+					AlertBox.infoAlert("Udało się!", "Dodano kurs " + courseToAdd.getName() + ", do pracownika " + courseToAdd.getEmployee().getFirstName() + ", " + courseToAdd.getEmployee().getFirstName(), "Obiekt został dodany do bazy");
+					employee.setCourseHoursSum(employee.getCourseHoursSum() + courseToAdd.getHours());
+					CheckAndClearTextField.clearTextField(courseNameTF);
+					CheckAndClearTextField.clearTextField(courseHoursTF);
+				} else {
+					AlertBox.errorAlert("Błąd", "Nie udalo sie dodac");
+				}
 			}
 		} catch (Exception exception) {
-			exception.printStackTrace();
-			Alert alert = new Alert(Alert.AlertType.INFORMATION);
-			alert.setTitle("Błąd!");
-			alert.setHeaderText("Podaj ilość godzin poprawnie!");
-			alert.showAndWait();
+			AlertBox.errorAlert("Błąd", "Wystapil blad");
 			return;
 		}
-
-		//courseName.setVisible(false);
-		//courseHours.setVisible(false);
-		//courseAddButton.setVisible(false);
 	}
 }
