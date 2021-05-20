@@ -663,7 +663,7 @@ public class DBManagment {
                 return true;
 
         } catch (SQLException e) {
-            AlertBox.errorAlert("Błąd", e.getMessage());
+            AlertBox.errorAlert("Błąd", e.getMessage().split("Where")[0]);
             System.out.println(e.getMessage());
             return false;
         }
