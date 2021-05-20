@@ -73,7 +73,7 @@ public class EmployeeDetailsManagerViewController implements Initializable {
 		employeeEmploymentDate.setText(e.getEmploymentDate().toString());
 		employeePhoneNumber.setText(e.getPhone());
 		employeePosition.setText(e.getPosition());
-		employeeSalary.setText(e.getSalary());
+		employeeSalary.setText(e.getSalaryInt().toString());
 		employeeCategory.setText(e.getCategory());
 		employeeSOO.setText(e.getPPE().toString());
 		employeeCoursesHours.setText(""+e.getCourseHoursSum());
@@ -114,21 +114,27 @@ public class EmployeeDetailsManagerViewController implements Initializable {
 		});
 	}
 	public void deleteEmployee(ActionEvent event) {
-		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-		alert.setTitle("Usuwanie pracownika");
-		alert.getButtonTypes().clear();
-		alert.getButtonTypes().addAll(ButtonType.YES, ButtonType.CANCEL);
-		Employee employeeToDelete = Global.getEmployee();
-		alert.setHeaderText("Czy napewno usunac pracownika " + employeeToDelete.getFirstName()+" "+employeeToDelete.getLastName());
-		alert.showAndWait();
-		System.out.println(alert.getResult() == ButtonType.YES);
-		if (alert.getResult() == ButtonType.YES) {
-			if(DBManagment.deleteEmployee(employeeToDelete)){
-				Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
-				alert1.setTitle("Udało się!");
-				alert1.setHeaderText("Pracownik został usunięty!");
-				alert1.showAndWait();
+		try {
+			Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+			alert.setTitle("Usuwanie pracownika");
+			alert.getButtonTypes().clear();
+			alert.getButtonTypes().addAll(ButtonType.YES, ButtonType.CANCEL);
+			Employee employeeToDelete = Global.getEmployee();
+			alert.setHeaderText("Czy napewno usunac pracownika " + employeeToDelete.getFirstName() + " " + employeeToDelete.getLastName());
+			alert.showAndWait();
+			System.out.println(alert.getResult() == ButtonType.YES);
+			if (alert.getResult() == ButtonType.YES) {
+				if (DBManagment.deleteEmployee(employeeToDelete)) {
+					Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
+					alert1.setTitle("Udało się!");
+					alert1.setHeaderText("Pracownik został usunięty!");
+					alert1.showAndWait();
+					ChangeScreen.initPanel(Global.getViewPane(), FXMLLoader.load(getClass().getResource("employeeList.fxml")));
+				}
 			}
+		}
+		catch (Exception e){
+			AlertBox.errorAlert("Błąd", e.getMessage());
 		}
 	}
 
