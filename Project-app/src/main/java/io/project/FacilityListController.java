@@ -25,9 +25,7 @@ import javafx.util.StringConverter;
 import java.net.URL;
 import java.sql.Date;
 import java.sql.SQLException;
-import java.util.List;
-import java.util.Map;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -181,36 +179,36 @@ public class FacilityListController implements Initializable {
 
     private Employee selectedEmployee;
 
-    public void facilityList(){
-        cityCol.setCellValueFactory(new PropertyValueFactory<Facility,String>("city"));
-        nameCol.setCellValueFactory(new PropertyValueFactory<Facility,String>("name"));
-        addressCol.setCellValueFactory(new PropertyValueFactory<Facility,String>("address"));
-        scheduleCol.setCellValueFactory(new PropertyValueFactory<Facility,String>("schedule"));
+    public void facilityList() {
+        cityCol.setCellValueFactory(new PropertyValueFactory<Facility, String>("city"));
+        nameCol.setCellValueFactory(new PropertyValueFactory<Facility, String>("name"));
+        addressCol.setCellValueFactory(new PropertyValueFactory<Facility, String>("address"));
+        scheduleCol.setCellValueFactory(new PropertyValueFactory<Facility, String>("schedule"));
 
         ObservableList<Facility> list = DBManagment.getFacilityInfo();
         table.setItems(list);
     }
 
-        public void employeeListByFacility(){
-        employeeFirstNameCol.setCellValueFactory(new PropertyValueFactory<Employee,String>("firstName"));
-        employeeLastNameCol.setCellValueFactory(new PropertyValueFactory<Employee,String>("lastName"));
-        employeePositionCol.setCellValueFactory(new PropertyValueFactory<Employee,String>("position"));
-        ObservableList<Employee> list = DBManagment.getEmployeeInfoByFacilityId( selectedFacility.getId() );
+    public void employeeListByFacility() {
+        employeeFirstNameCol.setCellValueFactory(new PropertyValueFactory<Employee, String>("firstName"));
+        employeeLastNameCol.setCellValueFactory(new PropertyValueFactory<Employee, String>("lastName"));
+        employeePositionCol.setCellValueFactory(new PropertyValueFactory<Employee, String>("position"));
+        ObservableList<Employee> list = DBManagment.getEmployeeInfoByFacilityId(selectedFacility.getId());
         tableEmployee.setItems(list);
     }
 
-    public void holidayListByFacility(){
-        ObservableList<String> data = DBManagment.getHolidayInfoByFacilityID(selectedFacility.getId() );
+    public void holidayListByFacility() {
+        ObservableList<String> data = DBManagment.getHolidayInfoByFacilityID(selectedFacility.getId());
         tableOptions.setItems(data);
     }
 
-    public void deliveryListByFacility(){
-        ObservableList<String> data = DBManagment.getDeliveryInfoByFacilityID(selectedFacility.getId() );
+    public void deliveryListByFacility() {
+        ObservableList<String> data = DBManagment.getDeliveryInfoByFacilityID(selectedFacility.getId());
         tableOptions.setItems(data);
     }
 
-    public void inspectionListByFacility(){
-        ObservableList<String> data = DBManagment.getInspectionInfoByFacilityID(  selectedFacility.getId() );
+    public void inspectionListByFacility() {
+        ObservableList<String> data = DBManagment.getInspectionInfoByFacilityID(selectedFacility.getId());
         tableOptions.setItems(data);
     }
 
@@ -230,21 +228,29 @@ public class FacilityListController implements Initializable {
         facilityList();
     }
 
-    void setQuestion1Visibility(boolean isVisible){
+    void setQuestion1Visibility(boolean isVisible) {
         empInspectionQuestion1.setVisible(isVisible);
         date1.setVisible(isVisible);
         descriptionText1.setVisible(isVisible);
-    };
-    void setQuestion2Visibility(boolean isVisible){
+    }
+
+    ;
+
+    void setQuestion2Visibility(boolean isVisible) {
         empInspectionQuestion2.setVisible(isVisible);
         date2.setVisible(isVisible);
         descriptionText2.setVisible(isVisible);
-    };
-    void setQuestion3Visibility(boolean isVisible){
+    }
+
+    ;
+
+    void setQuestion3Visibility(boolean isVisible) {
         empInspectionQuestion3.setVisible(isVisible);
         date3.setVisible(isVisible);
         descriptionText3.setVisible(isVisible);
-    };
+    }
+
+    ;
 
     /* inspection questions should be grouped in HBox, not VBox */
     private void initInspectionQuestions() {
@@ -261,9 +267,8 @@ public class FacilityListController implements Initializable {
     }
 
     @FXML
-    private void initAddEmployeeComboBox(MouseEvent mouseevent ) {
-        if (table.getSelectionModel().getSelectedIndex() < 0)
-        {
+    private void initAddEmployeeComboBox(MouseEvent mouseevent) {
+        if (table.getSelectionModel().getSelectedIndex() < 0) {
             return;
         }
 
@@ -291,9 +296,10 @@ public class FacilityListController implements Initializable {
         String s2 = "Czy wszystkie lodówki są sprawne?";
         String s3 = "Czy wszyscy pracownicy są wyposażeni w ŚOO?";
         boolean isEverythingValid = true;
+        HashSet<Boolean> validation = new HashSet<Boolean>();
 
-        if(FieldValidation.validateCharField(inspectionDescription) && FieldValidation.validateComboBox(employeeTF)
-                && FieldValidation.validateDatePicker(inspectionDate ) && FieldValidation.validateComboBox(answer1)
+        if (FieldValidation.validateCharField(inspectionDescription) && FieldValidation.validateComboBox(employeeTF)
+                && FieldValidation.validateDatePicker(inspectionDate) && FieldValidation.validateComboBox(answer1)
                 && FieldValidation.validateComboBox(answer2) && FieldValidation.validateComboBox(answer3)) {
 
             String ans1 = answer1.getSelectionModel().getSelectedItem();
@@ -304,31 +310,34 @@ public class FacilityListController implements Initializable {
             int employeeId = employeeTF.getSelectionModel().getSelectedItem().getId();
             Date date = Date.valueOf(inspectionDate.getValue());
             String descr = inspectionDescription.getText();
-                if (ans1.equals("Nie")) {
-                    if (FieldValidation.validateDatePicker(date1)) {
-                        DBManagment.addCheckup(s1, ans1, Date.valueOf(date1.getValue()), employeeId, descriptionText1.getText());
-                    }
-                    else isEverythingValid = false;
-                } else {
-                    DBManagment.addCheckup(s1, ans1, null, 0, null);
-                }
-                if (ans2.equals("Nie")) {
-                    if (FieldValidation.validateDatePicker(date2)) {
-                        DBManagment.addCheckup(s2, ans2, Date.valueOf(date2.getValue()), employeeId, descriptionText2.getText());
-                    }
-                    else isEverythingValid = false;
-                } else {
-                    DBManagment.addCheckup(s2, ans2, null, 0, null);
-                }
-                if (ans3.equals("Nie")) {
-                    if (FieldValidation.validateDatePicker(date3)) {
-                        DBManagment.addCheckup(s3, ans3, Date.valueOf(date3.getValue()), employeeId, descriptionText3.getText());
-                    }
-                    else isEverythingValid = false;
-                } else {
-                    DBManagment.addCheckup(s3, ans3, null, 0, null);
-                }
+
+            if ((ans1.equals("Nie") && !FieldValidation.validateDatePicker(date1)) ||
+                    (ans2.equals("Nie") && !FieldValidation.validateDatePicker(date2)) ||
+                    (ans3.equals("Nie") && !FieldValidation.validateDatePicker(date3))) {
+                isEverythingValid = false;
+            }
+
             if (isEverythingValid) {
+                if (ans1.equals("Nie")) {
+                    if (FieldValidation.validateDatePicker(date1))
+                        validation.add(DBManagment.addCheckup(s1, ans1, Date.valueOf(date1.getValue()), employeeId, descriptionText1.getText()));
+                } else validation.add(DBManagment.addCheckup(s1, ans1, null, 0, null));
+
+                if (ans2.equals("Nie")) {
+                    if (FieldValidation.validateDatePicker(date2))
+                        validation.add(DBManagment.addCheckup(s2, ans2, Date.valueOf(date2.getValue()), employeeId, descriptionText2.getText()));
+                } else validation.add(DBManagment.addCheckup(s2, ans2, null, 0, null));
+
+                if (ans3.equals("Nie")) {
+                    if (FieldValidation.validateDatePicker(date3))
+                        validation.add(DBManagment.addCheckup(s3, ans3, Date.valueOf(date3.getValue()), employeeId, descriptionText3.getText()));
+                } else validation.add(DBManagment.addCheckup(s3, ans3, null, 0, null));
+
+                if (validation.contains(false)) {
+                    AlertBox.infoAlert("Blad", "Operacje na bazie danych nie powiodly sie", "failure");
+                    return;
+                }
+
                 if (DBManagment.addInspection(employeeId, facilityId, date, descr)) {
                     AlertBox.infoAlert("Udało się!", "Inspekcja dodana do pracownika o id " + employeeId + " na obiekcie o id " + facilityId + ".", "success");
                 }
@@ -336,13 +345,14 @@ public class FacilityListController implements Initializable {
         }
     }
 
+
     private void displayEmployeeComboBox() {
         try {
             List<Employee> dbEmployees = DBManagment.getEmployees();
             List<Employee> facilityEmployees = DBManagment.getEmployeesByFacilityID(selectedFacility.getId());
             List<Employee> diff = dbEmployees.stream()
-                    .filter(e -> ! (facilityEmployees.contains(e)))
-                    .collect (Collectors.toList());
+                    .filter(e -> !(facilityEmployees.contains(e)))
+                    .collect(Collectors.toList());
 
             Map<String, Employee> employeeMap = diff.stream().collect(Collectors.toMap(this::employeeComboboxToString, Function.identity(), (e1, e2) -> e1));
             addEmployeeCB.setItems(FXCollections.observableList(diff));
@@ -357,7 +367,7 @@ public class FacilityListController implements Initializable {
                     return employeeMap.get(s);
                 }
             });
-        } catch ( SQLException e ) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -369,7 +379,7 @@ public class FacilityListController implements Initializable {
 
 
     public void addHoliday(ActionEvent actionEvent) {
-        if(FieldValidation.validateFloatingNum(holidayProceeds) && FieldValidation.validateComboBox(holidayName) &&
+        if (FieldValidation.validateFloatingNum(holidayProceeds) && FieldValidation.validateComboBox(holidayName) &&
                 FieldValidation.validateComboBox(holidayEmployee) && FieldValidation.validateDatePicker(holidayDate)) {
             Holiday holidayToAdd = new Holiday();
             holidayToAdd.setName(holidayName.getSelectionModel().getSelectedItem());
@@ -389,39 +399,37 @@ public class FacilityListController implements Initializable {
     public void employeeDetails() {
         try {
             ChangeScreen.initPanel(Global.getViewPane(), FXMLLoader.load(getClass().getResource("employeeDetailsManagerView.fxml")));
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             AlertBox.errorAlert("Błąd", e.getMessage());
         }
     }
 
-    public void enableEmployeeDataCheck(){
+    public void enableEmployeeDataCheck() {
         try {
             if (table.getSelectionModel().getSelectedItem() != null) {
                 selectedEmployee = tableEmployee.getSelectionModel().getSelectedItem();
                 Global.setEmployee(selectedEmployee);
                 employeeInfoButton.setDisable(false);
             }
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             AlertBox.errorAlert("Błąd", e.getMessage());
         }
     }
 
     @FXML
-    private void setVisibility(MouseEvent mouseevent ) {
+    private void setVisibility(MouseEvent mouseevent) {
         System.out.println("heheheheheh");
-        if(answer1.getSelectionModel().getSelectedItem() !=null) {
+        if (answer1.getSelectionModel().getSelectedItem() != null) {
             if (answer1.getSelectionModel().getSelectedItem().equals("Nie")) {
                 setQuestion1Visibility(true);
             } else setQuestion1Visibility(false);
         }
-        if(answer2.getSelectionModel().getSelectedItem() !=null) {
+        if (answer2.getSelectionModel().getSelectedItem() != null) {
             if (answer2.getSelectionModel().getSelectedItem().equals("Nie")) {
                 setQuestion2Visibility(true);
             } else setQuestion2Visibility(false);
         }
-        if(answer3.getSelectionModel().getSelectedItem() !=null) {
+        if (answer3.getSelectionModel().getSelectedItem() != null) {
             if (answer3.getSelectionModel().getSelectedItem().equals("Nie")) {
                 setQuestion3Visibility(true);
             } else setQuestion3Visibility(false);
