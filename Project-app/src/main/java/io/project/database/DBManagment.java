@@ -443,6 +443,51 @@ public class DBManagment {
             return false;
         }
     }
+
+    public static boolean addInspection(int employeeId, int facilityID, Date date, String descr) {
+        String sql = "SELECT addinspection(?, ?, ?, ?)";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, employeeId);
+            ps.setInt(2, facilityID);
+            ps.setDate(3, date);
+            ps.setString(4, descr);
+            ps.execute();
+            ps.close();
+            return true;
+        } catch (SQLException e) {
+            showMessageDialog(null, e.getMessage());
+            return false;
+        }
+    }
+
+    public static boolean addCheckup(String question, String answer, Date date, int empid, String descr) {
+        String idQuery = "SELECT id_inspection FROM inspection ORDER BY id_inspection DESC LIMIT 1";
+        String sql = "SELECT addcheckup(?, ?, ?, ?, ?, ?)";
+        String inspectionId = "";
+        try {
+            PreparedStatement pst = conn.prepareStatement(idQuery);
+            ResultSet res = pst.executeQuery();
+            while (res.next()) {
+                inspectionId = res.getString("id_inspection");
+            }
+
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, Integer.parseInt(inspectionId));
+            ps.setObject(2, question,Types.OTHER);
+            ps.setObject(3, answer,Types.OTHER);
+            ps.setDate(4, date);
+            ps.setInt(5, empid);
+            ps.setString(6, descr);
+            ps.execute();
+            ps.close();
+            return true;
+        } catch (SQLException e) {
+            showMessageDialog(null, e.getMessage());
+            return false;
+        }
+    }
+
     public static ObservableList<Violation> getViolationInfo(Employee employee) {
         ObservableList<Violation> list = FXCollections.observableArrayList();
         try{

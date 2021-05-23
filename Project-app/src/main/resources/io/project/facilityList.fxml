@@ -91,7 +91,7 @@
                            <children>
                               <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                                  <children>
-                                    <TextField fx:id="employeeTF" prefHeight="25.0" prefWidth="234.0" promptText="Osoba odpowiedzialna" />
+                                    <ComboBox fx:id="employeeTF" prefHeight="25.0" prefWidth="234.0" promptText="Osoba odpowiedzialna" />
                                     <DatePicker fx:id="inspectionDate" editable="false" prefHeight="25.0" prefWidth="234.0" promptText="Data" />
                                  </children>
                                  <VBox.margin>
@@ -159,7 +159,7 @@
                         </Label>
                         <VBox fx:id="employeeForm" alignment="CENTER" spacing="5.0">
                            <children>
-                              <ComboBox fx:id="addEmployeeCB" onKeyPressed="#initAddEmployeeComboBox" prefHeight="25.0" prefWidth="234.0" promptText="Pracownik" />
+                              <ComboBox fx:id="addEmployeeCB" onDragDetected="#setVisibility" onDragDone="#setVisibility" onDragEntered="#setVisibility" onKeyPressed="#initAddEmployeeComboBox" prefHeight="25.0" prefWidth="234.0" promptText="Pracownik" />
                               <Button mnemonicParsing="false" onAction="#addEmployeeToFacility" prefHeight="25.0" prefWidth="80.0" styleClass="green" stylesheets="@style.css" text="Dodaj" />
                            </children>
                         </VBox>
@@ -199,16 +199,16 @@
                               </VBox>
                               <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="110.0" spacing="5.0">
                                  <children>
-                                    <ComboBox fx:id="answer1" prefHeight="25.0" prefWidth="107.0" promptText="Odpowiedź" />
-                                    <ComboBox fx:id="answer2" prefHeight="25.0" prefWidth="107.0" promptText="Odpowiedź" />
-                                    <ComboBox fx:id="answer3" prefHeight="25.0" prefWidth="107.0" promptText="Odpowiedź" />
+                                    <ComboBox fx:id="answer1" onAction="#setVisibility" onMouseClicked="#setVisibility" prefHeight="25.0" prefWidth="107.0" promptText="Odpowiedź" />
+                                    <ComboBox fx:id="answer2" onMouseClicked="#setVisibility" prefHeight="25.0" prefWidth="107.0" promptText="Odpowiedź" />
+                                    <ComboBox fx:id="answer3" onMouseClicked="#setVisibility" prefHeight="25.0" prefWidth="107.0" promptText="Odpowiedź" />
                                  </children>
                               </VBox>
                               <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="200.0" spacing="5.0">
                                  <children>
-                                    <TextField fx:id="employeeText1" prefHeight="25.0" prefWidth="186.0" promptText="Osoba odpowiedzialna" />
-                                    <TextField fx:id="employeeText2" prefHeight="25.0" prefWidth="186.0" promptText="Osoba odpowiedzialna" />
-                                    <TextField fx:id="employeeText3" prefHeight="25.0" prefWidth="186.0" promptText="Osoba odpowiedzialna" />
+                                    <ComboBox fx:id="empInspectionQuestion1" onMouseDragged="#setVisibility" prefHeight="25.0" prefWidth="186.0" promptText="Osoba odpowiedzialna" />
+                                    <ComboBox fx:id="empInspectionQuestion2" onMouseDragged="#setVisibility" prefHeight="25.0" prefWidth="186.0" promptText="Osoba odpowiedzialna" />
+                                    <ComboBox fx:id="empInspectionQuestion3" onMouseDragged="#setVisibility" prefHeight="25.0" prefWidth="186.0" promptText="Osoba odpowiedzialna" />
                                  </children>
                               </VBox>
                               <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="150.0" spacing="5.0">
@@ -221,11 +221,11 @@
                               <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="200.0" spacing="5.0">
                                  <children>
                                     <TextField fx:id="descriptionText1" prefHeight="25.0" prefWidth="159.0" promptText="Opisz szczegóły" />
-                                    <TextField fx:id="descriptionText3" prefHeight="25.0" prefWidth="159.0" promptText="Opisz szczegóły" />
                                     <TextField fx:id="descriptionText2" prefHeight="25.0" prefWidth="159.0" promptText="Opisz szczegóły" />
+                                    <TextField fx:id="descriptionText3" prefHeight="25.0" prefWidth="159.0" promptText="Opisz szczegóły" />
                                  </children>
                               </VBox>
-                              <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" styleClass="green" stylesheets="@style.css" text="Dodaj">
+                              <Button mnemonicParsing="false" onAction="#addInspection" prefHeight="30.0" prefWidth="120.0" styleClass="green" stylesheets="@style.css" text="Dodaj">
                                  <font>
                                     <Font size="15.0" />
                                  </font>

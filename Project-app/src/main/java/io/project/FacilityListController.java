@@ -23,6 +23,7 @@ import javafx.scene.layout.VBox;
 import javafx.util.StringConverter;
 
 import java.net.URL;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
@@ -57,7 +58,7 @@ public class FacilityListController implements Initializable {
     private Label addInspectionLabel;
 
     @FXML
-    private TextField employeeTF;
+    private ComboBox<Employee> employeeTF;
 
     @FXML
     private DatePicker inspectionDate;
@@ -87,13 +88,13 @@ public class FacilityListController implements Initializable {
     private ComboBox<String> answer3;
 
     @FXML
-    private TextField employeeText1;
+    private ComboBox<Employee> empInspectionQuestion1;
 
     @FXML
-    private TextField employeeText2;
+    private ComboBox<Employee> empInspectionQuestion2;
 
     @FXML
-    private TextField employeeText3;
+    private ComboBox<Employee> empInspectionQuestion3;
 
     @FXML
     private DatePicker date1;
@@ -209,7 +210,7 @@ public class FacilityListController implements Initializable {
     }
 
     public void inspectionListByFacility(){
-        ObservableList<String> data = DBManagment.getInspectionInfoByFacilityID( /* selectedFacility.getId() */ );
+        ObservableList<String> data = DBManagment.getInspectionInfoByFacilityID(  /* selectedFacility.getId() */ );
         tableOptions.setItems(data);
     }
 
@@ -221,7 +222,42 @@ public class FacilityListController implements Initializable {
         listEmployeeButton.setDisable(true);
         DBManagment.fillHolidayAdditionDataEmployee(holidayEmployee);
         DBManagment.fillHolidayAdditionDataHoliday(holidayName);
+        DBManagment.fillHolidayAdditionDataEmployee(employeeTF);
+        setQuestion1Visibility(false);
+        setQuestion2Visibility(false);
+        setQuestion3Visibility(false);
+        initInspectionQuestions();
         facilityList();
+    }
+
+    void setQuestion1Visibility(boolean isVisible){
+        empInspectionQuestion1.setVisible(isVisible);
+        date1.setVisible(isVisible);
+        descriptionText1.setVisible(isVisible);
+    };
+    void setQuestion2Visibility(boolean isVisible){
+        empInspectionQuestion2.setVisible(isVisible);
+        date2.setVisible(isVisible);
+        descriptionText2.setVisible(isVisible);
+    };
+    void setQuestion3Visibility(boolean isVisible){
+        empInspectionQuestion3.setVisible(isVisible);
+        date3.setVisible(isVisible);
+        descriptionText3.setVisible(isVisible);
+    };
+
+    /* inspection questions should be grouped in HBox, not VBox */
+    private void initInspectionQuestions() {
+        answer1.getItems().add("Tak");
+        answer1.getItems().add("Nie");
+        answer2.getItems().add("Tak");
+        answer2.getItems().add("Nie");
+        answer3.getItems().add("Tak");
+        answer3.getItems().add("Nie");
+        DBManagment.fillHolidayAdditionDataEmployee(empInspectionQuestion1);
+        /* name of method above is misleading. It works generically, not only for holiday addition */
+        DBManagment.fillHolidayAdditionDataEmployee(empInspectionQuestion2);
+        DBManagment.fillHolidayAdditionDataEmployee(empInspectionQuestion3);
     }
 
     @FXML
@@ -231,10 +267,8 @@ public class FacilityListController implements Initializable {
             return;
         }
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////
-        // inspectionQuestionsForm.setVisible(true);
-        inspectionQuestionsForm.setVisible(false); // chwilowo wylaczone
-        ////////////////////////////////////////////////////////////////////////////////////////////////
+        inspectionQuestionsForm.setVisible(true);
+
         listEmployeeButton.setDisable(false);
         additionComboBoxes.setVisible(true);
         selectedFacility = table.getSelectionModel().getSelectedItem();
@@ -250,6 +284,51 @@ public class FacilityListController implements Initializable {
 
         displayEmployeeComboBox();
 
+    }
+
+    public void addInspection(ActionEvent event) {
+        String s1 = "Czy wilgotność w pomieszczeniu jest zgodna z zasadami?";
+        String s2 = "Czy wszystkie lodówki są sprawne?";
+        String s3 = "Czy wszyscy pracownicy są wyposażeni w ŚOO?";
+
+        if(FieldValidation.validateCharField(inspectionDescription) && FieldValidation.validateComboBox(employeeTF)
+                && FieldValidation.validateDatePicker(inspectionDate ) && FieldValidation.validateComboBox(answer1)
+                && FieldValidation.validateComboBox(answer2) && FieldValidation.validateComboBox(answer3));
+
+        String ans1 = answer1.getSelectionModel().getSelectedItem();
+        String ans2 = answer2.getSelectionModel().getSelectedItem();
+        String ans3 = answer3.getSelectionModel().getSelectedItem();
+
+        int facilityId = selectedFacility.getId();
+        int employeeId = employeeTF.getSelectionModel().getSelectedItem().getId();
+        Date date =  Date.valueOf(inspectionDate.getValue());
+        String descr = inspectionDescription.getText();
+        if (DBManagment.addInspection(employeeId, facilityId, date, descr)) {
+            if (ans1.equals("Nie")) {
+                if (FieldValidation.validateDatePicker(date1)) {
+                    DBManagment.addCheckup(s1, ans1, Date.valueOf(date1.getValue()), employeeId, descriptionText1.getText());
+                }
+            } else {
+                DBManagment.addCheckup(s1, ans1, null, 0, null);
+            }
+            if (ans2.equals("Nie")) {
+                if (FieldValidation.validateDatePicker(date2)) {
+                    DBManagment.addCheckup(s2, ans2, Date.valueOf(date2.getValue()), employeeId, descriptionText2.getText());
+                }
+            }
+            else{
+                DBManagment.addCheckup(s2, ans2, null, 0, null);
+            }
+            if (ans3.equals("Nie")) {
+                if (FieldValidation.validateDatePicker(date3)) {
+                    DBManagment.addCheckup(s3, ans3, Date.valueOf(date3.getValue()), employeeId, descriptionText3.getText());
+                }
+            }
+            else {
+                DBManagment.addCheckup(s3, ans3, null, 0, null);
+            }
+            AlertBox.infoAlert("Udało się!", "Inspekcja dodana do pracownika o id " + employeeId + " na obiekcie o id " + facilityId + ".", "success");
+        }
     }
 
     private void displayEmployeeComboBox() {
@@ -324,4 +403,26 @@ public class FacilityListController implements Initializable {
         }
     }
 
+    @FXML
+    private void setVisibility(MouseEvent mouseevent ) {
+        System.out.println("heheheheheh");
+        if(answer1.getSelectionModel().getSelectedItem() !=null) {
+            if (answer1.getSelectionModel().getSelectedItem().equals("Nie")) {
+                setQuestion1Visibility(true);
+            } else setQuestion1Visibility(false);
+        }
+        if(answer2.getSelectionModel().getSelectedItem() !=null) {
+            if (answer2.getSelectionModel().getSelectedItem().equals("Nie")) {
+                setQuestion2Visibility(true);
+            } else setQuestion2Visibility(false);
+        }
+        if(answer3.getSelectionModel().getSelectedItem() !=null) {
+            if (answer3.getSelectionModel().getSelectedItem().equals("Nie")) {
+                setQuestion3Visibility(true);
+            } else setQuestion3Visibility(false);
+        }
+    }
+
+
 }
+
