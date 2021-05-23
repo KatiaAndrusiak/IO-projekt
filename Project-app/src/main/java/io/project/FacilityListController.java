@@ -290,44 +290,49 @@ public class FacilityListController implements Initializable {
         String s1 = "Czy wilgotność w pomieszczeniu jest zgodna z zasadami?";
         String s2 = "Czy wszystkie lodówki są sprawne?";
         String s3 = "Czy wszyscy pracownicy są wyposażeni w ŚOO?";
+        boolean isEverythingValid = true;
 
         if(FieldValidation.validateCharField(inspectionDescription) && FieldValidation.validateComboBox(employeeTF)
                 && FieldValidation.validateDatePicker(inspectionDate ) && FieldValidation.validateComboBox(answer1)
-                && FieldValidation.validateComboBox(answer2) && FieldValidation.validateComboBox(answer3));
+                && FieldValidation.validateComboBox(answer2) && FieldValidation.validateComboBox(answer3)) {
 
-        String ans1 = answer1.getSelectionModel().getSelectedItem();
-        String ans2 = answer2.getSelectionModel().getSelectedItem();
-        String ans3 = answer3.getSelectionModel().getSelectedItem();
+            String ans1 = answer1.getSelectionModel().getSelectedItem();
+            String ans2 = answer2.getSelectionModel().getSelectedItem();
+            String ans3 = answer3.getSelectionModel().getSelectedItem();
 
-        int facilityId = selectedFacility.getId();
-        int employeeId = employeeTF.getSelectionModel().getSelectedItem().getId();
-        Date date =  Date.valueOf(inspectionDate.getValue());
-        String descr = inspectionDescription.getText();
-        if (DBManagment.addInspection(employeeId, facilityId, date, descr)) {
-            if (ans1.equals("Nie")) {
-                if (FieldValidation.validateDatePicker(date1)) {
-                    DBManagment.addCheckup(s1, ans1, Date.valueOf(date1.getValue()), employeeId, descriptionText1.getText());
+            int facilityId = selectedFacility.getId();
+            int employeeId = employeeTF.getSelectionModel().getSelectedItem().getId();
+            Date date = Date.valueOf(inspectionDate.getValue());
+            String descr = inspectionDescription.getText();
+                if (ans1.equals("Nie")) {
+                    if (FieldValidation.validateDatePicker(date1)) {
+                        DBManagment.addCheckup(s1, ans1, Date.valueOf(date1.getValue()), employeeId, descriptionText1.getText());
+                    }
+                    else isEverythingValid = false;
+                } else {
+                    DBManagment.addCheckup(s1, ans1, null, 0, null);
                 }
-            } else {
-                DBManagment.addCheckup(s1, ans1, null, 0, null);
-            }
-            if (ans2.equals("Nie")) {
-                if (FieldValidation.validateDatePicker(date2)) {
-                    DBManagment.addCheckup(s2, ans2, Date.valueOf(date2.getValue()), employeeId, descriptionText2.getText());
+                if (ans2.equals("Nie")) {
+                    if (FieldValidation.validateDatePicker(date2)) {
+                        DBManagment.addCheckup(s2, ans2, Date.valueOf(date2.getValue()), employeeId, descriptionText2.getText());
+                    }
+                    else isEverythingValid = false;
+                } else {
+                    DBManagment.addCheckup(s2, ans2, null, 0, null);
+                }
+                if (ans3.equals("Nie")) {
+                    if (FieldValidation.validateDatePicker(date3)) {
+                        DBManagment.addCheckup(s3, ans3, Date.valueOf(date3.getValue()), employeeId, descriptionText3.getText());
+                    }
+                    else isEverythingValid = false;
+                } else {
+                    DBManagment.addCheckup(s3, ans3, null, 0, null);
+                }
+            if (isEverythingValid) {
+                if (DBManagment.addInspection(employeeId, facilityId, date, descr)) {
+                    AlertBox.infoAlert("Udało się!", "Inspekcja dodana do pracownika o id " + employeeId + " na obiekcie o id " + facilityId + ".", "success");
                 }
             }
-            else{
-                DBManagment.addCheckup(s2, ans2, null, 0, null);
-            }
-            if (ans3.equals("Nie")) {
-                if (FieldValidation.validateDatePicker(date3)) {
-                    DBManagment.addCheckup(s3, ans3, Date.valueOf(date3.getValue()), employeeId, descriptionText3.getText());
-                }
-            }
-            else {
-                DBManagment.addCheckup(s3, ans3, null, 0, null);
-            }
-            AlertBox.infoAlert("Udało się!", "Inspekcja dodana do pracownika o id " + employeeId + " na obiekcie o id " + facilityId + ".", "success");
         }
     }
 
