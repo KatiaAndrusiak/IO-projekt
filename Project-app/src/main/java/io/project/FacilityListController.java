@@ -210,7 +210,7 @@ public class FacilityListController implements Initializable {
     }
 
     public void inspectionListByFacility(){
-        ObservableList<String> data = DBManagment.getInspectionInfoByFacilityID(  /* selectedFacility.getId() */ );
+        ObservableList<String> data = DBManagment.getInspectionInfoByFacilityID(  selectedFacility.getId() );
         tableOptions.setItems(data);
     }
 

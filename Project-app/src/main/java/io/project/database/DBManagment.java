@@ -795,12 +795,12 @@ public class DBManagment {
         return  list;
     }
 
-    public static ObservableList<String> getInspectionInfoByFacilityID(/* int id */) {
+    public static ObservableList<String> getInspectionInfoByFacilityID( int id ) {
         ObservableList<String> list = FXCollections.observableArrayList();
         try{
             PreparedStatement ps = null;
             ResultSet rs = null;
-            String sql = "SELECT * from inspection"; // WHERE id_facility = " + id;
+            String sql = "SELECT * from inspection WHERE id_facility = " + id;
             ps = getConn().prepareStatement(sql);
             rs = ps.executeQuery();
             while(rs.next()){
