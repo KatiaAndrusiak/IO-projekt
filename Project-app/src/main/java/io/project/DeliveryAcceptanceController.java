@@ -35,7 +35,7 @@ public class DeliveryAcceptanceController implements Initializable {
     public void acceptDelivery() {
         try {
             if (FieldValidation.validateComboBox(deliverySupplierComboBox) ||
-                    deliveryDateTF.getValue() != null ||
+                    FieldValidation.validateDatePicker(deliveryDateTF) ||
                     FieldValidation.validateNum(deliveryPaymentDelayTF) ||
                     FieldValidation.validateNum(deliveryPaymentTF)) {
                 Supplier supplier = new Supplier();
