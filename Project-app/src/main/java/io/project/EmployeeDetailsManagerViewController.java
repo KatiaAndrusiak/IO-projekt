@@ -99,14 +99,16 @@ public class EmployeeDetailsManagerViewController implements Initializable {
 				return new ListCell<>() {
 					@Override
 					protected void updateItem(Violation item, boolean empty) {
-						super.updateItem(item, empty);
-						if (item != null) {
-							if (item.getCorrectionDate().isEqual(LocalDate.of(1970, 1, 1))) {
-								setDisable(false);
-							} else {
-								setDisable(true);
+						if(item != null) {
+							super.updateItem(item, empty);
+							if (item != null) {
+								if (item.getCorrectionDate().isEqual(LocalDate.of(1970, 1, 1))) {
+									setDisable(false);
+								} else {
+									setDisable(true);
+								}
+								setText(item.toString());
 							}
-							setText(item.toString());
 						}
 					}
 				};

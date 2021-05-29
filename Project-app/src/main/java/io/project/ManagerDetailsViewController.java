@@ -81,13 +81,15 @@ public class ManagerDetailsViewController implements Initializable {
 				return new ListCell<>() {
 					@Override
 					protected void updateItem(Violation item, boolean empty) {
-						super.updateItem(item, empty);
-						if (item.getCorrectionDate() == null) {
-							setDisable(true);
-						} else {
-							setDisable(false);
+						if(item != null) {
+							super.updateItem(item, empty);
+							if (item.getCorrectionDate() == null) {
+								setDisable(true);
+							} else {
+								setDisable(false);
+							}
+							setText(item.toString());
 						}
-						setText(item.toString());
 					}
 				};
 			}
