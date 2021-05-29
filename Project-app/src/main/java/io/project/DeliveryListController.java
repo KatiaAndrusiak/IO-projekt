@@ -77,16 +77,18 @@ public class DeliveryListController implements Initializable {
             TableCell<Delivery, String> tableCell = new TableCell<>() {
                 @Override
                 protected void updateItem(String item, boolean empty) {
-                    super.updateItem(item, empty);
-                    this.setText(null);
-                    this.setGraphic(null);
-                    if(!empty){
-                        if (item.equals("opłacono")) {
-                            setDisable(true);
-                        } else {
-                            setDisable(false);
+                    if (item != null) {
+                        super.updateItem(item, empty);
+                        this.setText(null);
+                        this.setGraphic(null);
+                        if (!empty) {
+                            if (item.equals("opłacono")) {
+                                setDisable(true);
+                            } else {
+                                setDisable(false);
+                            }
+                            setText(item.toString());
                         }
-                        setText(item.toString());
                     }
                 }
             };
