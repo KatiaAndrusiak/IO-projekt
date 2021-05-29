@@ -27,8 +27,8 @@ public class SupplierAdditionController implements Initializable {
 
     public void addSupplier() {
         try {
-            if (FieldValidation.validateCharField(supplierNameTF) ||
-                    FieldValidation.validateEmail(supplierEmailTF) ||
+            if (FieldValidation.validateCharField(supplierNameTF) &&
+                    FieldValidation.validateEmail(supplierEmailTF) &&
                     FieldValidation.validateNum(supplierPhoneTF)) {
                 Supplier supplier = new Supplier(supplierNameTF.getText(),
                         supplierPhoneTF.getText(),
