@@ -4,6 +4,7 @@ import io.project.alert.AlertBox;
 import io.project.database.DBManagment;
 import io.project.entities.Employee;
 import io.project.screenloader.ChangeScreen;
+import io.project.validation.FieldValidation;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -78,17 +79,23 @@ public class EmployeeAdditionController implements Initializable
 		userToAdd.setPPE(employeeSOO.getValue());
 		userToAdd.setCourseHoursSum(Integer.parseInt(employeeCoursesHoursTF.getText()));
 		Global.setEmployee(userToAdd);
-		if (DBManagment.addEmployee(userToAdd)) {
-			AlertBox.infoAlert("Udało się!", "Pracownik " + userToAdd.getFirstName() + " " + userToAdd.getLastName() + " został dodany do bazy", "Pracownik został dodany do bazy");
-			employeeFirstNameTF.clear();
-			employeeLastNameTF.clear();
-			employeeUsernameTF.clear();
-			employeePasswordTF.clear();
-			employeeSalaryTF.clear();
-			employeePhoneTF.clear();
-			employeeCoursesHoursTF.clear();
-			ChangeScreen.initPanel(Global.getViewPane(), FXMLLoader.load(getClass().getResource("employeeList.fxml")));
+		if (FieldValidation.validateFirstAndLastName(employeeFirstNameTF) && FieldValidation.validateFirstAndLastName(employeeLastNameTF) &&
+			FieldValidation.validateDatePicker(employeeDOBTF) && FieldValidation.validateDatePicker(employmentDate) && FieldValidation.validateDatePicker(employeeSOO) &&
+			FieldValidation.validatePhoneNumber(employeePhoneTF) && FieldValidation.validateCoursesHours(employeeCoursesHoursTF) && FieldValidation.validateNum(employeeSalaryTF) &&
+		    FieldValidation.validateLoginAndPassword(employeeUsernameTF) && FieldValidation.validateLoginAndPassword(employeePasswordTF)) {
+			if (DBManagment.addEmployee(userToAdd)) {
+				AlertBox.infoAlert("Udało się!", "Pracownik " + userToAdd.getFirstName() + " " + userToAdd.getLastName() + " został dodany do bazy", "Pracownik został dodany do bazy");
+				employeeFirstNameTF.clear();
+				employeeLastNameTF.clear();
+				employeeUsernameTF.clear();
+				employeePasswordTF.clear();
+				employeeSalaryTF.clear();
+				employeePhoneTF.clear();
+				employeeCoursesHoursTF.clear();
+				ChangeScreen.initPanel(Global.getViewPane(), FXMLLoader.load(getClass().getResource("employeeList.fxml")));
+			}
 		}
+
 	}
 
 
@@ -96,5 +103,13 @@ public class EmployeeAdditionController implements Initializable
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		DBManagment.setEmployeeAdditionData(employeePosition, employeeRole, employeeCategory);
+		FieldValidation.filterForNumberFields(employeeSalaryTF);
+		FieldValidation.filterForNumberFields(employeePhoneTF);
+		FieldValidation.filterForNumberFields(employeeCoursesHoursTF);
+		FieldValidation.filterForTextFields(employeeFirstNameTF);
+		FieldValidation.filterForTextFields(employeeLastNameTF);
+		employeePosition.getSelectionModel().select(2);
+		employeeRole.getSelectionModel().select(2);
+		employeeCategory.getSelectionModel().selectFirst();
 	}
 }

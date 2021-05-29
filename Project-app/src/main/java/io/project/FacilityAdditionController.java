@@ -4,6 +4,7 @@ import io.project.alert.AlertBox;
 import io.project.database.DBManagment;
 import io.project.entities.Facility;
 import io.project.screenloader.ChangeScreen;
+import io.project.validation.FieldValidation;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -44,18 +45,25 @@ public class FacilityAdditionController implements Initializable
 		facilityToAdd.setSchedule(facilitySchedule.getText());
 		facilityToAdd.setCity(facilityCityTF.getText());
 		Global.setFacility(facilityToAdd);
-		if (DBManagment.addFacility(facilityToAdd)) {
-			AlertBox.infoAlert("Udało się!", "Obiekt " + facilityToAdd.getName() + ", który znajduje się pod adresem " + facilityToAdd.getCity() + ", " + facilityToAdd.getAddress() + " został dodany do bazy", "Obiekt został dodany do bazy");
-			facilityNameTF.clear();
-			facilityAddressTF.clear();
-			facilitySchedule.clear();
-			facilityCityTF.clear();
-			ChangeScreen.initPanel(Global.getViewPane(), FXMLLoader.load(getClass().getResource("facilityList.fxml")));
+		if (FieldValidation.validateCharField(facilityNameTF) && FieldValidation.validateCharField(facilityCityTF) &&
+			FieldValidation.validateFacilityAddress(facilityAddressTF) && FieldValidation.validateFacilitySchedule(facilitySchedule)) {
+			if (DBManagment.addFacility(facilityToAdd)) {
+				AlertBox.infoAlert("Udało się!", "Obiekt " + facilityToAdd.getName() + ", który znajduje się pod adresem " + facilityToAdd.getCity() + ", " + facilityToAdd.getAddress() + " został dodany do bazy", "Obiekt został dodany do bazy");
+				facilityNameTF.clear();
+				facilityAddressTF.clear();
+				facilitySchedule.clear();
+				facilityCityTF.clear();
+				ChangeScreen.initPanel(Global.getViewPane(), FXMLLoader.load(getClass().getResource("facilityList.fxml")));
+			}
 		}
+
 	}
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		DBManagment.fillFacilityAdditionData(facilityStatusComboBox);
+		FieldValidation.filterForTextFields(facilityNameTF);
+		FieldValidation.filterForTextFields(facilityCityTF);
+		facilityStatusComboBox.getSelectionModel().selectFirst();
 	}
 }
