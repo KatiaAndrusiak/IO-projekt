@@ -4,7 +4,6 @@ import io.project.alert.AlertBox;
 import io.project.database.DBManagment;
 import io.project.entities.Employee;
 import io.project.screenloader.ChangeScreen;
-import io.project.validation.CheckAndClearTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -81,13 +80,13 @@ public class EmployeeAdditionController implements Initializable
 		Global.setEmployee(userToAdd);
 		if (DBManagment.addEmployee(userToAdd)) {
 			AlertBox.infoAlert("Udało się!", "Pracownik " + userToAdd.getFirstName() + " " + userToAdd.getLastName() + " został dodany do bazy", "Pracownik został dodany do bazy");
-			CheckAndClearTextField.clearTextField(employeeFirstNameTF);
-			CheckAndClearTextField.clearTextField(employeeLastNameTF);
-			CheckAndClearTextField.clearTextField(employeeUsernameTF);
-			CheckAndClearTextField.clearTextField(employeePasswordTF);
-			CheckAndClearTextField.clearTextField(employeeSalaryTF);
-			CheckAndClearTextField.clearTextField(employeePhoneTF);
-			CheckAndClearTextField.clearTextField(employeeCoursesHoursTF);
+			employeeFirstNameTF.clear();
+			employeeLastNameTF.clear();
+			employeeUsernameTF.clear();
+			employeePasswordTF.clear();
+			employeeSalaryTF.clear();
+			employeePhoneTF.clear();
+			employeeCoursesHoursTF.clear();
 			ChangeScreen.initPanel(Global.getViewPane(), FXMLLoader.load(getClass().getResource("employeeList.fxml")));
 		}
 	}

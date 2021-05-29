@@ -4,7 +4,6 @@ import io.project.alert.AlertBox;
 import io.project.database.DBManagment;
 import io.project.entities.Employee;
 import io.project.entities.Holiday;
-import io.project.validation.CheckAndClearTextField;
 import io.project.validation.FieldValidation;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -51,7 +50,7 @@ public class HolidayAdditionController implements Initializable
 			holidayToAdd.setFacility(Global.getFacility());
 			if (DBManagment.addHoliday(holidayToAdd)) {
 				AlertBox.infoAlert("Udało się!", "Dodano święto " + holidayToAdd.getName() + ", do pracownika " + holidayToAdd.getEmployee().getFirstName() + ", " + holidayToAdd.getEmployee().getFirstName(), "Obiekt został dodany do bazy");
-				CheckAndClearTextField.clearTextField(holidayIncomeTF);
+				holidayIncomeTF.clear();
 			} else {
 				AlertBox.errorAlert("Ups", "Nie udało się dodać święta");
 			}

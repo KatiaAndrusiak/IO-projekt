@@ -6,7 +6,6 @@ import io.project.entities.Employee;
 import io.project.entities.Facility;
 import io.project.entities.Holiday;
 import io.project.screenloader.ChangeScreen;
-import io.project.validation.CheckAndClearTextField;
 import io.project.validation.FieldValidation;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -25,7 +24,10 @@ import javafx.util.StringConverter;
 import java.net.URL;
 import java.sql.Date;
 import java.sql.SQLException;
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.ResourceBundle;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -389,7 +391,7 @@ public class FacilityListController implements Initializable {
             holidayToAdd.setFacility(table.getSelectionModel().getSelectedItem());
             if (DBManagment.addHoliday(holidayToAdd)) {
                 AlertBox.infoAlert("Udało się!", "Dodano święto " + holidayToAdd.getName() + ", do pracownika " + holidayToAdd.getEmployee().getFirstName() + ", " + holidayToAdd.getEmployee().getFirstName(), "Obiekt został dodany do bazy");
-                CheckAndClearTextField.clearTextField(holidayProceeds);
+                holidayProceeds.clear();
             } else {
                 AlertBox.infoAlert("Ups", "Nie udało się dodać święta", "Obiekt nie został dodany");
             }

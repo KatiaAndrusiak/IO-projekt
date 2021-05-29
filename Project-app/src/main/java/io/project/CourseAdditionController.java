@@ -4,7 +4,6 @@ import io.project.alert.AlertBox;
 import io.project.database.DBManagment;
 import io.project.entities.Course;
 import io.project.entities.Employee;
-import io.project.validation.CheckAndClearTextField;
 import io.project.validation.FieldValidation;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -47,8 +46,8 @@ public class CourseAdditionController implements Initializable
 				if (DBManagment.addCourseToEmployee(courseToAdd)) {
 					AlertBox.infoAlert("Udało się!", "Dodano kurs " + courseToAdd.getName() + ", do pracownika " + courseToAdd.getEmployee().getFirstName() + ", " + courseToAdd.getEmployee().getFirstName(), "Obiekt został dodany do bazy");
 					employee.setCourseHoursSum(employee.getCourseHoursSum() + courseToAdd.getHours());
-					CheckAndClearTextField.clearTextField(courseNameTF);
-					CheckAndClearTextField.clearTextField(courseHoursTF);
+					courseNameTF.clear();
+					courseHoursTF.clear();
 				} else {
 					AlertBox.errorAlert("Błąd", "Nie udalo sie dodac");
 				}

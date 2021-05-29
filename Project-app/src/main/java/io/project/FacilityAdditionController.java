@@ -4,7 +4,6 @@ import io.project.alert.AlertBox;
 import io.project.database.DBManagment;
 import io.project.entities.Facility;
 import io.project.screenloader.ChangeScreen;
-import io.project.validation.CheckAndClearTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -47,10 +46,10 @@ public class FacilityAdditionController implements Initializable
 		Global.setFacility(facilityToAdd);
 		if (DBManagment.addFacility(facilityToAdd)) {
 			AlertBox.infoAlert("Udało się!", "Obiekt " + facilityToAdd.getName() + ", który znajduje się pod adresem " + facilityToAdd.getCity() + ", " + facilityToAdd.getAddress() + " został dodany do bazy", "Obiekt został dodany do bazy");
-			CheckAndClearTextField.clearTextField(facilityNameTF);
-			CheckAndClearTextField.clearTextField(facilityAddressTF);
-			CheckAndClearTextField.clearTextField(facilitySchedule);
-			CheckAndClearTextField.clearTextField(facilityCityTF);
+			facilityNameTF.clear();
+			facilityAddressTF.clear();
+			facilitySchedule.clear();
+			facilityCityTF.clear();
 			ChangeScreen.initPanel(Global.getViewPane(), FXMLLoader.load(getClass().getResource("facilityList.fxml")));
 		}
 	}
