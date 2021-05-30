@@ -199,9 +199,9 @@
                               </VBox>
                               <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="110.0" spacing="5.0">
                                  <children>
-                                    <ComboBox fx:id="answer1" onAction="#setVisibility" onMouseClicked="#setVisibility" prefHeight="25.0" prefWidth="107.0" promptText="Odpowiedź" />
-                                    <ComboBox fx:id="answer2" onMouseClicked="#setVisibility" prefHeight="25.0" prefWidth="107.0" promptText="Odpowiedź" />
-                                    <ComboBox fx:id="answer3" onMouseClicked="#setVisibility" prefHeight="25.0" prefWidth="107.0" promptText="Odpowiedź" />
+                                    <ComboBox fx:id="answer1" onAction="#setVisibility" prefHeight="25.0" prefWidth="107.0" promptText="Odpowiedź" />
+                                    <ComboBox fx:id="answer2" onAction="#setVisibility" prefHeight="25.0" prefWidth="107.0" promptText="Odpowiedź" />
+                                    <ComboBox fx:id="answer3" onAction="#setVisibility" prefHeight="25.0" prefWidth="107.0" promptText="Odpowiedź" />
                                  </children>
                               </VBox>
                               <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="200.0" spacing="5.0">

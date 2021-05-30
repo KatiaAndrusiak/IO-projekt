@@ -273,17 +273,24 @@ public class FacilityListController implements Initializable {
         if (table.getSelectionModel().getSelectedIndex() < 0) {
             return;
         }
-
-        inspectionQuestionsForm.setVisible(true);
-
         listEmployeeButton.setDisable(false);
-        additionComboBoxes.setVisible(true);
         selectedFacility = table.getSelectionModel().getSelectedItem();
         displayEmployeeComboBox();
-        tableOptions.setItems(null);
-        tableEmployee.setItems(null);
+        clearAdditionData();
+        clearinspection();
+        setVisibilityInternal();
     }
 
+    public void clearAdditionData(){
+        tableOptions.setItems(null);
+        tableEmployee.setItems(null);
+        employeeTF.setValue(null);
+        holidayName.setValue(null);
+        holidayEmployee.setValue(null);
+        holidayDate.setValue(null);
+        addEmployeeCB.setValue(null);
+        holidayProceeds.clear();
+    }
     public void addEmployeeToFacility(ActionEvent event) {
         int facilityId = selectedFacility.getId();
         int employeeId = addEmployeeCB.getSelectionModel().getSelectedItem().getId();
@@ -347,16 +354,38 @@ public class FacilityListController implements Initializable {
                 }
             }
         }
+        clearinspection();
     }
 
+    private void clearinspection() {
+        date1.setValue(null);
+        date2.setValue(null);
+        date3.setValue(null);
+        inspectionDate.setValue(null);
+        answer1.setValue(null);
+        answer2.setValue(null);
+        answer3.setValue(null);
+        empInspectionQuestion1.setValue(null);
+        empInspectionQuestion2.setValue(null);
+        empInspectionQuestion3.setValue(null);
+        employeeTF.setValue(null);
+        descriptionText1.clear();
+        descriptionText2.clear();
+        descriptionText3.clear();
+        inspectionDescription.clear();
+        setVisibilityInternal();
+    }
 
     private void displayEmployeeComboBox() {
         try {
             List<Employee> dbEmployees = DBManagment.getEmployees();
+            System.out.println(dbEmployees);
             List<Employee> facilityEmployees = DBManagment.getEmployeesByFacilityID(selectedFacility.getId());
+            System.out.println(facilityEmployees);
             List<Employee> diff = dbEmployees.stream()
                     .filter(e -> !(facilityEmployees.contains(e)))
                     .collect(Collectors.toList());
+            System.out.println(diff);
 
             Map<String, Employee> employeeMap = diff.stream().collect(Collectors.toMap(this::employeeComboboxToString, Function.identity(), (e1, e2) -> e1));
             addEmployeeCB.setItems(FXCollections.observableList(diff));
@@ -421,7 +450,7 @@ public class FacilityListController implements Initializable {
     }
 
     @FXML
-    private void setVisibility(MouseEvent mouseevent) {
+    private void setVisibility(ActionEvent actionevent) {
         if (answer1.getSelectionModel().getSelectedItem() != null) {
             if (answer1.getSelectionModel().getSelectedItem().equals("Nie")) {
                 setQuestion1Visibility(true);
@@ -439,6 +468,13 @@ public class FacilityListController implements Initializable {
         }
     }
 
+    private void setVisibilityInternal() {
+        inspectionQuestionsForm.setVisible(true);
+        additionComboBoxes.setVisible(true);
+        setQuestion1Visibility(false);
+        setQuestion2Visibility(false);
+        setQuestion3Visibility(false);
+    }
 
 }
 
