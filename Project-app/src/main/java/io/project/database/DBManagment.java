@@ -413,7 +413,7 @@ public class DBManagment {
     }
 
     public static ObservableList<Employee> getEmployeesByFacilityID(int id) throws SQLException {
-        String sql = "select employee_data_view.* from employee_data_view JOIN employee_facility ON employee_data_view.id_employee = employee_facility.id_employee WHERE id_facility = " + id;
+        String sql = "select * from employee_facility, employee where id_facility= "+id+" AND employee_facility.id_employee = employee.id_employee ";
         PreparedStatement ps = conn.prepareStatement(sql);
         ResultSet res1 = ps.executeQuery();
         ObservableList<Employee> result = FXCollections.observableArrayList();
@@ -422,7 +422,6 @@ public class DBManagment {
             employee.setId(res1.getInt("id_employee"));
             employee.setFirstName(res1.getString("first_name"));
             employee.setLastName(res1.getString("last_name"));
-            employee.setPosition(res1.getString("position"));
             result.add(employee);
         }
         return result;
