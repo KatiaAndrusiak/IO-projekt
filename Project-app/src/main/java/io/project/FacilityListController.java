@@ -280,6 +280,8 @@ public class FacilityListController implements Initializable {
         additionComboBoxes.setVisible(true);
         selectedFacility = table.getSelectionModel().getSelectedItem();
         displayEmployeeComboBox();
+        tableOptions.setItems(null);
+        tableEmployee.setItems(null);
     }
 
     public void addEmployeeToFacility(ActionEvent event) {
@@ -420,7 +422,6 @@ public class FacilityListController implements Initializable {
 
     @FXML
     private void setVisibility(MouseEvent mouseevent) {
-        System.out.println("heheheheheh");
         if (answer1.getSelectionModel().getSelectedItem() != null) {
             if (answer1.getSelectionModel().getSelectedItem().equals("Nie")) {
                 setQuestion1Visibility(true);
