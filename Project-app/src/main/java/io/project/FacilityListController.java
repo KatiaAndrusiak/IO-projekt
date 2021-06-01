@@ -319,6 +319,9 @@ public class FacilityListController implements Initializable {
 
             int facilityId = selectedFacility.getId();
             int employeeId = employeeTF.getSelectionModel().getSelectedItem().getId();
+            int empInspection1 = -1;
+            int empInspection2 = -1;
+            int empInspection3 = -1;
             Date date = Date.valueOf(inspectionDate.getValue());
             String descr = inspectionDescription.getText();
 
@@ -330,18 +333,21 @@ public class FacilityListController implements Initializable {
 
             if (isEverythingValid) {
                 if (ans1.equals("Nie")) {
-                    if (FieldValidation.validateDatePicker(date1))
-                        validation.add(DBManagment.addCheckup(s1, ans1, Date.valueOf(date1.getValue()), employeeId, descriptionText1.getText()));
+                    if (FieldValidation.validateDatePicker(date1) && FieldValidation.validateComboBox(empInspectionQuestion1))
+                        empInspection1 = empInspectionQuestion1.getSelectionModel().getSelectedItem().getId();
+                        validation.add(DBManagment.addCheckup(s1, ans1, Date.valueOf(date1.getValue()), empInspection1, descriptionText1.getText()));
                 } else validation.add(DBManagment.addCheckup(s1, ans1, null, 0, null));
 
                 if (ans2.equals("Nie")) {
-                    if (FieldValidation.validateDatePicker(date2))
-                        validation.add(DBManagment.addCheckup(s2, ans2, Date.valueOf(date2.getValue()), employeeId, descriptionText2.getText()));
+                    if (FieldValidation.validateDatePicker(date2) && FieldValidation.validateComboBox(empInspectionQuestion2))
+                        empInspection2 = empInspectionQuestion2.getSelectionModel().getSelectedItem().getId();
+                        validation.add(DBManagment.addCheckup(s2, ans2, Date.valueOf(date2.getValue()), empInspection2, descriptionText2.getText()));
                 } else validation.add(DBManagment.addCheckup(s2, ans2, null, 0, null));
 
                 if (ans3.equals("Nie")) {
-                    if (FieldValidation.validateDatePicker(date3))
-                        validation.add(DBManagment.addCheckup(s3, ans3, Date.valueOf(date3.getValue()), employeeId, descriptionText3.getText()));
+                    if (FieldValidation.validateDatePicker(date3) && FieldValidation.validateComboBox(empInspectionQuestion3))
+                        empInspection3 = empInspectionQuestion3.getSelectionModel().getSelectedItem().getId();
+                        validation.add(DBManagment.addCheckup(s3, ans3, Date.valueOf(date3.getValue()), empInspection3, descriptionText3.getText()));
                 } else validation.add(DBManagment.addCheckup(s3, ans3, null, 0, null));
 
                 if (validation.contains(false)) {
