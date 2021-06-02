@@ -41,7 +41,7 @@ public class HolidayAdditionController implements Initializable
 
     public void addHoliday(ActionEvent actionEvent) {
 		if(FieldValidation.validateNum(holidayIncomeTF) && FieldValidation.validateComboBox(holidayNameComboBox) &&
-		FieldValidation.validateComboBox(holidayPersonComboBox) && FieldValidation.validateDatePicker(holidayDateTF)) {
+			FieldValidation.validateComboBox(holidayPersonComboBox) && FieldValidation.validateDatePicker(holidayDateTF)) {
 			Holiday holidayToAdd = new Holiday();
 			holidayToAdd.setName(holidayNameComboBox.getSelectionModel().getSelectedItem());
 			holidayToAdd.setProceeds(Double.parseDouble(holidayIncomeTF.getText()));

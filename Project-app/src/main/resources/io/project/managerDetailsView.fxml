@@ -156,7 +156,7 @@
                         <ListView fx:id="managerResponsibilitiesList" prefHeight="400.0" prefWidth="200.0" />
                         <HBox alignment="TOP_RIGHT" spacing="20.0">
                            <children>
-                              <Button fx:id="managerConfirmButton" mnemonicParsing="false" styleClass="green" stylesheets="@style.css" text="Zatwierdź">
+                              <Button fx:id="managerConfirmButton" mnemonicParsing="false" onAction="#approveResponsibility" styleClass="green" stylesheets="@style.css" text="Zatwierdź">
                                  <font>
                                     <Font size="24.0" />
                                  </font>

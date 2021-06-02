@@ -6,14 +6,12 @@ import io.project.entities.Violation;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
@@ -75,24 +73,43 @@ public class ManagerDetailsViewController implements Initializable {
 		managerCoursesHours.setText(String.valueOf(currUser.getCourseHoursSum()));
 		ObservableList<Violation> data = DBManagment.getViolationInfo(currUser);
 		managerResponsibilitiesList.setItems(data);
+		System.out.println(data);
 		managerResponsibilitiesList.setCellFactory(new Callback<>() {
 			@Override
-			public ListCell<Violation> call(ListView<Violation> ListView) {
+			public ListCell<Violation> call(ListView<Violation> param) {
 				return new ListCell<>() {
 					@Override
 					protected void updateItem(Violation item, boolean empty) {
 						if(item != null) {
 							super.updateItem(item, empty);
-							if (item.getCorrectionDate() == null) {
-								setDisable(true);
-							} else {
-								setDisable(false);
+							if (item != null) {
+								if (item.getCorrectionDate().isEqual(LocalDate.of(1970, 1, 1))) {
+									setDisable(false);
+								} else {
+									setDisable(true);
+								}
+								setText(item.toString());
 							}
-							setText(item.toString());
 						}
 					}
 				};
-			}
-		});
+			}});
+	}
+	public void approveResponsibility(){
+		Violation selected = managerResponsibilitiesList.getSelectionModel().getSelectedItem();
+		if(DBManagment.approveResponsibility(selected)) {
+			ObservableList<Violation> data = DBManagment.getViolationInfo(Global.getCurrentUser());
+			managerResponsibilitiesList.setItems(data);
+			Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
+			alert1.setTitle("Udało się!");
+			alert1.setHeaderText("Zatwierdzono pomyślnie!");
+			alert1.showAndWait();
+		}else{
+			Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
+			alert1.setTitle("Błąd!");
+			alert1.setHeaderText("Nie udało się zatwierdzić!");
+			alert1.showAndWait();
+		}
+
 	}
 }
