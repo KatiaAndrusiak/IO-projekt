@@ -41,7 +41,7 @@ public class FieldValidation {
      * @return true jeśli wprowadzone dane są ok
      */
     public static boolean validateEmail(TextField data) {
-        Pattern p = Pattern.compile("^(.+)@(.+)$");
+        Pattern p = Pattern.compile("^(.+)@(.+)\\.(.+)$");
         Matcher m = p.matcher(data.getText());
 
         if (m.find() && m.group().equals(data.getText())) {
