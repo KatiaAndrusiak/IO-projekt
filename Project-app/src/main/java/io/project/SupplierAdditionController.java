@@ -43,8 +43,6 @@ public class SupplierAdditionController implements Initializable {
                 } else {
                     throw new Exception("Nie udało się dodać dostawcę");
                 }
-            } else {
-                AlertBox.errorAlert("Błąd", "Sprawdź poprawność danych");
             }
         } catch (Exception e) {
             AlertBox.errorAlert("Błąd", e.getMessage());
